@@ -39,10 +39,9 @@ public class deleteProductServlet extends HttpServlet {
 		ProductDao pDao = ProductDao.getInstance();
 		ProductVo pVo = new ProductVo();
 		
-		String prodnum = request.getParameter("prodnum");
+		String prodnum = request.getParameter("prodNum");
 		//데이터베이스로부터 해당 코드의 정보를 삭제
 		pDao.deleteProduct(prodnum);
-		
 		//삭제 후 목록 페이지로 이동
 		response.sendRedirect("productList.do");
 	}

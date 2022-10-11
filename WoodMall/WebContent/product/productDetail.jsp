@@ -25,7 +25,7 @@
 		</td>
 		<tr>
 			<th>상품명</th>
-			<td>${woodmallproduct.prodname}</td>
+			<td>${woodmallproduct.prodName}</td>
 		</tr>
 		<tr>
 			<th>가격</th>

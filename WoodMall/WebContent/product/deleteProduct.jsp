@@ -17,33 +17,33 @@
 	<tr>
 		<td width="20%">
 			<c:choose>
-				<c:when test="${empty product.pictureurl}">
+				<c:when test="${empty woodmallproduct.image}">
 					<img src="image/noimage.jpg">
 				</c:when>
 				<c:otherwise>
-					<img src="upload/${product.pictureurl}">
+					<img src="upload/${woodmallproduct.image}">
 				</c:otherwise>
 			</c:choose>
 		</td>
 		<tr>
 			<th>상품명</th>
-			<td>${product.name}</td>
+			<td>${woodmallproduct.prodName}</td>
 		</tr>
 		<tr>
 			<th>가격</th>
-			<td>${product.price}</td>
+			<td>${woodmallproduct.price}</td>
 		</tr>
 		<tr>
 			<th>설명</th>
-			<td height="150px">${product.description}</td>
+			<td height="150px">${woodmallproduct.content}</td>
 		</tr>
 		<tr>
 			<th>등록일자</th>
-			<td>${product.reg_date}</td>
+			<td>${woodmallproduct.reg_date}</td>
 		</tr>
 	</tr>
 </table>
-<input type="hidden" name="code" value="${product.code}">
+<input type="hidden" name="code" value="${woodmallproduct.prodNum}">
 <input type="submit" value="삭제">
 <input type="button" value="목록" onClick="location.href='productList.do'">
 </form>

@@ -164,7 +164,7 @@ public class ProductDao {
 	}
 	//상품 삭제
 	public ProductVo deleteProduct(String prodnum) {
-		String sql = "delete form woodmallproduct where prodnum=?";
+		String sql = "delete from woodmallproduct where prodnum=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -191,8 +191,10 @@ public class ProductDao {
 
 		} catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("삭제실패");
 		} finally {
 			DBManager.close(conn, pstmt, rs);
+			System.out.println("삭제완료");
 		}
 		return pVo;
 	}

@@ -25,7 +25,7 @@
 		</td>
 		<tr>
 			<th>상품명</th>
-			<td><input type="text" name="prodname" value="${woodmallproduct.prodname}"></td>
+			<td><input type="text" name="prodname" value="${woodmallproduct.prodName}"></td>
 		</tr>
 		<tr>
 			<th>가격</th>
@@ -45,7 +45,7 @@
 		</tr>
 	</tr>
 </table>
-<input type="hidden" name="prodnum" value="${woodmallproduct.prodnum}">
+<input type="hidden" name="prodnum" value="${woodmallproduct.prodNum}">
 <input type="submit" value="수정">
 <input type="reset" value="취소">
 <input type="button" value="목록" onClick="location.href='productList.do'">

@@ -17,12 +17,12 @@
 		<tr>
 			<th>상품코드</th>
 			<td>
-				<input type="text" name="prodnum">
+				<input type="text" name="prodNum">
 			</td>
 		</tr>
 				<tr>
 					<th>상품명</th>
-					<td><input type="text" name="prodname"></td>
+					<td><input type="text" name="prodName"></td>
 					<th>분류</th>
 					<td><input type="text" name="kind"></td>
 				</tr>

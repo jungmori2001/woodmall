@@ -17,15 +17,15 @@
 	
 	<c:forEach var="woodmallproduct" items="${productList}">
 		<tr>
-			<td>${woodmallproduct.prodnum}</td>
+			<td>${woodmallproduct.prodNum}</td>
 			<td>${woodmallproduct.kind}</td>
 			<td><img style="width:30px; height:30px;" src="upload/${woodmallproduct.image}"></td>
-			<td>${woodmallproduct.prodname}</td>
+			<td>${woodmallproduct.prodName}</td>
 			<td>${woodmallproduct.price}</td>
 			<td>${woodmallproduct.reg_date}</td>
-			<td><a href="productDetail.do?prodnum=${woodmallproduct.prodnum}">상품상세</a></td>
-			<td><a href="updateProduct.do?prodnum=${woodmallproduct.prodnum}">상품수정</a></td>
-			<td>상품삭제</td>
+			<td><a href="productDetail.do?prodnum=${woodmallproduct.prodNum}">상품상세</a></td>
+			<td><a href="updateProduct.do?prodnum=${woodmallproduct.prodNum}">상품수정</a></td>
+			<td><a href="deleteProduct.do?prodnum=${woodmallproduct.prodNum}">상품삭제</a></td>
 		</tr>
 	</c:forEach>	
 </table>
