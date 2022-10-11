@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
+    
     <title>연습</title>
     <script src="./script/script.js"></script>
    	<style>
@@ -215,34 +215,7 @@ figcaption {
 </head>
 
 <body>
-    <header style="display:flex">
-        <div style="flex:10%">
-            <img src="./image/logo.jpg" width="70%">
-        </div>
-        <div style="flex:90%">
-            <div style="background-color: white; text-align: right;">
-                <a href="#">로그인</a>
-                <a href="#">회원가입</a>
-            </div>
-            <div class="menubar">
-                <ul class="menu">
-                    <li>
-                        <a href="#">소개</a>
-                    </li>
-                    <li>
-                        <a href="#">가구</a>
-                        <ul class="submenu">
-                            <li><a href="#">책상</a></li>
-                            <li><a href="#">의자</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">고객센터</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
+   	<%@ include file="../baseLayout/header.jsp" %>
     <!--메인-->
     <input type="radio" id="s-1" name="slider-control" checked="checked">
     <input type="radio" id="s-2" name="slider-control">
@@ -306,24 +279,7 @@ figcaption {
             <div class="js-slider-indi indi-3"></div>
         </div>
     </div>
-    <!--푸터-->
-
-    <footer style="width:100%; height: 200px; background-color: black;">
-        <div>
-            <span><a href="https://www.youtube.com/"><img class="sns" src="image/youtube.png"></a></span>
-            <span><a href="https://www.instagram.com/"><img class="sns" src="image/insta.png"></a></span>
-            <span><a href="https://ko-kr.facebook.com/"><img class="sns" src="image/facebook.png"></a></span>
-        </div>
-        <div class="copy_left">
-            <h1 style="color:white;">All Contents Copyright 2022 7조 All Right reserved</h1>
-            <address style="color:white;">ContactMail : 7jo.naver.com Tel:+82 010-0000-0000</address>
-        </div>
-        <div class="copy_right">
-            <a href="#">이용약관</a>
-            <a href="#">개인정보취급방침</a>
-        </div>
-    </footer>
-
+    <%@ include file="../baseLayout/footer.jsp" %>
 </body>
 
 </html>
