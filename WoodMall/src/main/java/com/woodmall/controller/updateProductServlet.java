@@ -71,8 +71,8 @@ public class updateProductServlet extends HttpServlet {
 			Date reg_date = Date.valueOf(multi.getParameter("reg_date"));
 			
 			System.out.println(pVo);
-			pVo.setProdnum(prodnum);
-			pVo.setProdname(prodname);
+			pVo.setProdNum(prodnum);
+			pVo.setProdName(prodname);
 			pVo.setPrice(price);
 			pVo.setContent(content);
 			pVo.setImage(image);

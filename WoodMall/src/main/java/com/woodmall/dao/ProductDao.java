@@ -118,8 +118,8 @@ public class ProductDao {
 			while(rs.next()){
 				//rs.getInt("컬럼명");
 				pVo = new ProductVo();
-				pVo.setProdnum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-				pVo.setProdname(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
+				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setImage(rs.getString("image"));
 				pVo.setContent(rs.getString("content"));
@@ -146,12 +146,12 @@ public class ProductDao {
 			conn = DBManager.getConnection();
 			//Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, pVo.getProdname());
+			pstmt.setString(1, pVo.getProdName());
 			pstmt.setInt(2, pVo.getPrice());
 			pstmt.setString(3, pVo.getImage());
 			pstmt.setString(4, pVo.getContent());
 			pstmt.setDate(5, pVo.getReg_date());
-			pstmt.setInt(6, pVo.getProdnum());
+			pstmt.setInt(6, pVo.getProdNum());
 			
 			//SQL문 실행 및 결과 처리
 			result = pstmt.executeUpdate();
@@ -181,8 +181,8 @@ public class ProductDao {
 			while(rs.next()){
 				//rs.getInt("컬럼명");
 				pVo = new ProductVo();
-				pVo.setProdnum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-				pVo.setProdname(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
+				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setImage(rs.getString("image"));
 				pVo.setContent(rs.getString("content"));
