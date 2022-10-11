@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link href="/css/productListPage.css" rel="stylesheet">
+<link href="/css/productList.css" rel="stylesheet">
 <body>
 	<%@ include file="../baseLayout/header.jsp" %>
         <div class="products" id="wrapper">
