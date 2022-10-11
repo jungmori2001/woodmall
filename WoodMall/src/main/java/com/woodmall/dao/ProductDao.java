@@ -98,6 +98,103 @@ public class ProductDao {
 		return list;
 		
 	}
-	
+	//단일 상품 조회
+	public ProductVo selectProductByCode(String prodnum) {
+		String sql = "select * from woodmallproduct where prodnum=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVo pVo = null;
+		try {
+			conn = DBManager.getConnection();
+			// (3 단계) Statement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, prodnum);
+			
+			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+			rs = pstmt.executeQuery();
+			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			while(rs.next()){
+				//rs.getInt("컬럼명");
+				pVo = new ProductVo();
+				pVo.setProdnum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
+				pVo.setProdname(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				pVo.setPrice(rs.getInt("price"));
+				pVo.setImage(rs.getString("image"));
+				pVo.setContent(rs.getString("content"));
+				pVo.setReg_date(rs.getDate("reg_date"));
+			}
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return pVo;
+	}
+	//상품 수정
+	public int updateProduct(ProductVo pVo) {
+		int result = -1;
+		Connection conn = null;
+		//동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리필요
+		PreparedStatement pstmt = null; //동적 쿼리
+		
+		String sql="update woodmallproduct set prodname=?, price=?, image=?, content=?, reg_date=? where prodnum=?";
+		System.out.println(pVo);
+		try {
+			conn = DBManager.getConnection();
+			//Statement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pVo.getProdname());
+			pstmt.setInt(2, pVo.getPrice());
+			pstmt.setString(3, pVo.getImage());
+			pstmt.setString(4, pVo.getContent());
+			pstmt.setDate(5, pVo.getReg_date());
+			pstmt.setInt(6, pVo.getProdnum());
+			
+			//SQL문 실행 및 결과 처리
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		return result;
+	}
+	//상품 삭제
+	public ProductVo deleteProduct(String prodnum) {
+		String sql = "delete form woodmallproduct where prodnum=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVo pVo = null;
+		try {
+			conn = DBManager.getConnection();
+			// (3 단계) Statement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, prodnum);
+			
+			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+			rs = pstmt.executeQuery();
+			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			while(rs.next()){
+				//rs.getInt("컬럼명");
+				pVo = new ProductVo();
+				pVo.setProdnum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
+				pVo.setProdname(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				pVo.setPrice(rs.getInt("price"));
+				pVo.setImage(rs.getString("image"));
+				pVo.setContent(rs.getString("content"));
+				pVo.setReg_date(rs.getDate("reg_date"));
+			}
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return pVo;
+	}
 	
 }

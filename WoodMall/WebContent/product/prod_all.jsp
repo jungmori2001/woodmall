@@ -23,8 +23,8 @@
 			<td>${woodmallproduct.prodname}</td>
 			<td>${woodmallproduct.price}</td>
 			<td>${woodmallproduct.reg_date}</td>
-			<td>상품상세</td>
-			<td>상품수정</td>
+			<td><a href="productDetail.do?prodnum=${woodmallproduct.prodnum}">상품상세</a></td>
+			<td><a href="updateProduct.do?prodnum=${woodmallproduct.prodnum}">상품수정</a></td>
 			<td>상품삭제</td>
 		</tr>
 	</c:forEach>	

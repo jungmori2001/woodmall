@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-sdfsfdsdfsdfsdf
+<!-- 나중에 지워야됨 --><a href="productList.do">상품 페이지</a>
 </body>
 </html>
