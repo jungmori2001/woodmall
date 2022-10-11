@@ -51,10 +51,10 @@ public class WriteProductServlet extends HttpServlet {
 			);	
 			// 입력 양식을 통해 정보를 획득
 			
-			int prodnum = Integer.parseInt(multi.getParameter("prodnum")) ;
+			int prodNum = Integer.parseInt(multi.getParameter("prodNum")) ;
 			String kind = multi.getParameter("kind");
 			String image = multi.getFilesystemName("image");
-			String prodname = multi.getParameter("prodname");
+			String prodName = multi.getParameter("prodName");
 			int price = Integer.parseInt(multi.getParameter("price"));
 			String content = multi.getParameter("content");
 			Date reg_date = Date.valueOf(multi.getParameter("reg_date"));
@@ -66,10 +66,10 @@ public class WriteProductServlet extends HttpServlet {
 //			System.out.println(pictureurl);
 //			System.out.println(reg_date);
 			
-			pVo.setProdnum(prodnum);			// 입력된 상품 정보 Vo에 저장
+			pVo.setProdNum(prodNum);			// 입력된 상품 정보 Vo에 저장
 			pVo.setKind(kind);
 			pVo.setImage(image);
-			pVo.setProdname(prodname);
+			pVo.setProdName(prodName);
 			pVo.setPrice(price);
 			pVo.setContent(content);
 			pVo.setReg_date(reg_date);

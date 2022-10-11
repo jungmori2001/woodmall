@@ -38,10 +38,10 @@ public class ProductDao {
 			// (3단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql_insert);
 			
-			pstmt.setInt(1, pVo.getProdnum());
+			pstmt.setInt(1, pVo.getProdNum());
 			pstmt.setString(2, pVo.getKind());
 			pstmt.setString(3, pVo.getImage());
-			pstmt.setString(4, pVo.getProdname());
+			pstmt.setString(4, pVo.getProdName());
 			pstmt.setInt(5, pVo.getPrice());					// 정수형
 			pstmt.setString(6, pVo.getContent());			// 문자형
 			pstmt.setDate(7, pVo.getReg_date());				// 날짜형
@@ -75,10 +75,10 @@ public class ProductDao {
 			//rs.next() : 다음 행(row) 확인, rs.getString("컬럼명")
 			while(rs.next()) {
 				ProductVo pVo = new ProductVo();
-				pVo.setProdnum(rs.getInt("prodnum"));
+				pVo.setProdNum(rs.getInt("prodNum"));
 				pVo.setKind(rs.getString("kind"));
 				pVo.setImage(rs.getString("image"));
-				pVo.setProdname(rs.getString("prodname"));
+				pVo.setProdName(rs.getString("prodName"));
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setReg_date(rs.getDate("reg_date"));
 				list.add(pVo);
