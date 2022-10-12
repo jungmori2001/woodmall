@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>sed test file 입니다.</h2>
-	<h2>두번째</h2>
-	<h2>두번째sdfsdf</h2>
-	213121341i423408174809230893
+	<a href="noticeList.do">관리자 게시판 페이지</a>
 </body>
 </html>
