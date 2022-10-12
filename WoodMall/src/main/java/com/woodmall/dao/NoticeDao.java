@@ -22,7 +22,8 @@ public class NoticeDao {
 	
 	//전체 공지 조회
 	public List<NoticeVo> selectAllNotice(){
-		String sql = "select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc";
+		String sql ="select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc"; 
+//				"select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc";
 		
 		List<NoticeVo> list = new ArrayList<NoticeVo>();  //List 컬렉션 객체 생성
 		
@@ -34,12 +35,14 @@ public class NoticeDao {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
+				
 				NoticeVo nVo = new NoticeVo();
-				nVo.setNoticeNum(rs.getInt("noticenum"));
+				
+				nVo.setNoticeNum(rs.getInt("noticeNum"));
 				nVo.setName(rs.getString("name"));
-				nVo.setNoticeTitle(rs.getString("noticetitle"));
-				nVo.setNoticeContent(rs.getString("noticecontent"));
-				nVo.setNoticeHits(rs.getInt("noticehits"));
+				nVo.setNoticeTitle(rs.getString("noticeTitle"));
+				nVo.setNoticeContent(rs.getString("noticeContent"));
+				nVo.setNoticeHits(rs.getInt("noticeHits"));
 				
 				list.add(nVo);
 			}
@@ -55,5 +58,81 @@ public class NoticeDao {
 			}
 		}
 		return list;
+	}
+	//공지 쓰기
+	public int insertNotice(NoticeVo nVo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = -1;
+		
+		String sql_insert = "insert into woodmallnotice values(?, '관리자', 'admin', ?, ?, 0)";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql_insert);
+			
+			pstmt.setInt(1, nVo.getNoticeNum());
+			pstmt.setString(2, nVo.getNoticeTitle());
+			pstmt.setString(3, nVo.getNoticeContent());
+			result = pstmt.executeUpdate();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+
+		}
+		return result;
+	}
+	//공지 하나 확인하기(noticeNum)
+	public NoticeVo selectNoticeByNoticeNum(String noticeNum) {
+		String sql = "select * from woodmallnotice where noticenum=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		NoticeVo nVo = null;
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, noticeNum);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				nVo = new NoticeVo();
+				nVo.setNoticeNum(rs.getInt("noticeNum"));
+				nVo.setName(rs.getString("name"));
+				nVo.setNoticeTitle(rs.getString("noticeTitle"));
+				nVo.setNoticeContent(rs.getString("noticeContent"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return nVo;
+	}
+	//공지 수정
+	public int updateNotice(NoticeVo nVo) {
+		int result = -1;
+		Connection conn=null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update woodmallnotice set noticetitle=? , noticecontent=? where noticenum=?";
+		try {
+			conn = DBManager.getConnection();
+			
+			pstmt.setString(1, nVo.getNoticeTitle());
+			pstmt.setString(2, nVo.getNoticeContent());
+			pstmt.setInt(3, nVo.getNoticeNum());
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		return result;
 	}
 }

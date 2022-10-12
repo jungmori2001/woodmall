@@ -8,20 +8,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2> 전체상품 리스트</h2>
-<a href="#">공지사항 쓰기</a>
+<h2> 공지사항 리스트</h2>
+<a href="writeNotice.do">공지사항 쓰기</a>
 <table border="1">
 	<tr>
 		<th>글번호</th><th>작성자</th><th>제목</th><th>글내용</th><th>조회수</th>
 	</tr>
 	
-	<c:forEach var="woodmallproduct" items="${productList}">
+	<c:forEach var="woodmallnotice" items="${noticeList}">
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>${woodmallnotice.noticeNum}</td>
+			<td>${woodmallnotice.name}</td>
+			<td><a href="noticeDetail.do?noticeNum=${woodmallnotice.noticeNum}">${woodmallnotice.noticeTitle}</a></td>
+			<td>${woodmallnotice.noticeContent}</td>
+			<td>${woodmallnotice.noticeHits}</td>
 		</tr>
 	</c:forEach>	
 </table>
