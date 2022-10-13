@@ -65,15 +65,16 @@ public class NoticeDao {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
-		String sql_insert = "insert into woodmallnotice(noticenum, name, userid, noticetitle, noticecontent) values(woodmallnotice_seq.nextval, '관리자','admin', ?, ?)";
+		String sql_insert = "insert into woodmallnotice(noticenum, name, noticetitle, noticecontent) values(woodmallnotice_seq.nextval,?, ?, ?)";
 		
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql_insert);
 			
 //			pstmt.setInt(1, nVo.getNoticeNum());
-			pstmt.setString(1, nVo.getNoticeTitle());
-			pstmt.setString(2, nVo.getNoticeContent());
+			pstmt.setString(1, nVo.getName());
+			pstmt.setString(2, nVo.getNoticeTitle());
+			pstmt.setString(3, nVo.getNoticeContent());
 			result = pstmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -105,6 +106,7 @@ public class NoticeDao {
 				nVo.setName(rs.getString("name"));
 				nVo.setNoticeTitle(rs.getString("noticeTitle"));
 				nVo.setNoticeContent(rs.getString("noticeContent"));
+				nVo.setNoticeHits(rs.getInt("noticeHits"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -119,19 +121,55 @@ public class NoticeDao {
 		Connection conn=null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "update woodmallnotice set noticetitle=? , noticecontent=? where noticenum=?";
+		String sql = "update woodmallnotice set noticeTitle=?, noticeContent=? where noticeNum=?";
 		try {
 			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nVo.getNoticeTitle());
 			pstmt.setString(2, nVo.getNoticeContent());
+//			pstmt.setInt(3, nVo.getNoticeHits());
 			pstmt.setInt(3, nVo.getNoticeNum());
 			
 			result = pstmt.executeUpdate();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("오류"+ pstmt);
 		}finally {
 			DBManager.close(conn, pstmt);
 		}
 		return result;
 	}
+	//공지 삭제
+	public NoticeVo deleteNotice(String noticeNum) {
+		String sql = "delete from woodmallnotice where noticeNum=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		NoticeVo nVo = null;
+		
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, noticeNum);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				nVo= new NoticeVo();
+				nVo.setNoticeNum(rs.getInt("noticeNum"));
+				nVo.setName(rs.getString("name"));
+				nVo.setNoticeTitle(rs.getString("noticeTitle"));
+				nVo.setNoticeContent(rs.getString("noticeContent"));
+				nVo.setNoticeHits(rs.getInt("noticeHits"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("삭제실패");
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+			System.out.println("삭제완료");
+		}
+		return nVo;
+	}
+
 }

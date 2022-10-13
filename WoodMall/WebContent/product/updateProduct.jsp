@@ -19,7 +19,7 @@
 					<img src="image/noimage.jpg">
 				</c:when>
 				<c:otherwise>
-					<img src="upload/${woodmallproduct.image}">
+					<img src="upload/${wouctodmallprod.image}">
 				</c:otherwise>
 			</c:choose>
 		</td>

@@ -3,15 +3,13 @@ package com.woodmall.dto;
 public class NoticeVo {
 	private int noticeNum;
 	private String name;
-	private String userId;
 	private String noticeTitle;
 	private String noticeContent;
 	private int noticeHits;
 	
 	@Override
 	public String toString() {
-		return "NoticeVo [noticenum=" + noticeNum + ", name=" + name +", userid =" + userId +" noticetitle=" + noticeTitle 
-				+ ", noticecontent=" + noticeContent +", noticehits =" + noticeHits +"]";
+		return "NoticeVo [noticenum=" + noticeNum + ", name=" + name +", noticetitle=" + noticeTitle + ", noticecontent=" + noticeContent +", noticehits =" + noticeHits + "]";
 	}
 
 	public String getName() {
@@ -20,14 +18,6 @@ public class NoticeVo {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public int getNoticeNum() {

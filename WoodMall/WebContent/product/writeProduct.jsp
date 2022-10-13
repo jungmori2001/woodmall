@@ -14,12 +14,6 @@
 	<form method="post" enctype="multipart/form-data" name="frm">
 		<div id="wrap">
 			<table border="1" class="list">
-		<tr>
-			<th>상품코드</th>
-			<td>
-				<input type="text" name="prodNum">
-			</td>
-		</tr>
 				<tr>
 					<th>상품명</th>
 					<td><input type="text" name="prodName"></td>

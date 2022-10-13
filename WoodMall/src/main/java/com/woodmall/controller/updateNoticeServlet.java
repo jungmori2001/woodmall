@@ -18,6 +18,8 @@ public class updateNoticeServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		String noticeNum = request.getParameter("noticeNum");
 		NoticeDao nDao = NoticeDao.getInstance();
 		NoticeVo nVo = new NoticeVo();
@@ -35,31 +37,35 @@ public class updateNoticeServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; chaset=UTF-8");
 		
-		NoticeVo nVo = new NoticeVo();
 		NoticeDao nDao = NoticeDao.getInstance();
-		
+		NoticeVo nVo = new NoticeVo();
 		
 		int result =-1;
 
 
 		try {
-			String noticeNum2 = request.getParameter("noticeNum");
-			int noticeNum = Integer.parseInt(noticeNum2);
+			System.out.println(nVo);
+			int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
+			String name = request.getParameter("name");
 			String noticeTitle = request.getParameter("noticeTitle");
 			String noticeContent = request.getParameter("noticeContent");
-			
+//			int noticeHits = Integer.parseInt(request.getParameter("noticeHits"));
+	
 			nVo.setNoticeNum(noticeNum);
+			nVo.setName(name);
 			nVo.setNoticeTitle(noticeTitle);
 			nVo.setNoticeContent(noticeContent);
+//			nVo.setNoticeHits(noticeHits);
 			
-//			System.out.println(nVo);
+			System.out.println(nVo);
+			
 
 		}catch(Exception e) {
 			System.out.println("글 쓰는데 예외 발생: " + e);
 			System.out.println(nVo);
 		}
-		result = nDao.updateNotice(nVo);
 		
+		result = nDao.updateNotice(nVo);
 		//공지 작성 완료 시 메세지 출력
 		if(result==1) {
 			System.out.println("공지사항 수정 성공");

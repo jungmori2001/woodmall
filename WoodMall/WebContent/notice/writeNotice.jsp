@@ -19,6 +19,10 @@
 				<td><input type="text" name="noticeTitle"></td>
 			</tr>
 			<tr>
+				<th>작성자</th>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
 				<th>글 내용</th>
 				<td><textarea rows="10" cols="80" name="noticeContent"
 						placeholder="글을 작성하세요."></textarea></td>

@@ -29,7 +29,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;	// 동적 쿼리
 		int result = -1;
 		
-		String sql_insert = "insert into woodmallproduct values(?, ?, ?, ?, ?, ?, ?)";		// ? : 변화가 가능한 변수
+		String sql_insert = "insert into woodmallproduct values(woodmallproduct_seq.nextval, ?, ?, ?, ?, ?, ?)";		// ? : 변화가 가능한 변수
 
 		
 		try {
@@ -38,13 +38,13 @@ public class ProductDao {
 			// (3단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql_insert);
 			
-			pstmt.setInt(1, pVo.getProdNum());
-			pstmt.setString(2, pVo.getKind());
-			pstmt.setString(3, pVo.getImage());
-			pstmt.setString(4, pVo.getProdName());
-			pstmt.setInt(5, pVo.getPrice());					// 정수형
-			pstmt.setString(6, pVo.getContent());			// 문자형
-			pstmt.setDate(7, pVo.getReg_date());				// 날짜형
+//			pstmt.setInt(1, pVo.getProdNum());
+			pstmt.setString(1, pVo.getKind());
+			pstmt.setString(2, pVo.getImage());
+			pstmt.setString(3, pVo.getProdName());
+			pstmt.setInt(4, pVo.getPrice());					// 정수형
+			pstmt.setString(5, pVo.getContent());			// 문자형
+			pstmt.setDate(6, pVo.getReg_date());				// 날짜형
 
 			// (4단계) SQL문 실행 및 결과 처리
 			//	executeUpdate : 삽입(insert/update/delete)

@@ -31,6 +31,6 @@
 </table>
 <input type="button" value="목록" onClick="location.href='noticeList.do'">
 <input type="button" value="수정" onClick="location.href='updateNotice.do?noticeNum=${woodmallnotice.noticeNum}'">
-<input type="button" value="삭제" onClick="location.href='noticeList.do'">
+<input type="button" value="삭제" onClick="location.href='deleteNotice.do?noticeNum=${woodmallnotice.noticeNum}'">
 </body>
 </html>
