@@ -65,15 +65,15 @@ public class NoticeDao {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
-		String sql_insert = "insert into woodmallnotice values(?, '관리자', 'admin', ?, ?, 0)";
+		String sql_insert = "insert into woodmallnotice(noticenum, name, userid, noticetitle, noticecontent) values(woodmallnotice_seq.nextval, '관리자','admin', ?, ?)";
 		
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql_insert);
 			
-			pstmt.setInt(1, nVo.getNoticeNum());
-			pstmt.setString(2, nVo.getNoticeTitle());
-			pstmt.setString(3, nVo.getNoticeContent());
+//			pstmt.setInt(1, nVo.getNoticeNum());
+			pstmt.setString(1, nVo.getNoticeTitle());
+			pstmt.setString(2, nVo.getNoticeContent());
 			result = pstmt.executeUpdate();
 
 		}catch(Exception e) {
@@ -122,7 +122,6 @@ public class NoticeDao {
 		String sql = "update woodmallnotice set noticetitle=? , noticecontent=? where noticenum=?";
 		try {
 			conn = DBManager.getConnection();
-			
 			pstmt.setString(1, nVo.getNoticeTitle());
 			pstmt.setString(2, nVo.getNoticeContent());
 			pstmt.setInt(3, nVo.getNoticeNum());

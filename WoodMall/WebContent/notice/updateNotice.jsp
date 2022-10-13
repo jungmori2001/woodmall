@@ -13,10 +13,6 @@
 
 			<tr>
 			<tr>
-				<th>글 번호</th>
-				<td>${woodmallnotice.noticeNum}</td>
-			</tr>
-			<tr>
 				<th>작성자</th>
 				<td>${woodmallnotice.name}</td>
 			</tr>

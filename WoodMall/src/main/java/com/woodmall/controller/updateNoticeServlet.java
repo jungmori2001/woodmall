@@ -45,20 +45,21 @@ public class updateNoticeServlet extends HttpServlet {
 		try {
 			String noticeNum2 = request.getParameter("noticeNum");
 			int noticeNum = Integer.parseInt(noticeNum2);
-			
 			String noticeTitle = request.getParameter("noticeTitle");
 			String noticeContent = request.getParameter("noticeContent");
 			
 			nVo.setNoticeNum(noticeNum);
 			nVo.setNoticeTitle(noticeTitle);
 			nVo.setNoticeContent(noticeContent);
+			
+//			System.out.println(nVo);
 
-			result = nDao.insertNotice(nVo);
 		}catch(Exception e) {
 			System.out.println("글 쓰는데 예외 발생: " + e);
 			System.out.println(nVo);
-		
 		}
+		result = nDao.updateNotice(nVo);
+		
 		//공지 작성 완료 시 메세지 출력
 		if(result==1) {
 			System.out.println("공지사항 수정 성공");

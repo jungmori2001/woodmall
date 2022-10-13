@@ -15,10 +15,6 @@
 	<form method="post" name="frm">
 		<table border="1" class="list">
 			<tr>
-				<th>글번호</th>
-				<td><input type="text" name="noticeNum"></td>
-			</tr>
-			<tr>
 				<th>제목</th>
 				<td><input type="text" name="noticeTitle"></td>
 			</tr>

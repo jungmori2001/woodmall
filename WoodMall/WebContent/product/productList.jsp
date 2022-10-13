@@ -9,20 +9,32 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="../baseLayout/header.jsp" %>
-	<div class="products" id="wrapper">
-		<h3>Chair</h3>
-		<hr>
-		<div class="product-list">
-			<c:forEach var="product" items="${productList}">
-				<a href="productDetail.do?code='${product.prodNum}'" class="product">
-					<img src="/upload/${image}" width="225">
-					<div class="product-name">${product.prodName}</div>
-					<div class="product-price">${product.price}</div>
-				</a>
-			</c:forEach>
-		</div>
-	</div>
-<%@ include file="../baseLayout/footer.jsp" %>
+ <h2>상품 리스트</h2>
+   
+   <%-- ${productList} --%>
+
+   <table class="list">
+   	<tr>
+   		<td colspan="7" align="center">
+   			<a href="writeProduct.do">상품 등록</a>
+   		</td>
+   	</tr>
+      <tr>
+         <th>코드</th><th>분류</th><th>이미지</th><th>이름</th><th>가격</th><th>등록일자</th><th>상세</th><th>수정</th><th>삭제</th>
+      </tr>
+      <c:forEach var="woodmallproduct" items="${productList}">   
+         <tr>
+            <td>${woodmallproduct.prodNum}</td>
+            <td>${woodmallproduct.kind}</td>
+            <td>${woodmallproduct.image}</td>         
+            <td>${woodmallproduct.prodName}</td>
+            <td>${woodmallproduct.price}</td>
+            <td>${woodmallproduct.reg_date}</td>
+            <td><a href="productDetail.do?code=${woodmallproduct.prodNum}">상품상세</a></td>
+            <td><a href="updateProduct.do?code=${woodmallproduct.prodNum}">상품수정</a></td>
+            <td><a href="deleteProduct.do?code=${woodmallproduct.prodNum}">상품삭제</a></td>
+         </tr>
+      </c:forEach>
+   </table>
 </body>
 </html>
