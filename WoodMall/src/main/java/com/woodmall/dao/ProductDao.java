@@ -98,6 +98,50 @@ public class ProductDao {
 		return list;
 		
 	}
+	
+	//카테고리별 
+	public List<ProductVo> selectAllProductByKind(String kind){
+		String sql = "select * from woodmallproduct where kind="+kind;
+		List<ProductVo> list = new ArrayList<ProductVo>(); //list 컬렉션 개체 생성
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			//Statement  객체 생성
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("statement 객체 생성");
+			//SQL문 실행 및 결과처리 excuteQuery : 조회(select)
+			rs = pstmt.executeQuery();
+			//rs.next() : 다음 행(row) 확인, rs.getString("컬럼명")
+			while(rs.next()) {
+				ProductVo pVo = new ProductVo();
+				pVo.setProdNum(rs.getInt("prodNum"));
+				pVo.setKind(rs.getString("kind"));
+				pVo.setImage(rs.getString("image"));
+				pVo.setProdName(rs.getString("prodName"));
+				pVo.setPrice(rs.getInt("price"));
+				pVo.setReg_date(rs.getDate("reg_date"));
+				list.add(pVo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				//사용한 리소스 해제
+				rs.close();
+				pstmt.close();
+				conn.close();
+			}catch(SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return list;
+		
+	}
+	
+	
 	//단일 상품 조회
 	public ProductVo selectProductByCode(String prodnum) {
 		String sql = "select * from woodmallproduct where prodnum=?";
