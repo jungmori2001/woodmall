@@ -20,14 +20,21 @@ public class ClientProductListServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-ProductDao pDao = ProductDao.getInstance();
+		ProductDao pDao = ProductDao.getInstance();
+		String kind = request.getParameter("kind");
 		
+
 		//모든 상품 리스트를 DB로부터 조회 후 저장
-		List<ProductVo> productList = pDao.selectAllProduct();
+		List<ProductVo> productList = pDao.selectAllProductByKind(kind);
 		request.setAttribute("productList", productList);
 		
+		
+		kind = kind.replaceAll("'", "");
+		request.setAttribute("kind" , kind);
+		
+		
 		//리스트 페이지로 이동
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/productLsit.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductList.jsp");
 		dispatcher.forward(request, response);
 	}
 

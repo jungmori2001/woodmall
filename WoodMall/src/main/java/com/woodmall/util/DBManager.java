@@ -14,7 +14,7 @@ public class DBManager {
 			// (1 단계) JDBC 드라이버 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");	// Oracle
 			// (2 단계) 데이터 베이스 연결 객체 생성 
-			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			String url = "jdbc:oracle:thin:@192.168.0.158:1521:orcl";
 			String uid = "ora_user";
 			String pass = "1234";
 			conn = DriverManager.getConnection(url, uid, pass);	// DB연결

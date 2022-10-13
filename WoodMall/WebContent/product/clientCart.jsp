@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>WoodMall : 장바구니</title>
 </head>
 <body>
-<!-- 나중에 지워야됨 --><a href="productList.do">상품 페이지</a>
-
+	<%@ include file="../baseLayout/header.jsp" %>
+	
+	
+	<%@ include file="../baseLayout/footer.jsp" %>
 </body>
 </html>
