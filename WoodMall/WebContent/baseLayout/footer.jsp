@@ -6,13 +6,13 @@
 <meta charset="UTF-8">
 <title></title>
 </head>
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 <body>
 <footer style="width:100%; height: 200px; background-color: black;">
         <div>
-            <span><a href="https://www.youtube.com/"><img class="sns" src="image/youtube.png"></a></span>
-            <span><a href="https://www.instagram.com/"><img class="sns" src="image/insta.png"></a></span>
-            <span><a href="https://ko-kr.facebook.com/"><img class="sns" src="image/facebook.png"></a></span>
+            <span><a href="https://www.youtube.com/"><img class="sns" src="../image/youtube.png"></a></span>
+            <span><a href="https://www.instagram.com/"><img class="sns" src="../image/insta.png"></a></span>
+            <span><a href="https://ko-kr.facebook.com/"><img class="sns" src="../image/facebook.png"></a></span>
         </div>
         <div class="copy_left">
             <h1 style="color:white;">All Contents Copyright 2022 7조 All Right reserved</h1>

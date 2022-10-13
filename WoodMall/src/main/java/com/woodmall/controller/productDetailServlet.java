@@ -30,8 +30,8 @@ public class productDetailServlet extends HttpServlet {
 		
 		pVo = pDao.selectProductByCode(prodnum);
 		
-		request.setAttribute("woodmallproduct", pVo);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/productDetail.jsp");
+		request.setAttribute("productList", pVo);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 
