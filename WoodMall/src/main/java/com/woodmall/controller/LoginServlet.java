@@ -42,22 +42,22 @@ public class LoginServlet extends HttpServlet {
 	}
 
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		request.setCharacterEncoding("UTF-8");		// post 방식 한글 설정
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();		// 웹페이지 출력 처리
 		
-		String url = "login/login.jsp";			// 현재 URL
+		String url = "login.jsp";			// 현재 URL
 
 		//MemberDao mDao = new MemberDao();			// 데이터 베이스 연동
 		
 		MemberDao mDao = MemberDao.getInstance();	// 데이터 베이스 연동
 		
-		String userId = request.getParameter("userId");		// 입력양식으로 부터 가져온 아이디
+		String userId = request.getParameter("userid");		// 입력양식으로 부터 가져온 아이디
 		String userPwd = request.getParameter("password");
-		
+//		System.out.println("userId: "+ userId + " userPwd: "+ userPwd);
 		// 디비 연동 후, 가져올 아이디/암호
 //		String id = "kenneth";
 		int result = mDao.checkUser(userId, userPwd);		// DB 사용자 확인
@@ -67,17 +67,19 @@ public class LoginServlet extends HttpServlet {
 //		out.print("암호: " + userPwd);
 		
 		if(result == 1) {
-//			System.out.println("암호 일치");
-			url = "main.jsp";
+			System.out.println("암호 일치");
+			url = "index.jsp";
 			
-			MemberVo mVo = getMember(userid);
-//			System.out.println("회원 이름:" + mVo.getName());
+			MemberVo mVo = mDao.getMember(userId);
+			System.out.println("회원 이름:" + mVo.getName());
 			
 			// 세션 설정
 			HttpSession session = request.getSession();		// 생성된 세션 객체 호출
+			session.setAttribute("loginUser", mVo);	
 			
-			session.setAttribute("loginUser", mVo);			// 세션에 회원 정보 저장
-			System.out.println(session.getAttribute("loginUser"));	// toString 확인
+			
+			// 세션에 회원 정보 저장
+//			System.out.println(session.getAttribute("loginUser"));	// toString 확인
 //			System.out.println(session);		// session 객체 확인
 //			request.setAttribute("name", mVo.getName());
 //			request.setAttribute("id", mVo.getUserid());
@@ -90,14 +92,11 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("존재하지 않는 회원");
 //			url = "member/login.jsp";
 		}
-		
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request,response);
 	}
 
-
-
-	}
+}
 
 

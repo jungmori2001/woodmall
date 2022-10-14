@@ -90,11 +90,11 @@ public class MemberVo {
 
 
 
-	}
+}
 	
 
 
-}
+
 
 
 

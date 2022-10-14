@@ -4,16 +4,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/53a8c415f1.js"></script>
-    <link rel="stylesheet" href="css/login.css"> 
-    <script type="text/javascript" src="script/login.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/53a8c415f1.js"></script>
+  <link rel="stylesheet" href="css/login.css"> 
+  <script type="text/javascript" src="script/login.js"></script> 
 <title>로그인</title>
 </head>
 <body>
-<body>
+
 <form action="login.do" method="post" name="frm">
     <img src="image/logo.jpg">
     <div class="wrap">
@@ -26,7 +26,7 @@
             </div>
             <div class="login_id">
                 <h4>아이디</h4>
-                <input type="userid" name="userid" placeholder="아이디">
+                <input type="text" name="userid" placeholder="아이디">
             </div>
             <div class="login_pw">
                 <h4>비밀번호</h4>
@@ -34,17 +34,21 @@
             </div>
             <div class="login_etc">
                 <div class="checkbox">
-                <input type="checkbox" name="rembid" id=""> 아이디 저장
+                <input type="checkbox" name="rembid" > 아이디 저장
                 </div>
                 <div class="forgot_pw">
                 <a href="">비밀번호를 잃어버렸나요?</a>
             </div>
             </div>
             <div class="submit">
-                <input type="submit" value="로그인" onclick="return checkLogin()"> 
+                <input type="submit" value="로그인" > 
             </div>
         </div>
     </div>
+    
+
+ 
+    
 </form>
 </body>
 </html>

@@ -1,85 +1,77 @@
 package com.woodmall.dao;
 
+import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Statement;
+
 
 import com.woodmall.dto.MemberVo;
 import com.woodmall.util.DBManager;
 
-public class MemberDao {
+
+public class MemberDao {	
 	
+	// 싱글톤 생성 및 사용
+	// 필드
 	private static MemberDao instance = new MemberDao();	
 	// 생성자
 	private MemberDao(){		
 	}	
-	
+	// 메소드
 	public static MemberDao getInstance() {
-		return instance;	
+		return instance;		
 	}	
-		// 로그인(사용자 인증) : select
-		// 입력값: 로그인 페이지에서 입력받은 사용자아이디와 암호
-		// 반환값: result (1:암호일치), (0:암호불일치), (-1:사용자아이디없음)
-		public int checkUser(String userid, String password) {
-			int result = -1;		
-			Connection conn = null;
-			Statement stmt = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;		
-			String sql = "select Member from Member where userid=?";	
+	
+	// 로그인(사용자 인증) : select
+	// 입력값: 로그인 페이지에서 입력받은 사용자아이디와 암호
+	// 반환값: result (1:암호일치), (0:암호불일치), (-1:사용자아이디없음)
+	public int checkUser(String userid, String password) {
+		int result = -1;	
+		Connection conn = null;
+//		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		String sql = "select password from MEMBER where userid=?";	
+		
+		try {
 			
-			try {
-//				// (1 단계) JDBC 드라이버 로드
-				//Class.forName("com.mysql.jdbc.Driver");			// MySql
-			Class.forName("oracle.jdbc.driver.OracleDriver");	// Oracle
-//				// (2 단계) 데이터 베이스 연결 객체 생성 
-			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-				String uid = "ora_user";
-				String pass = "1234";
-//				conn = DriverManager.getConnection(url, uid, pass);	// DB연결
-				conn = DBManager.getConnection();			
-				
-				// (3 단계) Statement 객체 생성
-				stmt = conn.createStatement();
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, userid);
-				
-				// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
-//				rs = stmt.executeQuery(sql);
-				rs = pstmt.executeQuery();
-				// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
-				if(rs.next()){
-//					System.out.println(rs.getString("pwd"));	
-					// 아이디/ 암호 비교 후 페이지 이동
-					if(rs.getString("password")!=null &&
-							rs.getString("password").equals(password)) {
-						result = 1;		// 암호 일치
-					} else {
-						result = 0;		// 암호 불일치
-					}
+			conn = DBManager.getConnection();	
+			// (3 단계) Statement 객체 생성
+//			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+//			pstmt.setString(2, password);
+	
+			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+//			rs = stmt.executeQuery(sql);
+			rs = pstmt.executeQuery();
+			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			if(rs.next()) {
+//				System.out.println(rs.getString("pwd"));	
+				// 아이디/ 암호 비교 후 페이지 이동
+				if(rs.getString("password")!=null &&
+						rs.getString("password").equals(password)) {
+					result = 1;		// 암호 일치
 				} else {
-					result = -1;		// 디비에 userid 없음
+					result = 0;		// 암호 불일치
 				}
-			} catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				DBManager.close(conn, pstmt, rs);
-				try {
-//					//(5 단계) 사용한 리소스 해제
-				rs.close();
-					stmt.close();
-					pstmt.close();
-					conn.close();
-				} catch(SQLException e) {	
-					System.out.println(e.getMessage());
-				}
+			} else {
+				result = -1;		// 디비에 userid 없음
 			}
-			
-			return result;
+		} catch(Exception e) {
+				e.printStackTrace();
+		} finally {
+				DBManager.close(conn, pstmt, rs);
 		}
-	}	
+		return result;
+	}		
+			
+			
+	
+
 // 회원 가입: DB에 회원 정보를 삽입
 //public int insertMember(String name, String id, String pwd, String email, String phone, int admin) {
 public int insertMember(MemberVo mVo) {
@@ -90,7 +82,7 @@ public int insertMember(MemberVo mVo) {
 	PreparedStatement pstmt = null;		// 동적 쿼리
 	
 //	String sql_insert = "insert into member values('"+name+"', '"+id+"', '"+pwd+"', '"+email+"', '"+phone+"', "+admin+")";
-	String sql_insert = "insert into Member values(?, ?, ?, ?, ?, ?)";
+	String sql_insert = "insert into member(name,userid,password,PhoneNum,emailAddress,PostNum,mainAddress,detailAddress,subAddress) values(?,?,?,?,?,?,?,?,?)";
 	
 //	System.out.println(sql_insert);
 	
@@ -111,17 +103,15 @@ public int insertMember(MemberVo mVo) {
 		pstmt.setString(2, mVo.getUserid());
 		pstmt.setString(3, mVo.getPassword());
 		pstmt.setString(4, mVo.getPhoneNum());
-		pstmt.setString(5, mVo.getPostNum());
-		pstmt.setString(6, mVo.getEmailAddress());
-		pstmt.setString(7, mVo.getDetailAddress());
-		pstmt.setString(8, mVo.getMainAddress());
+		pstmt.setString(5, mVo.getEmailAddress());			// 문자형
+		pstmt.setString(6, mVo.getPostNum());
+		pstmt.setString(7, mVo.getMainAddress());
+		pstmt.setString(8, mVo.getDetailAddress());
 		pstmt.setString(9, mVo.getSubAddress());
 		
 		
 		
-		
-													// 문자형
-					// 정수형
+		// 정수형
 //		pstmt.setFloat(int idx, float x);			// 실수형
 //		pstmt.setDate(int idx, Date x);				// 날짜형
 //		pstmt.setTimestamp(int idx, Timestamp x);	// 시간형
@@ -134,6 +124,7 @@ public int insertMember(MemberVo mVo) {
 		e.printStackTrace();			
 	} finally {
 		DBManager.close(conn, pstmt);
+		
 //		try {
 //			//(5 단계) 사용한 리소스 해제
 ////			stmt.close();
@@ -144,18 +135,18 @@ public int insertMember(MemberVo mVo) {
 //		}
 	}
 	return result;
-}
+	}
 
-// 회원 정보 가져오기: select
-// 입력값: 사용자id(userid) 
-// 반환값: 해당 회원 정보
+// 회원 정보 가져오기 : select
 public MemberVo getMember(String userid) {
 	int result = -1;
-	String sql = "select * from Member where userid = ?";
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql = "select * from member where userid = ?";
 	MemberVo mVo = null;		
 
-	Connection conn = null;
-	ResultSet rs = null;
+
 	try {
 		conn = DBManager.getConnection();
 		
@@ -173,84 +164,103 @@ public MemberVo getMember(String userid) {
 			mVo.setName(name); 						// DB에서 가져온 정보를 mVo객체에 저장				
 			mVo.setUserid(rs.getString("userid")); 
 			mVo.setPassword(rs.getString("password"));
-			mVo.setPostNum(rs.getString("PostNum"));
 			mVo.setPhoneNum(rs.getString("PhoneNum"));
-			mVo.setEmailAddress(rs.getString("EmailAddress"));
-			mVo.setDetailAddress(rs.getString("DetailAddress"));
-			mVo.setMainAddress(rs.getString("MainAddress"));
-			mVo.setEmailAddress(rs.getString("EmailAddress"));
-			mVo.setSubAddress(rs.getString("SubAddress"));
+			mVo.setEmailAddress(rs.getString("emailAddress"));
+			mVo.setPostNum(rs.getString("postNum"));
+			mVo.setMainAddress(rs.getString("mainAddress"));
+			mVo.setDetailAddress(rs.getString("detailAddress"));
+			mVo.setSubAddress(rs.getString("subAddress"));
+			
 		} else {
 			result = -1;		// 디비에 userid 없음
 		}
 	} catch(Exception e) {
 		e.printStackTrace();
 	} finally {
-		DBManager.close(conn, pstmt, rs);
+		try {
+			rs.close();
+			pstmt.close();
+			conn.close();
+	} catch(SQLException e) {
+		System.out.println(e.getMessage());
+		}
+		
 	}
 	return mVo;
 }
 
-// 회원 정보 업데이트 : update
-// 입력값: 회원 테이블 정보
-// 반환값: 성공여부
-public int updateMember(MemberVo mVo) {
-	int result = -1;		
-	String sql = "update Member set password=?, EmailAddress=?, PhoneNum=?  where userid=?";
-	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	try {
-		conn = DBManager.getConnection();
+//회원 정보 업데이트 : update
+	// 입력값: 회원 테이블 정보
+	// 반환값: 성공여부
+	public int updateMember(MemberVo mVo) {
+		int result = -1;		
+		String sql = "update member set password=?, EmailAddress=?, PostNum=?, MainAddress=?, PhoneNum=?,  where userid=?";
 		
-		// (3 단계) Statement 객체 생성
-		pstmt = conn.prepareStatement(sql);		// 쿼리 입력
-		pstmt.setString(1, mVo.getPassword());
-		pstmt.setString(2, mVo.getEmailAddress());
-		pstmt.setString(3, mVo.getPhoneNum());
-		pstmt.setString(4, mVo.getUserid());
-		// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
-		result = pstmt.executeUpdate();
-	} catch(Exception e) {
-		e.printStackTrace();
-	} finally {
-		DBManager.close(conn, pstmt);
-	}		
-	return result;
-}
+		Connection conn = null;
+//		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			// (3 단계) Statement 객체 생성
+			pstmt = conn.prepareStatement(sql);		// 쿼리 입력
+			pstmt.setString(1, mVo.getPassword());
+			pstmt.setString(2, mVo.getEmailAddress());
+			pstmt.setString(3, mVo.getPostNum());
+			pstmt.setString(4, mVo.getMainAddress());
+			pstmt.setString(5, mVo.getPhoneNum());
+			// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
+//			rs = stmt.executeQuery(sql);
+			result = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}		
+		return result;
+	}
 
-// 아이디를 확인 : select
-// 입력값: 중복 체크하려는 userid
-// 반환값: 체크한 id가 DB에 존재 여부: 존재(1), 존재안함(-1)
-public int confirmID(String userid) {
-	int result = -1;
-	String sql = "select userid from Member where userid=?";
-	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	try {
-		conn = DBManager.getConnection();
+	// 아이디를 확인 : select
+	// 입력값: 중복 체크하려는 userid
+	// 반환값: 체크한 id가 DB에 존재 여부: 존재(1), 존재안함(-1)
+	public int confirmID(String userid) {
+		int result = -1;
+		String sql = "select userid from member where userid=?";
 		
-		// (3 단계) Statement 객체 생성
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, userid);
+		Connection conn = null;
+//		Statement stmt =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// (1 단계) JDBC 드라이버 로드
+			Class.forName("oracle.jdbc.driver.OracleDriver");	// Oracle
+			// (2 단계) 데이터 베이스 연결 객체 생성 
+			String url = "jdbc:oracle:thin:@192.168.0.158:1521:orcl";
+			String uid = "ora_user";
+			String pass = "1234";
+			
+			// (3 단계) Statement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			
+			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+			rs = pstmt.executeQuery();
+			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			if(rs.next()){
+				// 디비로부터 회원 정보 획득
+				result = 1;			// 디비에 userid 있음
+			} else {
+				result = -1;		// 디비에 userid 없음
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}		
+		return result;	
 		
-		// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
-		rs = pstmt.executeQuery();
-		// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
-		if(rs.next()){
-			// 디비로부터 회원 정보 획득
-			result = 1;			// 디비에 userid 있음
-		} else {
-			result = -1;		// 디비에 userid 없음
-		}
-	} catch(Exception e) {
-		e.printStackTrace();
-	} finally {
-		DBManager.close(conn, pstmt, rs);
-	}		
-	return result;		
+	}
 }
-}
-
