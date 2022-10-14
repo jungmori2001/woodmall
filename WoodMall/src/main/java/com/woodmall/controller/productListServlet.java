@@ -21,7 +21,8 @@ public class productListServlet extends HttpServlet {
 		ProductDao pDao = ProductDao.getInstance();
 		
 		//모든 상품 리스트를 DB로부터 조회 후 저장
-		List<ProductVo> productList = pDao.selectAllProduct();
+//		List<ProductVo> productList = pDao.selectAllProduct();
+		List<ProductVo> productList = pDao.getProductList();
 		request.setAttribute("productList", productList);
 		
 		//리스트 페이지로 이동
