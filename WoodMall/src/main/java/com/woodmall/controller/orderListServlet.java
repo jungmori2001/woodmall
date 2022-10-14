@@ -10,27 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.woodmall.dao.ProductDao;
-import com.woodmall.dto.ProductVo;
+import com.woodmall.dao.OrderDao;
+import com.woodmall.dto.OrderVo;
 
-@WebServlet("/productList.do")
-public class productListServlet extends HttpServlet {
+@WebServlet("/orderList.do")
+public class orderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductDao pDao = ProductDao.getInstance();
+		OrderDao oDao = OrderDao.getInstance();
 		
-		//모든 상품 리스트를 DB로부터 조회 후 저장
-//		List<ProductVo> productList = pDao.selectAllProduct();
-		List<ProductVo> productList = pDao.getProductList();
-		request.setAttribute("productList", productList);
+		//모든 주문내역 리스트를 DB로부터 조회 후 저장
+		List<OrderVo> orderList = oDao.selectAllOrder();
+		request.setAttribute("orderList", orderList);
+//		System.out.println(orderList);
 		
 		//리스트 페이지로 이동
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/prod_all.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("order/orderList.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
