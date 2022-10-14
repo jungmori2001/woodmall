@@ -6,7 +6,84 @@
 <meta charset="UTF-8">
 <title></title>
 </head>
-<link rel="stylesheet" href="../css/style.css">
+<style>
+
+footer {
+    position: relative;
+    transform: translateY(90%);
+}
+
+.sns {
+    margin: 0.5%;
+    margin-top: 1%;
+    width: 50px;
+    height: 50px;
+}
+
+.copy_left {
+    margin-top: 100px;
+    font-size: 5px;
+    float: left;
+}
+
+.copy_right {
+    font-size: 8px;
+    float: right;
+    margin-top: 100px;
+    font-size: 5px;
+}
+
+/*상품 관리 리스트 페이지*/
+.admin_right{
+    width:100%;
+    float: right;
+    height: 100%;
+}
+
+/* (관리자) 관리 페이지 */
+.table{
+    max-width:1200px;
+    max-height: 700px;
+    margin:3%;
+    border: 1px solid black;
+}
+th{background-color: skyblue; color:white;}
+tr, td, th{
+    text-align: center;
+    border: 1px solid gray;
+    width:300px;
+    height: 30px;
+}
+
+.writebtn {
+    margin: 3%;
+    float: right;
+    width: 10%;
+    height: 40px;
+}
+
+.right_bottom > .btn{
+    margin:3%;
+    float: right;
+    width: 30%;
+    height: 40px;
+    background-color: yellowgreen;
+    color:black;
+}
+.btn{
+    border: 1px solid skyblue;
+    background-color: rgba(0,0,0,0);
+    color:skyblue;
+    padding:3px;
+    border-radius:5px;
+    cursor: pointer;
+}
+.btn:hover{
+    color:white;
+    background-color: skyblue;
+    transition-duration: 0.2s;
+}
+</style>
 <body>
 <footer style="width:100%; height: 200px; background-color: black;">
         <div>
