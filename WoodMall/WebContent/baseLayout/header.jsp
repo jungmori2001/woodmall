@@ -7,11 +7,6 @@
 <title></title>
 </head>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 ul,
 li {
@@ -76,7 +71,7 @@ a {
 <body>
 <header style="display:flex">
         <div style="flex:10%">
-            <img src="../image/logo.jpg" width="70%">
+            <img src="./image/logo.jpg" width="70%">
         </div>
         <div style="flex:90%">
             <div style="background-color: white; text-align: right;">
