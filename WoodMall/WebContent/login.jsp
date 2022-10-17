@@ -41,7 +41,7 @@
             </div>
             </div>
             <div class="submit">
-                <input type="submit" value="로그인" > 
+                <input type="submit" value="로그인"> 
             </div>
         </div>
     </div>

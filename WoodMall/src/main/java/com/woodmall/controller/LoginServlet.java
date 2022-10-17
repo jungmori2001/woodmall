@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 //			System.out.println(session);
 			
 			// 만약, 세션 속성이 유지되고 있는 동안(즉, 로그인 되어 있는 상태)에는 index.jsp 페이지로 이동
-			if(session.getAttribute("loginUser") != null) {		// 세션에 로그인한 회원 정보가 저장되어 있는지 확인하여 
+			if(session.getAttribute("userid") != null) {		// 세션에 로그인한 회원 정보가 저장되어 있는지 확인하여 
 				url = "index.jsp";
 			}
 			
@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 			
 			// 세션 설정
 			HttpSession session = request.getSession();		// 생성된 세션 객체 호출
-			session.setAttribute("loginUser", mVo);	
+			session.setAttribute("userId", mVo);	
 			
 			
 			// 세션에 회원 정보 저장

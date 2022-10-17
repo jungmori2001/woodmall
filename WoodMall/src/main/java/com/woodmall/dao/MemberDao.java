@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.sql.Statement;
 
-
 import com.woodmall.dto.MemberVo;
 import com.woodmall.util.DBManager;
 
@@ -82,7 +81,7 @@ public int insertMember(MemberVo mVo) {
 	PreparedStatement pstmt = null;		// 동적 쿼리
 	
 //	String sql_insert = "insert into member values('"+name+"', '"+id+"', '"+pwd+"', '"+email+"', '"+phone+"', "+admin+")";
-	String sql_insert = "insert into member(name,userid,password,PhoneNum,emailAddress,PostNum,mainAddress,detailAddress,subAddress) values(?,?,?,?,?,?,?,?,?)";
+	String sql_insert = "insert into member(?,?,?,?,?,?,?,?,)";
 	
 //	System.out.println(sql_insert);
 	
@@ -125,14 +124,7 @@ public int insertMember(MemberVo mVo) {
 	} finally {
 		DBManager.close(conn, pstmt);
 		
-//		try {
-//			//(5 단계) 사용한 리소스 해제
-////			stmt.close();
-//			pstmt.close();
-//			conn.close();
-//		} catch(SQLException e) {
-//			System.out.println(e.getMessage());
-//		}
+
 	}
 	return result;
 	}
@@ -150,11 +142,11 @@ public MemberVo getMember(String userid) {
 	try {
 		conn = DBManager.getConnection();
 		
-		// (3 단계) Statement 객체 생성
+//		// (3 단계) Statement 객체 생성
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, userid);
 		
-		// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+//		 (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 		rs = pstmt.executeQuery();
 		// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
 		if(rs.next()){
@@ -170,7 +162,7 @@ public MemberVo getMember(String userid) {
 			mVo.setMainAddress(rs.getString("mainAddress"));
 			mVo.setDetailAddress(rs.getString("detailAddress"));
 			mVo.setSubAddress(rs.getString("subAddress"));
-			
+		
 		} else {
 			result = -1;		// 디비에 userid 없음
 		}
@@ -200,7 +192,7 @@ public MemberVo getMember(String userid) {
 //		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+	
 		try {
 			conn = DBManager.getConnection();
 			
@@ -208,8 +200,7 @@ public MemberVo getMember(String userid) {
 			pstmt = conn.prepareStatement(sql);		// 쿼리 입력
 			pstmt.setString(1, mVo.getPassword());
 			pstmt.setString(2, mVo.getEmailAddress());
-			pstmt.setString(3, mVo.getPostNum());
-			pstmt.setString(4, mVo.getMainAddress());
+			pstmt.setString(3, mVo.getPostNum());			pstmt.setString(4, mVo.getMainAddress());
 			pstmt.setString(5, mVo.getPhoneNum());
 			// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
 //			rs = stmt.executeQuery(sql);
@@ -226,7 +217,7 @@ public MemberVo getMember(String userid) {
 	// 아이디를 확인 : select
 	// 입력값: 중복 체크하려는 userid
 	// 반환값: 체크한 id가 DB에 존재 여부: 존재(1), 존재안함(-1)
-	public int confirmID(String userid) {
+public int confirmID(String userid) {
 		int result = -1;
 		String sql = "select userid from member where userid=?";
 		
@@ -246,7 +237,7 @@ public MemberVo getMember(String userid) {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			
-			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+//			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 			rs = pstmt.executeQuery();
 			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
 			if(rs.next()){
@@ -259,7 +250,8 @@ public MemberVo getMember(String userid) {
 			e.printStackTrace();
 		} finally {
 			DBManager.close(conn, pstmt, rs);
-		}		
+		}	
+		
 		return result;	
 		
 	}
