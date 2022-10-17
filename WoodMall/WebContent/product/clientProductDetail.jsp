@@ -59,6 +59,7 @@
 	</script>
 	<%@ include file="../baseLayout/header.jsp"%>
 	<article>
+	<form action="../order.do" name="form" method="post">
 		<div class="article">
 			<div class="image" align="center">
 				<c:choose>
@@ -72,11 +73,12 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			
 			<div class="imp">
 				<div class="prodName">
 					<h2>${product.prodName}</h2>
 				</div>
-				<form action="../order.do" name="form" method="get">
+				
 					<table>
 						<tr>
 							<td>가격</td>
@@ -98,14 +100,18 @@
 								name="sum" size="11" readonly="readonly">원</td>
 					
 					</table>
-				</form>
+				
 			</div>
+			
 		</div>
+		
 		<div align="center">
-		<input type="hidden" name="prodNum" value="${product.prodNum}">
-		<input style="height: 30px" type="button" value="Add to Cart" onclick="location.href='cart.do?prodNum=${product.prodNum}'">
+		<input type="hidden" name="userid" value="${product.prodNum}">
+		<input style="height: 30px" type="button" value="Add to Cart" onclick="location.href='../clientProductCart.do?prodNum=${product.prodNum}'">
 		<input style="height: 30px" type="submit" value="구매">
+		
 		</div>
+		</form>
 	</article>
 
 	<div class="tab">

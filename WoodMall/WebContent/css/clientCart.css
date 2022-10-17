@@ -78,7 +78,7 @@ td {
     font-weight: bold;
 }
 
-.cart__list__smartstore {
+.cart_smartStore {
     font-size: 12px;
     color: gray;
 }
@@ -136,6 +136,7 @@ td {
 
 .price {
     font-weight: bold;
+    border-bottom: 1px solid lightgrey;
 }
 
 .cart__mainbtns {

@@ -47,13 +47,7 @@ footer {
     margin:3%;
     border: 1px solid black;
 }
-th{background-color: skyblue; color:white;}
-tr, td, th{
-    text-align: center;
-    border: 1px solid gray;
-    width:300px;
-    height: 30px;
-}
+
 
 .writebtn {
     margin: 3%;
