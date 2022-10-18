@@ -46,8 +46,12 @@ function selectAll(selectAll) {
                         </tr>
                     </thead>
                     <tbody>
+                    
                         <tr class="cart__list__detail">
-                            <td><input type="checkbox" name="price" value="${product.price}" checked="checked"></td>
+                            <td>
+                            <input type="hidden" name="prodNum" value="${produc.prodNum}">
+                            <input type="checkbox" name="price" value="${product.price}" checked="checked">
+                            </td>
                             <td><img src="upload/${product.image}"></td>
                             <td><a href="../index.jsp">WoodMall</a><span class="cart_smartStore"> 스마트스토어</span>
                                 <p>${product.prodName}</p>
@@ -67,7 +71,7 @@ function selectAll(selectAll) {
 
                             </td>
                             <td></td>
-                            <td>총 구매 금액<br><br></td>
+                            <td>총 구매 금액<br><br><span class="totalPrice"></span></td>
                             <td></td>
                         </tr>
                         

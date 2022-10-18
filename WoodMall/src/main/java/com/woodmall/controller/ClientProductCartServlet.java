@@ -1,7 +1,10 @@
 package com.woodmall.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,12 +28,13 @@ public class ClientProductCartServlet extends HttpServlet {
 		ProductDao pDao = ProductDao.getInstance();
 		
 		String userId = (String) session.getAttribute("userId");
-		String prodNum = request.getParameter("prodNum");
+		System.out.println(userId);
+		int prodNum = Integer.parseInt(request.getParameter("prodNum"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		
 	
 		//1.prodNum 기반으로 데이터 가져오기
-		pDao.selectProductByCode(prodNum);
+		pVo = pDao.selectProductByCode(prodNum);
 		
 		//2.가져온 데이터에서 필요한 부분만 insert 함수에 넣기
 		
@@ -41,18 +45,51 @@ public class ClientProductCartServlet extends HttpServlet {
 		cVo.setQuantity(quantity);
 		cVo.setUserId(userId);
 		
-		
 		cDao.insertProductToCart(cVo);
 		
+		String result = request.getParameter("result");
 		
-		
-		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		ProductDao pDao = ProductDao.getInstance();
+		ProductVo pVo = new ProductVo();
+		
+		// 1. 장바구니에서 체크된 항목의 코드값만 가져와서 다시 디비에서 불러오기
+		
+			// 전체 금액
+		String[] prices = request.getParameterValues("price");
+		int totalPrice = 0;
+		for(String price: prices) {
+			totalPrice = totalPrice+ Integer.parseInt(price);
+		}
+		
+		String[] prodNums = request.getParameterValues("prodNum");
+		
+		List<ProductVo> list = new ArrayList<ProductVo>();
+		
+		for(String prodNum : prodNums) {
+			pVo = pDao.selectProductByCode(Integer.parseInt(prodNum));
+			pVo.getProdName();
+			pVo.getPrice();
+			pVo.getProdNum();
+		}
+		list.add(pVo);
+		
+		
+		request.setAttribute("productList", list);
+		
+		
+		
+		request.setAttribute("totalPrice", totalPrice);
+		
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");
+		dispatcher.forward(request, response);
+		
 	}
-
 }

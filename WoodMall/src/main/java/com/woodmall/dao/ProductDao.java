@@ -145,7 +145,7 @@ public class ProductDao {
 	}
 
 	// 단일 상품 조회
-	public ProductVo selectProductByCode(String prodnum) {
+	public ProductVo selectProductByCode(int prodNum) {
 		String sql = "select * from woodmallproduct where prodnum=?";
 
 		Connection conn = null;
@@ -156,7 +156,7 @@ public class ProductDao {
 			conn = DBManager.getConnection();
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, prodnum);
+			pstmt.setInt(1, prodNum);
 
 			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 			rs = pstmt.executeQuery();
@@ -164,8 +164,8 @@ public class ProductDao {
 			while (rs.next()) {
 				// rs.getInt("컬럼명");
 				pVo = new ProductVo();
-				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				pVo.setProdNum(rs.getInt("prodNum"));// 컬럼명 code인 정보를 가져옴
+				pVo.setProdName(rs.getString("prodName"));// DB에서 가져온 정보를 pVo객체에 저장
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setImage(rs.getString("image"));
 				pVo.setContent(rs.getString("content"));
@@ -325,4 +325,44 @@ public class ProductDao {
 		ProductVo pVo = null;
 		return pVo;
 	}
+	
+	public List<ProductVo> searchProduct(String column, String keyword) {
+		String sql = "select * from woodmallProduct where "+column+" like ? order by code";
+		
+		List<ProductVo> list = new ArrayList<ProductVo>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			// (3 단계) Statement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+			rs = pstmt.executeQuery();
+			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			while(rs.next()){
+				// 디비로부터 가져온 상품 정보를 pVo 객체에 저장
+				ProductVo pVo = new ProductVo();
+				pVo.setProdNum(rs.getInt("prodNum"));
+				pVo.setProdName(rs.getString("prodName"));
+				pVo.setPrice(rs.getInt("price"));
+				pVo.setImage(rs.getString("image"));
+				pVo.setContent(rs.getString("content"));
+				pVo.setReg_date(rs.getDate("reg_date"));
+				list.add(pVo);	// List 객체에 데이터 추가
+			} 
+//			System.out.println("rs : " + rs);
+//			System.out.println("list : "+ list);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	
 }

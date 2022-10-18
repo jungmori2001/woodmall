@@ -19,7 +19,7 @@ public class deleteProductServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//쿼리스트링으로 전달 받을 prodnum 획득
-		String prodnum = request.getParameter("prodnum");
+		int prodnum = Integer.parseInt(request.getParameter("prodnum"));
 		
 		//상품 삭제링크 클릭시 삭제할 상품 정보를 표시
 		ProductDao pDao = ProductDao.getInstance();
