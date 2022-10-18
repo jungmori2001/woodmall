@@ -12,24 +12,39 @@ public class MemberVo {
 	private String name;
 	private String userid;
 	private String password;
-	private String PhoneNum;
+	private String emailId;
 	private String emailAddress;
+	private String firstPhone;
+	private String midPhone;
+	private String lastPhone;
 	private String postNum;
 	private String mainAddress;
 	private String detailAddress;
 	private String subAddress;
-	
+	private String grade;
+	private int admin;
+	private int totalPurchase;
 	
 	@Override
 	public String toString() {
-		return "MemberVO [name=" + name + ", userid=" + userid + ", password=" + password + ", PhoneNum=" + PhoneNum
-				+ ", emailAddress=" + emailAddress + ", postNum=" + postNum + ", mainAddress=" + mainAddress
-				+ ", detailAddress=" + detailAddress + ", subAddress=" + subAddress + "]";
+		return "MemberVo [name=" + name + ", userid=" + userid + ", password=" + password + ", emailId=" + emailId
+				+ ", emailAddress=" + emailAddress + ", firstPhone=" + firstPhone + ", midPhone=" + midPhone
+				+ ", lastPhone=" + lastPhone + ", postNum=" + postNum + ", mainAddress=" + mainAddress
+				+ ", detailAddress=" + detailAddress + ", subAddress=" + subAddress + ", grade=" + grade + ", admin="
+				+ admin + ", totalPurchase=" + totalPurchase + ", getName()=" + getName() + ", getUserid()="
+				+ getUserid() + ", getPassword()=" + getPassword() + ", getEmailAddress()=" + getEmailAddress()
+				+ ", getFirstPhone()=" + getFirstPhone() + ", getMidPhone()=" + getMidPhone() + ", getLastPhone()="
+				+ getLastPhone() + ", getPostNum()=" + getPostNum() + ", getMainAddress()=" + getMainAddress()
+				+ ", getDetailAddress()=" + getDetailAddress() + ", getSubAddress()=" + getSubAddress()
+				+ ", getEmailId()=" + getEmailId() + ", getGrade()=" + getGrade() + ", getAdmin()=" + getAdmin()
+				+ ", getTotalPurchase()=" + getTotalPurchase() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
 	
 	
-	
+
+
 	public String getName() {
 		return name;
 	}
@@ -48,17 +63,41 @@ public class MemberVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPhoneNum() {
-		return PhoneNum;
-	}
-	public void setPhoneNum(String phoneNum) {
-		PhoneNum = phoneNum;
-	}
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+	
+	public String getFirstPhone() {
+		return firstPhone;
+	}
+
+
+	public void setFirstPhone(String firstPhone) {
+		this.firstPhone = firstPhone;
+	}
+
+
+	public String getMidPhone() {
+		return midPhone;
+	}
+
+
+	public void setMidPhone(String midPhone) {
+		this.midPhone = midPhone;
+	}
+
+
+	public String getLastPhone() {
+		return lastPhone;
+	}
+
+
+	public void setLastPhone(String lastPhone) {
+		this.lastPhone = lastPhone;
 	}
 	public String getPostNum() {
 		return postNum;
@@ -85,6 +124,41 @@ public class MemberVo {
 	public void setSubAddress(String subAddress) {
 		this.subAddress = subAddress;
 	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+
+	public String getGrade() {
+		return grade;
+	}
+
+
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public int getAdmin() {
+		return admin;
+	}
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
+	public int getTotalPurchase() {
+		return totalPurchase;
+	}
+	public void setTotalPurchase(int totalPurchase) {
+		this.totalPurchase = totalPurchase;
+	}
+
+
 
 
 

@@ -1,7 +1,7 @@
 package com.woodmall.dao;
 
-import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ public class MemberDao {
 //		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;		
-		String sql = "select password from MEMBER where userid=?";	
+		String sql = "select password from Member where userid=?";	
 		
 		try {
 			
@@ -81,7 +81,7 @@ public int insertMember(MemberVo mVo) {
 	PreparedStatement pstmt = null;		// 동적 쿼리
 	
 //	String sql_insert = "insert into member values('"+name+"', '"+id+"', '"+pwd+"', '"+email+"', '"+phone+"', "+admin+")";
-	String sql_insert = "insert into member(?,?,?,?,?,?,?,?,)";
+	String sql_insert = "insert into Member(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 //	System.out.println(sql_insert);
 	
@@ -101,12 +101,19 @@ public int insertMember(MemberVo mVo) {
 		pstmt.setString(1, mVo.getName());
 		pstmt.setString(2, mVo.getUserid());
 		pstmt.setString(3, mVo.getPassword());
-		pstmt.setString(4, mVo.getPhoneNum());
+		pstmt.setString(4, mVo.getEmailId());
 		pstmt.setString(5, mVo.getEmailAddress());			// 문자형
-		pstmt.setString(6, mVo.getPostNum());
-		pstmt.setString(7, mVo.getMainAddress());
-		pstmt.setString(8, mVo.getDetailAddress());
-		pstmt.setString(9, mVo.getSubAddress());
+		pstmt.setString(6, mVo.getFirstPhone());
+		pstmt.setString(7, mVo.getMidPhone());
+		pstmt.setString(8, mVo.getLastPhone());
+		pstmt.setString(9, mVo.getPostNum());
+		pstmt.setString(10, mVo.getMainAddress());
+		pstmt.setString(11, mVo.getDetailAddress());
+		pstmt.setString(12, mVo.getSubAddress());
+		pstmt.setString(13, mVo.getGrade());
+		pstmt.setInt(14, mVo.getAdmin());
+		pstmt.setInt(15, mVo.getTotalPurchase());
+		
 		
 		
 		
@@ -135,7 +142,7 @@ public MemberVo getMember(String userid) {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	String sql = "select * from member where userid = ?";
+	String sql = "select * from Member where userid=?";
 	MemberVo mVo = null;		
 
 
@@ -156,13 +163,16 @@ public MemberVo getMember(String userid) {
 			mVo.setName(name); 						// DB에서 가져온 정보를 mVo객체에 저장				
 			mVo.setUserid(rs.getString("userid")); 
 			mVo.setPassword(rs.getString("password"));
-			mVo.setPhoneNum(rs.getString("PhoneNum"));
+			mVo.setEmailId("emailId");
 			mVo.setEmailAddress(rs.getString("emailAddress"));
+			mVo.setFirstPhone("firstPhone");
+			mVo.setMidPhone("midPhone");
+			mVo.setLastPhone("lastPhone");
 			mVo.setPostNum(rs.getString("postNum"));
 			mVo.setMainAddress(rs.getString("mainAddress"));
 			mVo.setDetailAddress(rs.getString("detailAddress"));
 			mVo.setSubAddress(rs.getString("subAddress"));
-		
+	
 		} else {
 			result = -1;		// 디비에 userid 없음
 		}
@@ -186,7 +196,7 @@ public MemberVo getMember(String userid) {
 	// 반환값: 성공여부
 	public int updateMember(MemberVo mVo) {
 		int result = -1;		
-		String sql = "update member set password=?, EmailAddress=?, PostNum=?, MainAddress=?, PhoneNum=?,  where userid=?";
+		String sql = "update Member set password=?, EmailAddress=?, PostNum=?, MainAddress=?, PhoneNum=?,  where userid=?";
 		
 		Connection conn = null;
 //		Statement stmt = null;
@@ -201,7 +211,10 @@ public MemberVo getMember(String userid) {
 			pstmt.setString(1, mVo.getPassword());
 			pstmt.setString(2, mVo.getEmailAddress());
 			pstmt.setString(3, mVo.getPostNum());			pstmt.setString(4, mVo.getMainAddress());
-			pstmt.setString(5, mVo.getPhoneNum());
+			pstmt.setString(4, mVo.getFirstPhone());
+			pstmt.setString(5, mVo.getMidPhone());
+			pstmt.setString(6, mVo.getLastPhone());
+			
 			// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
 //			rs = stmt.executeQuery(sql);
 			result = pstmt.executeUpdate();
@@ -219,12 +232,13 @@ public MemberVo getMember(String userid) {
 	// 반환값: 체크한 id가 DB에 존재 여부: 존재(1), 존재안함(-1)
 public int confirmID(String userid) {
 		int result = -1;
-		String sql = "select userid from member where userid=?";
+		String sql = "select userid from Member where userid=?";
 		
 		Connection conn = null;
 //		Statement stmt =null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
 			// (1 단계) JDBC 드라이버 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");	// Oracle
@@ -233,7 +247,8 @@ public int confirmID(String userid) {
 			String uid = "ora_user";
 			String pass = "1234";
 			
-			// (3 단계) Statement 객체 생성
+			conn = DriverManager.getConnection(url, uid, pass);
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			

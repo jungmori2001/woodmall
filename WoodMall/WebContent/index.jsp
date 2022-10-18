@@ -224,6 +224,7 @@ figcaption {
         </div>
         <div style="flex:90%">
             <div style="background-color: white; text-align: right;">
+            	<td>${loginUser.name}(${loginUser.userid})님</td>
                 <a href="login.do">로그인</a>
                 <a href="join.do">회원가입</a>
             </div>

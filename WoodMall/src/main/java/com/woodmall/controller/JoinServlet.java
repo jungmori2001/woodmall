@@ -38,7 +38,7 @@ public class JoinServlet extends HttpServlet {
 		String postNum = request.getParameter("postNum");
 		String mainAddress = request.getParameter("mainAddress");
 		String detailAddress = request.getParameter("detailAddress");
-//		String subAddress = request.getParameter("subAddress");
+		String subAddress = request.getParameter("subAddress");
 		
 		
 //		System.out.println("name: " + name);
@@ -60,7 +60,7 @@ public class JoinServlet extends HttpServlet {
 		mVo.setPostNum(postNum);
 		mVo.setMainAddress(mainAddress);
 		mVo.setDetailAddress(detailAddress);
-//		mVo.setSubAddress(subAddress);
+		mVo.setSubAddress(subAddress);
 		
 //		System.out.println(mVo.getName());
 //		System.out.println(mVo.getAdmin());
