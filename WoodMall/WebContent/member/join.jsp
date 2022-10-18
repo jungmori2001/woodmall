@@ -14,13 +14,13 @@
 <title>회원 가입</title>
 </head>
 <body>
-
-<body>
+<form action="join.do" method="post" name="frm">
     <header style="display:flex">
         <div style="flex:130px;">
             <img src="image/logo.jpg" width="120px;">
     </div>
     </header>
+    
     <h1 align="center">회원가입 </h1>
     <hr>
     <div>
@@ -64,6 +64,6 @@
  	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
-   
+</form>   
 </body>
 </html>

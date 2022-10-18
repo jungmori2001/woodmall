@@ -55,7 +55,7 @@ public class JoinServlet extends HttpServlet {
 		mVo.setName(name);				// MemberVo 클래스에 정보 저장 
 		mVo.setUserid(userid);
 		mVo.setPassword(password);
-		mVo.setPhoneNum(PhoneNum);
+		mVo.set
 		mVo.setEmailAddress(emailAddress);
 		mVo.setPostNum(postNum);
 		mVo.setMainAddress(mainAddress);
