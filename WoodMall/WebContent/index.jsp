@@ -214,7 +214,13 @@ figcaption {
 </head>
 
 <body>
-    <%@ include file="baseLayout/header.jsp" %>
+<div style="flex:90%">
+<div style="background-color: white; text-align: right;">
+<td>${loginUser.name}(${loginUser.userid})님</td> 
+<a href="login.do">로그인</a>
+<a href="join.do">회원가입</a>
+</div>
+</div>
     <!--메인-->
     <!-- 나중에 지워야됨 --><a href="productList.do">상품 페이지</a>
     <input type="radio" id="s-1" name="slider-control" checked="checked">
@@ -225,6 +231,7 @@ figcaption {
             <div class="js-slider_img">
                 <img class="c-img-w-full" src="./image/slideimg02.jpg" alt="">
             </div>
+        
             <figcaption class="wo-caption">
                 <h3 class="wo-h3">
                     <div class="c-label">WoodMall</div>
