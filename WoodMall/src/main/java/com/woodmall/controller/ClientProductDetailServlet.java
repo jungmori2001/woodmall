@@ -1,7 +1,7 @@
 package com.woodmall.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,35 +14,32 @@ import com.woodmall.dao.ProductDao;
 import com.woodmall.dto.ProductVo;
 
 
-@WebServlet("/clientProductList.do")
-public class ClientProductListServlet extends HttpServlet {
+@WebServlet("/clientProductDetail.do")
+public class ClientProductDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		String prodNum = request.getParameter("prodNum");
+		
 		ProductDao pDao = ProductDao.getInstance();
-		String kind = request.getParameter("kind");
+		ProductVo pVo = new ProductVo();
 		
-
-		//모든 상품 리스트를 DB로부터 조회 후 저장
-		List<ProductVo> productList = pDao.selectAllProductByKind(kind);
-		request.setAttribute("productList", productList);
+		pVo = pDao.selectProductByCode(prodNum);
 		
+		request.setAttribute("product", pVo);
 		
-		kind = kind.replaceAll("'", "");
-		request.setAttribute("kind" , kind);
-		
-		
-		
-		//리스트 페이지로 이동
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }
