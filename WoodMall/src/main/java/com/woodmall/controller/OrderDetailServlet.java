@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.woodmall.dao.OrderDao;
-import com.woodmall.dto.OrderVo;
-import com.woodmall.dto.ProductVo;
+import com.woodmall.dto.OrderDetailVo;
 
 
 @WebServlet("/orderDetail.do")
@@ -26,27 +25,18 @@ public class OrderDetailServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String orderNum =request.getParameter("orderNum");
-		
 		OrderDao oDao = OrderDao.getInstance();
-		OrderVo oVo = new OrderVo();
-//		ProductVo pVo = new ProductVo();
-//		MemberVo mVo = new MemberVo();
-		
-		oVo = oDao.selectOrderByOrderNum(orderNum);
+		OrderDetailVo oDVo = new OrderDetailVo();
 
-		request.setAttribute("ordermanager", oVo);
-//		request.setAttribute("member", mVo);
-//		request.setAttribute("woodmallproduct", pVo);
-//		System.out.println(oVo);
-//		System.out.println(pVo);
+		oDVo = oDao.selectOrderByOrderNum(orderNum);
 		
+		request.setAttribute("ordermanager", oDVo);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("order/orderDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }

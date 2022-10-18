@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class OrderVo {
 	private int orderNum;
+	private int prodNum;
+	private String userId;
 	private String name;
 	private int orderQuen;
 	private String paymentStatus;
@@ -14,9 +16,37 @@ public class OrderVo {
 
 	@Override
 	public String toString() {
-		return "OrderVo [ordernum=" + orderNum + ", name=" + name + ", orderquen=" + orderQuen + ", paymentstatus=" + paymentStatus
-				+ ", price=" + price + ",orderdate=" + orderDate + ", ordercontent=" + orderContent +", orderstatus" + orderStatus + "]";
+		return "OrderVo [ordernum=" + orderNum + ", prodnum=" + prodNum +", userid="+userId+",name=" + name + ", orderquen=" + orderQuen + ", paymentstatus=" + paymentStatus
+				+ ", price=" + price + ",orderdate=" + orderDate + ", ordercontent=" + orderContent +", orderstatus=" + orderStatus + "]";
 		}
+	
+
+	
+	
+	
+public String getUserId() {
+		return userId;
+	}
+
+
+
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
+
+
+
+public int getProdNum() {
+	return prodNum;
+	}
+	public void setProdNum(int prodNum) {
+		this.prodNum = prodNum;
+	}
+
 public int getPrice() {
 		return price;
 	}
