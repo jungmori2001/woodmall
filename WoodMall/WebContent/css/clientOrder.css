@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#header {
+    background-color:black;
+    text-align: center;
+    color:white;
+    font-size:xx-large;
+    font-weight:bold;
+}
+
+body {
+    margin-right:20%; 
+    margin-left:20%;
+}
+
+
+.mainName{
+    font-size:large; 
+    font-weight:bold
+}
+
+
+
+#pay {
+    text-align:center;
+}
+
+#productSide {
+    flex:auto; 
+    border: 1px solid black;
+    border-radius:10px 10px 10px 10px;
+    margin-bottom:20px;
+}
+
+#productName {
+    text-align:left; 
+    font-weight:600;
+    margin-top:15px;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+#productOption {
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.payDetail {
+    display:flex;
+}
+
+hr{
+    height:2px; 
+    background-color: grey;
+}
+
+
+#payDetailLayor{
+    flex:80%; 
+    margin-right:20px;
+}
+
+.payDetailLeft{
+    flex:50%; 
+    text-align:left;
+}
+
+.payDetailRight{
+    flex:50%; 
+    text-align:right
+}
+
+
+.order{
+    background-color:black;
+    text-align: center;
+    color:white;
+    font-size:xx-large;
+    font-weight:bold;
+    
+}
