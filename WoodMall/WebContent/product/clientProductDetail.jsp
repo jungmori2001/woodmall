@@ -82,8 +82,9 @@
 						<tr>
 							<td>수량</td>
 							<td align="right"><input type="hidden" name="sell_price"
-								value="${product.price}"> <input class="input" type="text"
-								name="amount" value="1" size="3" onchange="change();"> <input
+								value="${product.price}"> 
+								<c:set var="quantity"><input class="input" type="text"	name="amount" value="1" size="3" onchange="change();"></c:set> 
+								<input
 								type="button" value=" + " onclick="add();"><input
 								type="button" value=" - " onclick="del();"></td>
 						</tr>
