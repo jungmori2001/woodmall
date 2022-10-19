@@ -145,7 +145,7 @@ public class ProductDao {
 	}
 
 	// 단일 상품 조회
-	public ProductVo selectProductByCode(String prodnum) {
+	public ProductVo selectProductByCode(int prodNum) {
 		String sql = "select * from woodmallproduct where prodnum=?";
 
 		Connection conn = null;
@@ -156,7 +156,7 @@ public class ProductDao {
 			conn = DBManager.getConnection();
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, prodnum);
+			pstmt.setInt(1, prodNum);
 
 			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 			rs = pstmt.executeQuery();
@@ -164,8 +164,8 @@ public class ProductDao {
 			while (rs.next()) {
 				// rs.getInt("컬럼명");
 				pVo = new ProductVo();
-				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				pVo.setProdNum(rs.getInt("prodNum"));// 컬럼명 code인 정보를 가져옴
+				pVo.setProdName(rs.getString("prodName"));// DB에서 가져온 정보를 pVo객체에 저장
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setImage(rs.getString("image"));
 				pVo.setContent(rs.getString("content"));
@@ -211,69 +211,41 @@ public class ProductDao {
 	}
 
 	// 상품 삭제
-public void deleteProduct(String prodNum) {
-		
-		Connection conn = null;
-		// 동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리 필요
-		PreparedStatement pstmt = null;		// 동적 쿼리
-		
+	public ProductVo deleteProduct(String prodnum) {
 		String sql = "delete from woodmallproduct where prodnum=?";
-		
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVo pVo = null;
 		try {
 			conn = DBManager.getConnection();
-			
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, prodNum);	
+			pstmt.setString(1, prodnum);
 
-			
-			// (4 단계) SQL문 실행 및 결과 처리
-			// executeUpdate : 삽입(insert/update/delete)
+			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+			rs = pstmt.executeQuery();
+			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			while (rs.next()) {
+				// rs.getInt("컬럼명");
+				pVo = new ProductVo();
+				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
+				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				pVo.setPrice(rs.getInt("price"));
+				pVo.setImage(rs.getString("image"));
+				pVo.setContent(rs.getString("content"));
+				pVo.setReg_date(rs.getDate("reg_date"));
+			}
 
-			pstmt.executeUpdate();				// 쿼리 수행
-		} catch(Exception e) {
-			e.printStackTrace();			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("삭제실패");
 		} finally {
-			//(5 단계) 사용한 리소스 해제
-			DBManager.close(conn, pstmt);
+			DBManager.close(conn, pstmt, rs);
+			System.out.println("삭제완료");
 		}
-}
-//	public ProductVo deleteProduct(String prodnum) {
-//		String sql = "delete from woodmallproduct where prodnum=?";
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		ProductVo pVo = null;
-//		try {
-//			conn = DBManager.getConnection();
-//			// (3 단계) Statement 객체 생성
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, prodnum);
-//
-//			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
-//			rs = pstmt.executeQuery();
-//			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
-//			while (rs.next()) {
-//				// rs.getInt("컬럼명");
-//				pVo = new ProductVo();
-//				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-//				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
-//				pVo.setPrice(rs.getInt("price"));
-//				pVo.setImage(rs.getString("image"));
-//				pVo.setContent(rs.getString("content"));
-//				pVo.setReg_date(rs.getDate("reg_date"));
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("삭제실패");
-//		} finally {
-//			DBManager.close(conn, pstmt, rs);
-//			System.out.println("삭제완료");
-//		}
-//		return pVo;
-//	}
+		return pVo;
+	}
 
 	// 상품 검색
 	public List<ProductVo> getProductList() {
@@ -287,14 +259,14 @@ public void deleteProduct(String prodNum) {
 	public List<ProductVo> getProductList(String column, String keyword, int page) {
 		String sql = "SELECT * FROM (" + "SELECT ROWNUM N, p.*"
 				+ "from(select * from woodmallproduct order by prodnum desc) p" + ")" + "WHERE N BETWEEN ? AND ?";
-
+		
 //		첫번째 ? -> 1, 11, 21, 31, 41, -> 1 + (page-1)*10
 //		등차수열의 n에 대한 식은 첫째항 A, 공차가 B인 경우 ->A + B (n-1) 
 //		두번쨰 ? -> 10, 20, 30, 40 -> page*10
-
+		
 		ProductVo pVo = null;
 		List<ProductVo> list = new ArrayList<ProductVo>(); // list 컬렉션 개체 생성
-
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -302,9 +274,9 @@ public void deleteProduct(String prodNum) {
 			conn = DBManager.getConnection();
 			// Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 1 + (page - 1) * 10);
-			pstmt.setInt(2, page * 10);
-
+			pstmt.setInt(1,  1 +(page-1)*10);
+			pstmt.setInt(2, page*10);
+			
 			// SQL문 실행 및 결과처리 excuteQuery : 조회(select)
 			rs = pstmt.executeQuery();
 			// rs.next() : 다음 행(row) 확인, rs.getString("컬럼명")
@@ -340,27 +312,6 @@ public void deleteProduct(String prodNum) {
 
 	public int getProductCount(String column, String keyword) {
 		int count = 0;
-		String sql = "SELECT COUNT(prodnum) count FROM (\r\n" + "    SELECT ROWNUM N, p.*\r\n"
-				+ "    from(select * from woodmallproduct order by prodnum desc) p\r\n" + ")";
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = DBManager.getConnection();
-			// Statement 객체 생성
-			pstmt = conn.prepareStatement(sql);
-			// SQL문 실행 및 결과처리 excuteQuery : 조회(select)
-			rs = pstmt.executeQuery();
-			// rs.next() : 다음 행(row) 확인, rs.getString("컬럼명")
-			while (rs.next()) {
-				count = rs.getInt("count");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt, rs);
-		}
 		return count;
 	}
 
@@ -374,4 +325,44 @@ public void deleteProduct(String prodNum) {
 		ProductVo pVo = null;
 		return pVo;
 	}
+	
+	public List<ProductVo> searchProduct(String column, String keyword) {
+		String sql = "select * from woodmallProduct where "+column+" like ? order by code";
+		
+		List<ProductVo> list = new ArrayList<ProductVo>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			// (3 단계) Statement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+			rs = pstmt.executeQuery();
+			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			while(rs.next()){
+				// 디비로부터 가져온 상품 정보를 pVo 객체에 저장
+				ProductVo pVo = new ProductVo();
+				pVo.setProdNum(rs.getInt("prodNum"));
+				pVo.setProdName(rs.getString("prodName"));
+				pVo.setPrice(rs.getInt("price"));
+				pVo.setImage(rs.getString("image"));
+				pVo.setContent(rs.getString("content"));
+				pVo.setReg_date(rs.getDate("reg_date"));
+				list.add(pVo);	// List 객체에 데이터 추가
+			} 
+//			System.out.println("rs : " + rs);
+//			System.out.println("list : "+ list);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	
 }

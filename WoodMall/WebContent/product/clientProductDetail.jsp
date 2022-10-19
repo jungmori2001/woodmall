@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,59 +9,63 @@
 <meta charset="UTF-8">
 <title>WoodMall : ${product.prodName}</title>
 </head>
-<link rel="stylesheet" type="text/css" href="./css/clientProductDetail.css">
+<link rel="stylesheet" type="text/css"
+	href="./css/clientProductDetail.css">
 <script type="text/javascript" src="./script/product.js"></script>
 
 <body onload="init()">
-                <script type="text/javaScript">
+	<script type="text/javaScript">
+		var sell_price;
+		var quantity;
 
-                    var sell_price;
-                    var amount;
+		function init() {
+			sell_price = document.form.sell_price.value;
+			quantity = document.form.quantity.value;
+			document.form.sum.value = sell_price;
+			change();
+		}
 
-                    function init() {
-                        sell_price = document.form.sell_price.value;
-                        amount = document.form.amount.value;
-                        document.form.sum.value = sell_price;
-                        change();
-                    }
+		function add() {
+			hm = document.form.quantity;
+			sum = document.form.sum;
+			hm.value++;
 
-                    function add() {
-                        hm = document.form.amount;
-                        sum = document.form.sum;
-                        hm.value++;
+			sum.value = (parseInt(hm.value) * sell_price)
+					.toLocaleString('ko-KR');
+		}
 
-                        sum.value = (parseInt(hm.value) * sell_price).toLocaleString('ko-KR');
-                    }
+		function del() {
+			hm = document.form.quantity;
+			sum = document.form.sum;
+			if (hm.value > 1) {
+				hm.value--;
+				sum.value = (parseInt(hm.value) * sell_price)
+						.toLocaleString('ko-KR');
 
-                    function del() {
-                        hm = document.form.amount;
-                        sum = document.form.sum;
-                        if (hm.value > 1) {
-                            hm.value--;
-                            sum.value = (parseInt(hm.value) * sell_price).toLocaleString('ko-KR');
-                            
-                        }
-                    }
+			}
+		}
 
-                    function change() {
-                        hm = document.form.amount;
-                        sum = document.form.sum;
+		function change() {
+			hm = document.form.quantity;
+			sum = document.form.sum;
 
-                        if (hm.value < 0) {
-                            hm.value = 0;
-                        }
-                        sum.value = (parseInt(hm.value) * sell_price).toLocaleString('ko-KR');
-                       
-                    }
-                </script>
+			if (hm.value < 0) {
+				hm.value = 0;
+			}
+			sum.value = (parseInt(hm.value) * sell_price)
+					.toLocaleString('ko-KR');
+
+		}
+	</script>
 	<%@ include file="../baseLayout/header.jsp"%>
 	<article>
+	
 		<div class="article">
 			<div class="image" align="center">
 				<c:choose>
 					<%-- 이미지가 서버에 존재하지 않는 경우 --%>
 					<c:when test="${empty product.image}">
-						<img src="image/no.png" width="150px">
+						<img src="../image/no.png" width="150px">
 					</c:when>
 					<%-- 이미지가 서버에 존재하는 경우 --%>
 					<c:otherwise>
@@ -69,33 +73,47 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			
 			<div class="imp">
 				<div class="prodName">
 					<h2>${product.prodName}</h2>
 				</div>
-				<form name="form" method="get">
+				<form action="../order.do" name="form" method="post">
 					<table>
 						<tr>
 							<td>가격</td>
-							<td align="right"><fmt:formatNumber value="${product.price}" pattern="#,###" />원</td>
+							<td align="right"><fmt:formatNumber value="${product.price}"
+									pattern="#,###" />원</td>
 						</tr>
 						<tr>
 							<td>수량</td>
-							<td align="right"><input type="hidden" name="sell_price"
-								value="${product.price}"> <input class="input" type="text"
-								name="amount" value="1" size="3" onchange="change();"> <input
-								type="button" value=" + " onclick="add();"><input
-								type="button" value=" - " onclick="del();"></td>
+							<td align="right">
+							
+							<input type="hidden" name="sell_price" value="${product.price}">
+							<input class="input" type="text" name="quantity" value="1" size="3" onchange="change();"> 
+							<input type="button" value=" + "
+								onclick="add();"><input type="button" value=" - "
+								onclick="del();"></td>
 						</tr>
 						<tr>
-							<td>총 금액</td>
-							<td align="right"><input class="input" type="text"
+							<td>총 금액s</td>
+							<td align="right"><input style="text-align:right" class="input" type="text"
 								name="sum" size="11" readonly="readonly">원</td>
-						</tr>
+					
 					</table>
-				</form>
+					<input type="hidden" name="prodNum" value="${product.prodNum}">
+					</form>
 			</div>
+			
 		</div>
+		
+		<div align="center">
+		
+		<input style="height: 30px" type="button" value="Add to Cart" onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}'">
+		<input style="height: 30px" type="submit" value="구매">
+		
+		</div>
+		
 	</article>
 
 	<div class="tab">
