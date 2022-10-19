@@ -136,6 +136,11 @@ public int insertMember(MemberVo mVo) {
 	return result;
 	}
 
+
+//전체 회원 정보 가져오기
+//public List<MemberVo> selectAllMember(){
+	
+//}
 // 회원 정보 가져오기 : select
 public MemberVo getMember(String userid) {
 	int result = -1;

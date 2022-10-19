@@ -22,7 +22,7 @@ public class deleteProductServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		// 쿼리 스트링으로 전달받은 code 를 획득
-		String prodnum = request.getParameter("prodnum");
+		int prodnum = Integer.parseInt(request.getParameter("prodNum"));
 		
 		// 상품 삭제 링크 클릭시 삭제할 상품 정보를 표시
 		ProductDao pDao = ProductDao.getInstance();

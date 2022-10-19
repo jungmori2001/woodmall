@@ -145,7 +145,7 @@ public class ProductDao {
 	}
 
 	// 단일 상품 조회
-	public ProductVo selectProductByCode(String prodnum) {
+	public ProductVo selectProductByCode(int prodnum) {
 		String sql = "select * from woodmallproduct where prodnum=?";
 
 		Connection conn = null;
@@ -156,7 +156,7 @@ public class ProductDao {
 			conn = DBManager.getConnection();
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, prodnum);
+			pstmt.setInt(1, prodnum);
 
 			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 			rs = pstmt.executeQuery();
