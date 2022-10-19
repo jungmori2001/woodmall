@@ -22,14 +22,14 @@ public class deleteProductServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		// 쿼리 스트링으로 전달받은 code 를 획득
-		int prodnum = Integer.parseInt(request.getParameter("prodNum"));
+		String prodNum = request.getParameter("prodnum");
 		
 		// 상품 삭제 링크 클릭시 삭제할 상품 정보를 표시
 		ProductDao pDao = ProductDao.getInstance();
 		ProductVo pVo = new ProductVo();
 		
 		// 데이터 베이스에서 삭제할 데이터 정보 확인
-		pVo = pDao.selectProductByCode(prodnum);
+		pVo = pDao.selectProductByCode(prodNum);
 		
 		request.setAttribute("woodmallproduct", pVo);
 
@@ -61,7 +61,7 @@ public class deleteProductServlet extends HttpServlet {
 		ProductDao pDao = ProductDao.getInstance();
 		ProductVo pVo = new ProductVo();
 		
-		String prodnum = request.getParameter("prodnum");
+		String prodnum = request.getParameter("prodNum");
 		System.out.println(prodnum);
 		
 		// 데이터베이스로부터 해당 코드의 정보를 삭제

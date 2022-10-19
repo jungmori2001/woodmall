@@ -23,7 +23,7 @@ public class productDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		int prodnum = Integer.parseInt(request.getParameter("prodNum"));
+		String prodnum = request.getParameter("prodnum");
 		
 		ProductDao pDao = ProductDao.getInstance();
 		ProductVo pVo = new ProductVo();

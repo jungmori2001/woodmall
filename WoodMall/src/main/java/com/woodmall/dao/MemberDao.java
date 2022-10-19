@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.woodmall.dto.MemberVo;
 import com.woodmall.util.DBManager;
@@ -138,9 +140,41 @@ public int insertMember(MemberVo mVo) {
 
 
 //전체 회원 정보 가져오기
-//public List<MemberVo> selectAllMember(){
+public List<MemberVo> selectAllMember(){
+	String sql="select * from member order by name";
+	List<MemberVo> list = new ArrayList<MemberVo>();
 	
-//}
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	try {
+		conn=DBManager.getConnection();
+		pstmt=conn.prepareStatement(sql);
+		rs=pstmt.executeQuery();
+		
+		while(rs.next()) {
+//			<th>회원 이름</th><th>아이디</th><th>전화번호</th><th>상세</th><th>수정</th><th>삭제</th>
+			MemberVo mVo = new MemberVo();
+			mVo.setName(rs.getString("name"));
+			mVo.setUserid(rs.getString("userid"));
+			mVo.setFirstPhone(rs.getString("firstPhone"));
+			mVo.setMidPhone(rs.getString("midPhone"));
+			mVo.setLastPhone(rs.getString("lastPhone"));
+			list.add(mVo);
+		}
+	} catch(Exception e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	return list;
+}
 // 회원 정보 가져오기 : select
 public MemberVo getMember(String userid) {
 	int result = -1;

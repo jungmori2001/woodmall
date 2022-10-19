@@ -43,7 +43,7 @@
 		</tr>
 	</tr>
 </table>
-<input type="hidden" name="prodnum" value="${woodmallproduct.prodNum}">
+<input type="hidden" name="prodNum" value="${woodmallproduct.prodNum}">
 <input type="submit" value="삭제">
 <input type="button" value="목록" onClick="location.href='productList.do'">
 </form>
