@@ -24,7 +24,7 @@ public class ClientProductDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String prodNum = request.getParameter("prodNum");
+		int prodNum = Integer.parseInt(request.getParameter("prodNum"));
 		
 		ProductDao pDao = ProductDao.getInstance();
 		ProductVo pVo = new ProductVo();

@@ -29,6 +29,7 @@
 			hm = document.form.quantity;
 			sum = document.form.sum;
 			hm.value++;
+			test = document.form.setQuantity;
 
 			sum.value = (parseInt(hm.value) * sell_price)
 					.toLocaleString('ko-KR');
@@ -56,29 +57,32 @@
 					.toLocaleString('ko-KR');
 
 		}
+		
+		function input(){
+			document.form.
+		}
 	</script>
+
 	<%@ include file="../baseLayout/header.jsp"%>
 	<article>
-	
-		<div class="article">
-			<div class="image" align="center">
-				<c:choose>
-					<%-- 이미지가 서버에 존재하지 않는 경우 --%>
-					<c:when test="${empty product.image}">
-						<img src="../image/no.png" width="150px">
-					</c:when>
-					<%-- 이미지가 서버에 존재하는 경우 --%>
-					<c:otherwise>
-						<img src="upload/${product.image}" width="200px">
-					</c:otherwise>
-				</c:choose>
-			</div>
-			
-			<div class="imp">
-				<div class="prodName">
-					<h2>${product.prodName}</h2>
+		<form action="clientOrder.do" name="form" method="post">
+			<div class="article">
+				<div class="image" align="center">
+					<c:choose>
+						<%-- 이미지가 서버에 존재하지 않는 경우 --%>
+						<c:when test="${empty product.image}">
+							<img src="../image/no.png" width="150px">
+						</c:when>
+						<%-- 이미지가 서버에 존재하는 경우 --%>
+						<c:otherwise>
+							<img src="upload/${product.image}" width="200px">
+						</c:otherwise>
+					</c:choose>
 				</div>
-				<form action="../order.do" name="form" method="post">
+				<div class="imp">
+					<div class="prodName">
+						<h2>${product.prodName}</h2>
+					</div>
 					<table>
 						<tr>
 							<td>가격</td>
@@ -88,32 +92,28 @@
 						<tr>
 							<td>수량</td>
 							<td align="right">
-							
-							<input type="hidden" name="sell_price" value="${product.price}">
-							<input class="input" type="text" name="quantity" value="1" size="3" onchange="change();"> 
-							<input type="button" value=" + "
+							<input type="hidden" name="sell_price" value="${product.price}"> 
+								<input class="input" type="text" name="quantity" value="1" size="3" onchange="change();"> 
+								<input type="button" value=" + "
 								onclick="add();"><input type="button" value=" - "
 								onclick="del();"></td>
 						</tr>
 						<tr>
 							<td>총 금액s</td>
-							<td align="right"><input style="text-align:right" class="input" type="text"
-								name="sum" size="11" readonly="readonly">원</td>
-					
+							<td align="right"><input style="text-align: right"
+								class="input" type="text" name="sum" size="11"
+								readonly="readonly">원</td>
 					</table>
 					<input type="hidden" name="prodNum" value="${product.prodNum}">
-					</form>
+				</div>
 			</div>
-			
-		</div>
-		
-		<div align="center">
-		
-		<input style="height: 30px" type="button" value="Add to Cart" onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}'">
-		<input style="height: 30px" type="submit" value="구매">
-		
-		</div>
-		
+			<div align="center">
+				<c:set var="quantity" var=""/>
+				<input style="height: 30px" type="button" value="Add to Cart"
+					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity='">
+				<input style="height: 30px" type="submit" value="구매">
+			</div>
+		</form>
 	</article>
 
 	<div class="tab">
@@ -125,16 +125,16 @@
 	<!-- Tab content -->
 	<div id="pro_detail" class="tabcontent">
 		<h3>제품상세</h3>
-		<p>London is the capital city of England.</p>
+		<p>${product.prodName} 상세정보</p>
 	</div>
 
 	<div id="review" class="tabcontent">
 		<h3>리뷰</h3>
-		<p>Paris is the capital of France.</p>
+		<p>${product.prodName} 리뷰</p>
 	</div>
 
 	<div id="qna" class="tabcontent">
-		<h3>QNA</h3>
+		<h3>${product.prodName} QNA</h3>
 		<p>Tokyo is the capital of Japan.</p>
 	</div>
 	<%@ include file="../baseLayout/footer.jsp"%>

@@ -28,10 +28,19 @@ public class ClientProductCartServlet extends HttpServlet {
 		ProductDao pDao = ProductDao.getInstance();
 		
 		String userId = (String) session.getAttribute("userId");
-		System.out.println(userId);
+		System.out.println("userid:"+userId);
 		int prodNum = Integer.parseInt(request.getParameter("prodNum"));
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println("prodNum:"+prodNum);
 		
+		String quantity = null; // 검색 대상(분야)
+		String t_quantity = request.getParameter("quantity");
+		
+		if (t_quantity != null && !t_quantity.equals(""))
+			quantity = t_quantity;
+		
+//		int quantity = 
+//				Integer.parseInt(request.getParameter("quantity"));
+		System.out.println("quantity:"+ quantity);
 	
 		//1.prodNum 기반으로 데이터 가져오기
 		pVo = pDao.selectProductByCode(prodNum);

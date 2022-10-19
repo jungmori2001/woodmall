@@ -5,7 +5,7 @@ public class CartVo {
 	private int prodNum;
 	private String prodName;
 	private int price;
-	private int quantity;
+	private String quantity;
 	
 
 	
@@ -56,12 +56,12 @@ public class CartVo {
 	}
 
 
-	public int getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
 
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 	

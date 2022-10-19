@@ -37,7 +37,7 @@ public class CartDao {
 			pstmt.setInt(2, cVo.getProdNum());
 			pstmt.setString(3, cVo.getProdName());
 			pstmt.setInt(4, cVo.getPrice());
-			pstmt.setInt(5, cVo.getQuantity());
+			pstmt.setString(5, cVo.getQuantity());
 			
 			result = pstmt.executeUpdate();
 
@@ -76,7 +76,7 @@ public class CartDao {
 				cVo.setProdNum(rs.getInt("prodNum"));
 				cVo.setProdName(rs.getString("prodName"));
 				cVo.setPrice(rs.getInt("price"));
-				cVo.setQuantity(rs.getInt("quantity"));
+				cVo.setQuantity(rs.getString("quantity"));
 				list.add(cVo);
 				
 			}
@@ -112,7 +112,7 @@ public class CartDao {
 				cVo.setProdNum(rs.getInt("prodNum"));
 				cVo.setProdName(rs.getString("prodName"));
 				cVo.setPrice(rs.getInt("price"));
-				cVo.setQuantity(rs.getInt("quantity"));
+				cVo.setQuantity(rs.getString("quantity"));
 			}
 
 		} catch (Exception e) {

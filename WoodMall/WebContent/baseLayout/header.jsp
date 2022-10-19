@@ -76,12 +76,12 @@ a {
 <body>
 <header style="display:flex">
         <div style="flex:10%">
-            <img src="../image/logo.jpg" width="70%">
+            <a href="index.jsp"><img src="image/logo.jpg" width="70%"></a>
         </div>
         <div style="flex:90%">
             <div style="background-color: white; text-align: right;">
-                <a href="#">로그인</a>
-                <a href="#">회원가입</a>
+                <a href="login.do">로그인</a>
+                <a href="join.do">회원가입</a>
             </div>
             <div class="menubar">
                 <ul class="menu">
