@@ -5,13 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./css/adminPage.css">
 <title>Insert title here</title>
 </head>
 <body>
 <h2>회원 리스트</h2>
-<table border='1';>
+<table id="wrap">
 	<tr>
-		<th>회원 이름</th><th>아이디</th><th>전화번호</th><th>상세</th><th>수정</th><th>삭제</th>
+		<th style=width:10%;>회원 이름</th>
+		<th style=width:15%;>아이디</th>
+		<th style=width:20%>전화번호</th>
+		<th style=width:5%;>상세</th>
+		<th style=width:5%;>수정</th>
+		<th style=width:5%;>삭제</th>
 	</tr>
 	<c:forEach var = "memberList" items="${memberList}">
 		<tr>

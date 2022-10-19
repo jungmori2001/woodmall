@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./css/adminPage.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -12,7 +14,12 @@
 <a href="writeNotice.do">공지사항 쓰기</a>
 <table border="1">
 	<tr>
-		<th>글번호</th><th>아이디</th><th>작성자</th><th>제목</th><th>글내용</th><th>조회수</th>
+		<th style=width:5%;>글번호</th>
+		<th style=width:10%;>아이디</th>
+		<th style=width:10%;>작성자</th>
+		<th style=width:15%;>제목</th>
+		<th style=width:30%;>글내용</th>
+		<th style=width:5%;>조회수</th>
 	</tr>
 	
 	<c:forEach var="woodmallnotice" items="${noticeList}">

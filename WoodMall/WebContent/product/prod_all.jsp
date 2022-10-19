@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./css/adminPage.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,7 +15,15 @@
 <div>
 <table border="1">
 	<tr>
-		<th>코드</th><th>분류</th><th>사진</th><th>이름</th><th>가격</th><th>등록일자</th><th>상세</th><th>수정</th><th>삭제</th>
+		<th style=width:5%;>코드</th>
+		<th style=width:10%;>분류</th>
+		<th style=width:5%;>사진</th>
+		<th style=width:15%;>이름</th>
+		<th style=width:10%;>가격</th>
+		<th style=width:10%;>등록일자</th>
+		<th style=width:5%;>상세</th>
+		<th style=width:5%;>수정</th>
+		<th style=width:5%;>삭제</th>
 	</tr>
 	
 	<c:forEach var="woodmallproduct" items="${productList}">
