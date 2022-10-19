@@ -12,12 +12,13 @@
 <a href="writeNotice.do">공지사항 쓰기</a>
 <table border="1">
 	<tr>
-		<th>글번호</th><th>작성자</th><th>제목</th><th>글내용</th><th>조회수</th>
+		<th>글번호</th><th>아이디</th><th>작성자</th><th>제목</th><th>글내용</th><th>조회수</th>
 	</tr>
 	
 	<c:forEach var="woodmallnotice" items="${noticeList}">
 		<tr>
 			<td>${woodmallnotice.noticeNum}</td>
+			<td>${woodmallnotice.userId}</td>
 			<td>${woodmallnotice.name}</td>
 			<td><a href="noticeDetail.do?noticeNum=${woodmallnotice.noticeNum}">${woodmallnotice.noticeTitle}</a></td>
 			<td>${woodmallnotice.noticeContent}</td>

@@ -30,8 +30,8 @@
 				<td>${ordermanager.price}</td>
 				<td>${ordermanager.orderDate}</td>
 				<td>${ordermanager.orderStatus}</td>
-				<td><a href="orderDetail.do?orderNum=${ordermanager.orderNum}">수정</a></td>
-				<td><a href="#">상세</a></td>
+				<td><a href="updateOrder.do?orderNum=${ordermanager.orderNum}">수정</a></td>
+				<td><a href="orderDetail.do?orderNum=${ordermanager.orderNum}">상세</a></td>
 			</tr>
 		</c:forEach>
 	</table>

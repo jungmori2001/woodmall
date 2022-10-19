@@ -66,8 +66,8 @@ public class OrderDao {
 		return list;
 	}
 	//ordermanager만 부분 조회
-	public OrderVo selectOrderByOrderNum1(String orderNum) {
-		String sql ="select * from ordermanager where ordernum=?";
+	public OrderVo changeStatusByOrderNum(String orderNum) {
+		String sql ="select * from ordermanager  where ordernum=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -77,20 +77,24 @@ public class OrderDao {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, orderNum);
+			
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
 				oVo=new OrderVo();
 				oVo.setOrderNum(rs.getInt("orderNum"));
+				oVo.setProdNum(rs.getInt("prodNum"));
 				oVo.setUserId(rs.getString("userId"));
 				oVo.setOrderQuen(rs.getInt("orderQuen"));
-				oVo.setOrderContent(rs.getString("orderContent"));
 				oVo.setPaymentStatus(rs.getString("paymentStatus"));
-				oVo.setOrderStatus(rs.getString("orderStatus"));
 				oVo.setPrice(rs.getInt("price"));
+				oVo.setOrderDate(rs.getDate("orderDate"));
+				oVo.setOrderContent(rs.getString("orderContent"));
+				oVo.setOrderStatus(rs.getString("orderStatus"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("상세보기 오류");
 		}finally {
 			DBManager.close(conn, pstmt, rs);
 		}
@@ -160,6 +164,7 @@ public class OrderDao {
 			pstmt.setInt(2, oVo.getOrderNum());
 			
 			result = pstmt.executeUpdate();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("오류발생: " +pstmt);

@@ -22,7 +22,11 @@ public class NoticeDao {
 	
 	//전체 공지 조회
 	public List<NoticeVo> selectAllNotice(){
-		String sql ="select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc"; 
+		String sql ="select n.*\r\n"
+				+ "from woodmallnotice n, member m\r\n"
+				+ "where n.userid = m.userid\r\n"
+				+ "order by noticenum desc";
+//				"select woodmallnotice.*, member.name from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc"; 
 //				"select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc";
 		
 		List<NoticeVo> list = new ArrayList<NoticeVo>();  //List 컬렉션 객체 생성
@@ -39,6 +43,7 @@ public class NoticeDao {
 				NoticeVo nVo = new NoticeVo();
 				
 				nVo.setNoticeNum(rs.getInt("noticeNum"));
+				nVo.setUserId(rs.getString("userId"));
 				nVo.setName(rs.getString("name"));
 				nVo.setNoticeTitle(rs.getString("noticeTitle"));
 				nVo.setNoticeContent(rs.getString("noticeContent"));
@@ -65,16 +70,17 @@ public class NoticeDao {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
-		String sql_insert = "insert into woodmallnotice(noticenum, name, noticetitle, noticecontent) values(woodmallnotice_seq.nextval,?, ?, ?)";
+		String sql_insert = "insert into woodmallnotice(noticenum, userid, name, noticetitle, noticecontent) values(woodmallnotice_seq.nextval,?, ?, ?, ?)";
 		
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql_insert);
 			
 //			pstmt.setInt(1, nVo.getNoticeNum());
-			pstmt.setString(1, nVo.getName());
-			pstmt.setString(2, nVo.getNoticeTitle());
-			pstmt.setString(3, nVo.getNoticeContent());
+			pstmt.setString(1, nVo.getUserId());
+			pstmt.setString(2, nVo.getName());
+			pstmt.setString(3, nVo.getNoticeTitle());
+			pstmt.setString(4, nVo.getNoticeContent());
 			result = pstmt.executeUpdate();
 
 		}catch(Exception e) {

@@ -222,7 +222,6 @@ figcaption {
 </div>
 </div>
     <!--메인-->
-    <!-- 나중에 지워야됨 --><a href="productList.do">상품 페이지</a>
     <input type="radio" id="s-1" name="slider-control" checked="checked">
     <input type="radio" id="s-2" name="slider-control">
     <input type="radio" id="s-3" name="slider-control">

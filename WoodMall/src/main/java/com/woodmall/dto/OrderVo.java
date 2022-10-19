@@ -17,7 +17,7 @@ public class OrderVo {
 	@Override
 	public String toString() {
 		return "OrderVo [ordernum=" + orderNum + ", prodnum=" + prodNum +", userid="+userId+",name=" + name + ", orderquen=" + orderQuen + ", paymentstatus=" + paymentStatus
-				+ ", price=" + price + ",orderdate=" + orderDate + ", ordercontent=" + orderContent +", orderstatus=" + orderStatus + "]";
+				+ ", price=" + price + ",orderdate=" + orderDate +", ordercontent=" + orderContent +", orderstatus=" + orderStatus + "]";
 		}
 	
 
