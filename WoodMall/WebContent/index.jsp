@@ -214,6 +214,7 @@ figcaption {
 </head>
 
 <body>
+
 <div style="flex:90%">
 <div style="background-color: white; text-align: right;">
 <td>${loginUser.name}(${loginUser.userid})님</td> 
