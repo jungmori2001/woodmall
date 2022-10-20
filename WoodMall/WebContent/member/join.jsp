@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 가입</title>
-    <link rel="stylesheet" href="css/join.css">
+    <link rel="stylesheet" href="../css/join.css">
 
 <head>
 <meta charset="UTF-8">
@@ -60,10 +60,8 @@
     <div>
         <button class="sign_up" type="button" id="submit" onclick="return checkJoin()">확인</button>
     </div>
-  	<script src="./script/address.js"></script>
+  	<script src="../script/address.js"></script>
  	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
 </form>   
 </body>
 </html>
