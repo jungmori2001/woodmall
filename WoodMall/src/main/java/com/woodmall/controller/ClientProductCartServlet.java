@@ -2,6 +2,7 @@ package com.woodmall.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import com.woodmall.dao.CartDao;
 import com.woodmall.dao.ProductDao;
 import com.woodmall.dto.CartVo;
-import com.woodmall.dto.MemberVo;
 import com.woodmall.dto.ProductVo;
 
 
@@ -23,7 +23,7 @@ public class ClientProductCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
+		System.out.println(session.getAttribute("loginUser"));
 		
 		
 		CartDao cDao = CartDao.getInstance();
@@ -35,10 +35,8 @@ public class ClientProductCartServlet extends HttpServlet {
 		String prodNum = request.getParameter("prodNum");	// 상품 코드
 		int quantity = Integer.parseInt(request.getParameter("quantity"));	// 상품 수량
 //		System.out.println("id : "+ userId);
-		System.out.println("prodNum : "+ prodNum);
-		System.out.println("quantity : "+ quantity);
-	
-		int result = 0;
+
+		
 		//1.prodNum 기반으로 데이터 가져오기
 		try{
 		pVo = pDao.selectProductByCode(prodNum);
@@ -52,16 +50,21 @@ public class ClientProductCartServlet extends HttpServlet {
 		cVo.setQuantity(quantity);
 		cVo.setUserId(userId);
 			/// cartDao  함수 수정 해야함
-		result = cDao.insertProductToCart(cVo);
-		System.out.println(result);
+		cDao.insertProductToCart(cVo);
+		
+//		List<CartVo> productList = cDao.selectProductByUserId(userId);
+		
+//		request.setAttribute("productList", productList);
+		
+		
 		} catch(Exception e) {
 			System.out.println(e.getStackTrace());
 		} finally {
-			request.setAttribute("result", result);  
+//			request.setAttribute("result", result);  
 //			리턴값을 이용하여 장바구니에 들어갔는지 알려주는 함수 넣기
 //			리턴값을 이용하여 장바구니 이동할지 계속 쇼핑할지 clientproductDetail.jsp 에 alert 함수 만들자 시간나면
-			RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
-			dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientCart.jsp");
+		dispatcher.forward(request, response);
 		}
 //		
 

@@ -68,7 +68,7 @@
 						</c:when>
 						<%-- 이미지가 서버에 존재하는 경우 --%>
 						<c:otherwise>
-							<img src="upload/${product.image}" width="225px">
+							<img src="./upload/${product.image}" width="225px">
 						</c:otherwise>
 					</c:choose>
 
@@ -79,7 +79,7 @@
 			</c:forEach>
 		</div>
 	</div>
-
+	
 	<%@ include file="../baseLayout/footer.jsp"%>
 </body>
 </html>

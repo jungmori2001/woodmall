@@ -95,7 +95,7 @@
 								onclick="del();"></td>
 						</tr>
 						<tr>
-							<td>총 금액s</td>
+							<td>총 금액</td>
 							<td align="right"><input style="text-align: right"
 								class="input" type="text" name="sum" size="11"
 								readonly="readonly">원</td>
@@ -103,10 +103,14 @@
 					<input type="hidden" name="prodNum" value="${product.prodNum}">
 				</div>
 			</div>
+			<% Object user = session.getAttribute("loginUser"); 
+                            	String loginUser = (String)user;
+                            %>
+            
 			<div align="center">
 				<c:set var="quantity" value="1"/>
 				<input style="height: 30px" type="button" value="Add to Cart"
-					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}'">
+					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}&userid=${loginUser.userid}'">
 				<input style="height: 30px" type="submit" value="구매">
 			</div>
 		</form>

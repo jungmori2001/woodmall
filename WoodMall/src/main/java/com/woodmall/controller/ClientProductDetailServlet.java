@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.woodmall.dao.ProductDao;
 import com.woodmall.dto.MemberVo;
@@ -25,9 +26,6 @@ public class ClientProductDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		
-		
-		
-		
 		PrintWriter out = response.getWriter();
 		
 		String prodNum = request.getParameter("prodNum");
@@ -39,6 +37,9 @@ public class ClientProductDetailServlet extends HttpServlet {
 		
 		request.setAttribute("product", pVo);
 		
+		
+		HttpSession session = request.getSession();
+		session.getAttribute("loginUser");
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");

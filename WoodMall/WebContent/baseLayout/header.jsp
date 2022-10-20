@@ -75,7 +75,7 @@ menubar > ul, li {
 <body>
 <header style="display:flex">
         <div style="flex:10%">
-            <img src="../image/logo.jpg" width="70%">
+            <img src="./image/logo.jpg" width="70%">
         </div>
         <div style="flex:90%">
             <div style="background-color: white; text-align: right;">

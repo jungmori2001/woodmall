@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>WoodMall : 장바구니</title>
-<link type="text/css" rel="stylesheet" href="../css/clientCart.css">
+<link type="text/css" rel="stylesheet" href="./css/clientCart.css">
 <script type = "text/javascript" > 
 function selectAll(selectAll) {
     const checkboxes = document.getElementsByName('price');
@@ -31,12 +31,7 @@ function selectAll(selectAll) {
             <table class="cart__list">
                     <thead>
                         <tr>
-                            <td><input type="checkbox"
-                                name="price"
-                                value="selectAll"
-                                checked="checked"
-                                onclick="selectAll(this)">
-                            <td colspan="2">상품정보</td>
+                            <td colspan="3">상품정보</td>
                             <td>상품금액</td>
                             <td>배송비</td>
                         </tr>
@@ -45,11 +40,12 @@ function selectAll(selectAll) {
                     
                         <tr class="cart__list__detail">
                             <td>
+                            
+                            <input type="hidden" name="userId" value="${user.userid}">
                             <input type="hidden" name="prodNum" value="${product.prodNum}">
                             <input type="hidden" name="quantity" value="${product.quantity}">
                             <input type="hidden" name="prodName" value="${product.prodName}">
                             <input type="hidden" name="userId" value="${product.userId}">
-                            <input type="checkbox" name="price" value="${product.price}" checked="checked">
                             </td>
                             <td><img src="upload/${product.image}"></td>
                             <td><a href="../index.jsp">WoodMall</a><span class="cart_smartStore"> 스마트스토어</span>
@@ -65,10 +61,6 @@ function selectAll(selectAll) {
                     <tfoot>
                         <tr>
                             <td colspan="3">
-                            <input type="button" value="선택상품 삭제" class="cart__list__optionbtn" 
-                            		onclick="location.href='../deleteProductFromCart.do'">
-                            <input type="submit" value="선택상품 구매" class="cart__list__optionbtn">
-
                             </td>
                             <td></td>
                             <td>총 구매 금액<br><br><span class="totalPrice"></span></td>
