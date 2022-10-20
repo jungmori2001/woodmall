@@ -3,6 +3,7 @@ package com.woodmall.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
-		String sql_insert = "insert into cart values(?, ?, ?, ?, ?);";
-		
+		String sql_insert = "insert into cart values(?, ?, ?, ?, ?)";
+
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql_insert);
@@ -43,6 +44,7 @@ public class CartDao {
 
 		}catch(Exception e) {
 			e.printStackTrace();
+			result=1;
 		}finally {
 			DBManager.close(conn, pstmt);
 
@@ -90,7 +92,7 @@ public class CartDao {
 	}
 	
 	public CartVo deleteProductFromCart(String userId, int prodNum) {
-		String sql = "delete from cart where userid=?, prodNum=?";
+		String sql = "delete from cart where userid=? and prodNum=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

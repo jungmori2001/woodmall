@@ -60,6 +60,7 @@
 
 	<%@ include file="../baseLayout/header.jsp"%>
 	<article>
+	
 		<form action="../clientOrder.do" name="form" method="post">
 			<div class="article">
 				<div class="image" align="center">
@@ -109,6 +110,7 @@
 				<input style="height: 30px" type="submit" value="구매">
 			</div>
 		</form>
+		
 	</article>
 
 	<div class="tab">
@@ -116,7 +118,7 @@
 		<button class="tablinks" onclick="openTap(event, 'review')">리뷰</button>
 		<button class="tablinks" onclick="openTap(event, 'qna')">QNA</button>
 	</div>
-
+	
 	<!-- Tab content -->
 	<div id="pro_detail" class="tabcontent">
 		<h3>제품상세</h3>

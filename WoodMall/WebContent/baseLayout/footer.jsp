@@ -8,7 +8,7 @@
 </head>
 <style>
 
-footer {
+.layout_footer {
     position: relative;
     transform: translateY(90%);
 }
@@ -47,13 +47,6 @@ footer {
     margin:3%;
     border: 1px solid black;
 }
-th{background-color: skyblue; color:white;}
-tr, td, th{
-    text-align: center;
-    border: 1px solid gray;
-    width:300px;
-    height: 30px;
-}
 
 .writebtn {
     margin: 3%;
@@ -85,7 +78,7 @@ tr, td, th{
 }
 </style>
 <body>
-<footer style="width:100%; height: 200px; background-color: black;">
+<footer class="layout_footer" style="width:100%; height: 200px; background-color: black;">
         <div>
             <span><a href="https://www.youtube.com/"><img class="sns" src="../image/youtube.png"></a></span>
             <span><a href="https://www.instagram.com/"><img class="sns" src="../image/insta.png"></a></span>

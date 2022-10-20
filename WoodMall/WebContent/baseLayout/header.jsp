@@ -13,12 +13,11 @@
     box-sizing: border-box;
 }
 
-ul,
-li {
+menubar > ul, li {
     list-style: none;
 }
 
-a {
+.header_link {
     text-decoration: none;
 }
 
@@ -36,7 +35,7 @@ a {
     margin: auto;
 }
 
-.menu>li {
+.menu > li {
     width: 40%;
     /*20*2=40%*/
     float: left;
@@ -80,19 +79,19 @@ a {
         </div>
         <div style="flex:90%">
             <div style="background-color: white; text-align: right;">
-                <a href="login.do">로그인</a>
-                <a href="join.do">회원가입</a>
+                <a class="header_link" href="login.do">로그인</a>
+                <a class="header_link" href="join.do">회원가입</a>
             </div>
             <div class="menubar">
                 <ul class="menu">
                     <li>
-                        <a href="#">소개</a>
+                        <a class="header_link" href="#">소개</a>
                     </li>
                     <li>
-                        <a href="#">가구</a>
+                        <a class="header_link" href="#">가구</a>
                         <ul class="submenu">
-                            <li><a href="./clientProductList.do?kind='책상'">책상</a></li>
-                            <li><a href="./clientProductList.do?kind='의자'">의자</a></li>
+                            <li><a class="header_link" href="./clientProductList.do?kind='책상'">책상</a></li>
+                            <li><a class="header_link" href="./clientProductList.do?kind='의자'">의자</a></li>
                         </ul>
                     </li>
                     <li>

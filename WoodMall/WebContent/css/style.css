@@ -6,12 +6,11 @@
     box-sizing: border-box;
 }
 
-ul,
-li {
+menubar > ul, li {
     list-style: none;
 }
 
-a {
+.header_link {
     text-decoration: none;
 }
 
@@ -29,7 +28,7 @@ a {
     margin: auto;
 }
 
-.menu>li {
+.menu > li {
     width: 40%;
     /*20*2=40%*/
     float: left;
@@ -68,7 +67,7 @@ a {
 
 /*푸터*/
 
-footer {
+.layout_footer {
     position: relative;
     transform: translateY(90%);
 }

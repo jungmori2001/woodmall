@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.woodmall.dao.ProductDao;
+import com.woodmall.dto.MemberVo;
 import com.woodmall.dto.ProductVo;
 
 
@@ -22,6 +23,11 @@ public class ClientProductDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		
+		
+		
+		
 		PrintWriter out = response.getWriter();
 		
 		String prodNum = request.getParameter("prodNum");
@@ -32,6 +38,8 @@ public class ClientProductDetailServlet extends HttpServlet {
 		pVo = pDao.selectProductByCode(prodNum);
 		
 		request.setAttribute("product", pVo);
+		
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
 		dispatcher.forward(request, response);
