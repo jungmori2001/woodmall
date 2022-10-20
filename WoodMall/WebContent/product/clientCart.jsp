@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>WoodMall : 장바구니</title>
+<link rel="stylesheet" type="text/css" href="css/clientCart.css">
 </head>
 <body>
 	<%@ include file="../baseLayout/header.jsp" %>
@@ -22,7 +25,7 @@
                 
                     <thead>
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td></td>
                             <td colspan="2">상품정보</td>
                             <td>상품금액</td>
                             <td>수량</td>
@@ -30,18 +33,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="product" items="${productList}">
                         <tr class="cart__list__detail">
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" name="prodNum" value="${product.prodNum}" checked>
+                            <c:set var="price" value="${product.price}"/></td>
                             <td><img src="upload/${product.image}"></td>
-                            <td><a href="../index.jsp">WoodMall</a><span class="cart__list__smartstore"> 스마트스토어</span>
+                            <td><a href="index.jsp">WoodMall</a><span class="cart__list__smartstore"> 스마트스토어</span>
                                 <p>${product.prodName}</p>
                             </td>
                             
-                            <td><span class="price">${product.pricd}원</span><br>
+                            <td><span class="price">
+                            <fmt:formatNumber value="${product.price}"
+									pattern="#,###" />원</span><br>
                             </td>
                             <td><div class="updown">
 
-                                <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="2">
+                                <input style="text-align:center;" type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="1" readonly>
             
                                 <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
             
@@ -50,17 +57,15 @@
                             </div></td>
                             <td>무료</td>
                         </tr>
-                        
+                        </c:forEach>
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <td colspan="3"><button class="cart__list__optionbtn">선택상품 삭제</button>
-                                <button class="cart__list__optionbtn">선택상품 구매</button>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr align="right">
+                            <td colspan="5"><strong style="font-size:20px;">총 금액</strong></td>
+                            <td style="font-size:17px"><fmt:formatNumber value="${totalPrice}"
+									pattern="#,###" />원</td>
                         </tr>
+                        
                     </tfoot>
             </table>
         </form>

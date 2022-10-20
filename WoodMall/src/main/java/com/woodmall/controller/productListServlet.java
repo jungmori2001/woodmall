@@ -19,24 +19,21 @@ public class productListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductDao pDao = ProductDao.getInstance();
-		ProductVo pVo = new ProductVo();
-		int page = 1;
+		String kind = request.getParameter("kind");
 		
-		String t_page = request.getParameter("p");
-		if(t_page != null && ! t_page.equals("")) {
-			page = Integer.parseInt(t_page);
-		}
-		
-		
+
 		//모든 상품 리스트를 DB로부터 조회 후 저장
-//		List<ProductVo> productList = pDao.selectAllProduct();
-		List<ProductVo> productList = pDao.getProductList();// 하나의 페이지에 표시할 데이터
-		int count = pDao.getProductCount();					//디비에서 검색한 게시물 수
+		List<ProductVo> productList = pDao.selectAllProductByKind(kind);
 		request.setAttribute("productList", productList);
-		request.setAttribute("count", count);
+		
+		
+		kind = kind.replaceAll("'", "");
+		request.setAttribute("kind" , kind);
+		
+		
 		
 		//리스트 페이지로 이동
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/prod_all.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductList.jsp");
 		dispatcher.forward(request, response);
 	}
 

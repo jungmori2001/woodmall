@@ -6,14 +6,33 @@ public class CartVo {
 	private String prodName;
 	private int price;
 	private int quantity;
-	
+	private String image;
+
 
 	
+	
+
 	@Override
 	public String toString() {
 		return "CartVo [userId=" + userId + ", prodNum=" + prodNum + ", prodName=" + prodName + ", price=" + price
-				+ ", quantity=" + quantity + "]";
+				+ ", quantity=" + quantity + ", image=" + image + "]";
 	}
+
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
 
 
 	public String getUserId() {

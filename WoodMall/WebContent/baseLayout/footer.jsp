@@ -7,13 +7,12 @@
 <title></title>
 </head>
 <style>
-
-footer {
+.footer_footer {
     position: relative;
     transform: translateY(90%);
 }
 
-.sns {
+.footer_sns {
     margin: 0.5%;
     margin-top: 1%;
     width: 50px;
@@ -39,57 +38,13 @@ footer {
     float: right;
     height: 100%;
 }
-
-/* (관리자) 관리 페이지 */
-.table{
-    max-width:1200px;
-    max-height: 700px;
-    margin:3%;
-    border: 1px solid black;
-}
-th{background-color: skyblue; color:white;}
-tr, td, th{
-    text-align: center;
-    border: 1px solid gray;
-    width:300px;
-    height: 30px;
-}
-
-.writebtn {
-    margin: 3%;
-    float: right;
-    width: 10%;
-    height: 40px;
-}
-
-.right_bottom > .btn{
-    margin:3%;
-    float: right;
-    width: 30%;
-    height: 40px;
-    background-color: yellowgreen;
-    color:black;
-}
-.btn{
-    border: 1px solid skyblue;
-    background-color: rgba(0,0,0,0);
-    color:skyblue;
-    padding:3px;
-    border-radius:5px;
-    cursor: pointer;
-}
-.btn:hover{
-    color:white;
-    background-color: skyblue;
-    transition-duration: 0.2s;
-}
 </style>
 <body>
-<footer style="width:100%; height: 200px; background-color: black;">
+<footer class="footer_footer" style="width:100%; height: 200px; background-color: black;">
         <div>
-            <span><a href="https://www.youtube.com/"><img class="sns" src="../image/youtube.png"></a></span>
-            <span><a href="https://www.instagram.com/"><img class="sns" src="../image/insta.png"></a></span>
-            <span><a href="https://ko-kr.facebook.com/"><img class="sns" src="../image/facebook.png"></a></span>
+            <span><a class="footer_a" href="https://www.youtube.com/"><img class="footer_sns" src="./image/youtube.png"></a></span>
+            <span><a class="footer_a" href="https://www.instagram.com/"><img class="footer_snssns" src="./image/insta.png"></a></span>
+            <span><a class="footer_a" href="https://ko-kr.facebook.com/"><img class="footer_snssns" src="./image/facebook.png"></a></span>
         </div>
         <div class="copy_left">
             <h1 style="color:white;">All Contents Copyright 2022 7조 All Right reserved</h1>

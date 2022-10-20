@@ -94,7 +94,7 @@
 								onclick="del();"></td>
 						</tr>
 						<tr>
-							<td>총 금액s</td>
+							<td>총 금액</td>
 							<td align="right"><input style="text-align: right"
 								class="input" type="text" name="sum" size="11"
 								readonly="readonly">원</td>
@@ -104,8 +104,12 @@
 			</div>
 			<div align="center">
 				<c:set var="quantity" value="1"/>
+				
 				<input style="height: 30px" type="button" value="Add to Cart"
-					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}'">
+					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}&userId=${loginUser.userid}'">
+					<c:if test="${result==1}">
+					
+					</c:if>
 				<input style="height: 30px" type="submit" value="구매">
 			</div>
 		</form>
@@ -129,8 +133,8 @@
 	</div>
 
 	<div id="qna" class="tabcontent">
-		<h3>${product.prodName} QNA</h3>
-		<p>Tokyo is the capital of Japan.</p>
+		<h3>QNA</h3>
+		<p>${product.prodName} QNA</p>
 	</div>
 	<%@ include file="../baseLayout/footer.jsp"%>
 </body>

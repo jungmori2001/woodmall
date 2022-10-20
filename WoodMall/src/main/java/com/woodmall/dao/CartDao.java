@@ -26,13 +26,13 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
-		String sql_insert = "insert into cart values(?, ?, ?, ?, ?);";
+		String sql_insert = "insert into cart values(?, ?, ?, ?, ?)";
 		
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql_insert);
 			
-//			pstmt.setInt(1, nVo.getNoticeNum());
+//			
 			pstmt.setString(1, cVo.getUserId());
 			pstmt.setInt(2, cVo.getProdNum());
 			pstmt.setString(3, cVo.getProdName());
@@ -54,7 +54,7 @@ public class CartDao {
 	
 	// 장바구니 정보 출력
 	public List<CartVo> selectProductByUserId(String userId) {
-		String sql = "select * from cart order by userid=?";
+		String sql = "select c.*, p.image from woodmallproduct p ,cart c where p.prodnum=c.prodnum and userid=?";
 		List<CartVo> list = new ArrayList<CartVo>();
 		
 		Connection conn = null;
@@ -77,6 +77,7 @@ public class CartDao {
 				cVo.setProdName(rs.getString("prodName"));
 				cVo.setPrice(rs.getInt("price"));
 				cVo.setQuantity(rs.getInt("quantity"));
+				cVo.setImage(rs.getString("image"));
 				list.add(cVo);
 				
 			}
@@ -89,8 +90,37 @@ public class CartDao {
 	
 	}
 	
+	
+	public int selectTotalPriceByUserIdBy(String userId) {
+		String sql = "select sum(price) sum from cart where userid=?";
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("sum");
+			}							
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return result;		
+	
+	}
+	
 	public CartVo deleteProductFromCart(String userId, int prodNum) {
-		String sql = "delete from cart where userid=?, prodNum=?";
+		String sql = "delete from cart where userid=? and prodNum=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

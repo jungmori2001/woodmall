@@ -16,9 +16,17 @@ a {
     color: black;
 }
 
+#p_num1 {
+border:none;border-right:0px; 
+border-top:0px; 
+border-left:0px; 
+border-bottom:0px;
+}
+
+
 img {
     display: block;
-    width: 80%;
+
     height: 80px;
     margin: auto;
 }
@@ -93,6 +101,7 @@ td {
     position: relative;
 }
 
+
 .cart__list__option p::after {
     content: "";
     width: 90%;
@@ -138,6 +147,8 @@ td {
     font-weight: bold;
     border-bottom: 1px solid lightgrey;
 }
+
+
 
 .cart__mainbtns {
     width: 420px;

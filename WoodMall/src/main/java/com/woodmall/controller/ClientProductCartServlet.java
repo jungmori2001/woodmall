@@ -22,26 +22,18 @@ import com.woodmall.dto.ProductVo;
 public class ClientProductCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		String prodNum = request.getParameter("prodNum");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String userId = request.getParameter("userId");		
 		
-		CartDao cDao = CartDao.getInstance();
-		ProductVo pVo = new ProductVo();
-		ProductDao pDao = ProductDao.getInstance();
-		
-		// 장바구니에 표시해야 하는 값 가져오기
-		String userId = (String) session.getAttribute("loginUser");	// 아이디
-		String prodNum = request.getParameter("prodNum");	// 상품 코드
-		int quantity = Integer.parseInt(request.getParameter("quantity"));	// 상품 수량
-		System.out.println("id : "+ userId);
-		System.out.println("prodNum : "+ prodNum);
-		System.out.println("quantity : "+ quantity);
-	
-		//1.prodNum 기반으로 데이터 가져오기
-		pVo = pDao.selectProductByCode(prodNum);
-		
-		//2.가져온 데이터에서 필요한 부분만 insert 함수에 넣기
 		
 		CartVo cVo = new CartVo();
+		CartDao cDao = CartDao.getInstance();
+		ProductDao pDao = ProductDao.getInstance();
+		ProductVo pVo = new ProductVo();
+		
+		// 장바구니 DB 에 상품 정보 넣기
+		pVo = pDao.selectProductByCode(prodNum);
 		cVo.setPrice(pVo.getPrice());
 		cVo.setProdName(pVo.getProdName());
 		cVo.setProdNum(pVo.getProdNum());
@@ -49,11 +41,9 @@ public class ClientProductCartServlet extends HttpServlet {
 		cVo.setUserId(userId);
 		
 		cDao.insertProductToCart(cVo);
+
+		response.sendRedirect("clientCart.do?&userId="+userId);
 		
-		String result = request.getParameter("result");
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
-		dispatcher.forward(request, response);
 		
 	}
 
