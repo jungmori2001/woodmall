@@ -81,7 +81,7 @@ public int insertMember(MemberVo mVo) {
 	PreparedStatement pstmt = null;		// 동적 쿼리
 	
 //	String sql_insert = "insert into member values('"+name+"', '"+id+"', '"+pwd+"', '"+email+"', '"+phone+"', "+admin+")";
-	String sql_insert = "insert into Member(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	String sql_insert = "insert into Member values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 //	System.out.println(sql_insert);
 	
@@ -115,8 +115,6 @@ public int insertMember(MemberVo mVo) {
 		pstmt.setInt(15, mVo.getTotalPurchase());
 		
 		
-		
-		
 		// 정수형
 //		pstmt.setFloat(int idx, float x);			// 실수형
 //		pstmt.setDate(int idx, Date x);				// 날짜형
@@ -134,7 +132,7 @@ public int insertMember(MemberVo mVo) {
 
 	}
 	return result;
-	}
+}
 
 // 회원 정보 가져오기 : select
 public MemberVo getMember(String userid) {

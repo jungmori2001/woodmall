@@ -19,7 +19,7 @@ public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("join.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/join.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -34,7 +34,9 @@ public class JoinServlet extends HttpServlet {
 		String userid = request.getParameter("userid");
 		String password = request.getParameter("password");
 		String emailAddress = request.getParameter("emailAddress");
-		String PhoneNum = request.getParameter("PhoneNum");
+		String firstPhone = request.getParameter("firstPhone");
+		String midPhone = request.getParameter("midPhone");
+		String lastPhone = request.getParameter("lastPhone");
 		String postNum = request.getParameter("postNum");
 		String mainAddress = request.getParameter("mainAddress");
 		String detailAddress = request.getParameter("detailAddress");
@@ -55,7 +57,9 @@ public class JoinServlet extends HttpServlet {
 		mVo.setName(name);				// MemberVo 클래스에 정보 저장 
 		mVo.setUserid(userid);
 		mVo.setPassword(password);
-		mVo.set
+		mVo.setFirstPhone(firstPhone);
+		mVo.setMidPhone(midPhone);
+		mVo.setLastPhone(lastPhone);
 		mVo.setEmailAddress(emailAddress);
 		mVo.setPostNum(postNum);
 		mVo.setMainAddress(mainAddress);
@@ -73,7 +77,7 @@ public class JoinServlet extends HttpServlet {
 			System.out.println("회원가입 실패");
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/login.jsp");
 		dispatcher.forward(request, response);		// 페이지 이동		
 	}
 
