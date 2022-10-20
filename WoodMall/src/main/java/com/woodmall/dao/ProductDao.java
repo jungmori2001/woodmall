@@ -60,7 +60,7 @@ public class ProductDao {
 		return result;
 	}
 
-	// 전체 상품 조회
+//	 전체 상품 조회
 	public List<ProductVo> selectAllProduct() {
 		String sql = "select * from woodmallproduct order by prodnum desc";
 		List<ProductVo> list = new ArrayList<ProductVo>(); // list 컬렉션 개체 생성
@@ -285,8 +285,9 @@ public void deleteProduct(String prodNum) {
 	}
 
 	public List<ProductVo> getProductList(String column, String keyword, int page) {
-		String sql = "SELECT * FROM (" + "SELECT ROWNUM N, p.*"
-				+ "from(select * from woodmallproduct order by prodnum desc) p" + ")" + "WHERE N BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM N, p.*\r\n"
+				+ "from(select * from woodmallproduct where "+column+" like ? order by prodnum desc) p) \r\n"
+				+ "WHERE N BETWEEN ? AND ?";
 
 //		첫번째 ? -> 1, 11, 21, 31, 41, -> 1 + (page-1)*10
 //		등차수열의 n에 대한 식은 첫째항 A, 공차가 B인 경우 ->A + B (n-1) 
@@ -302,8 +303,9 @@ public void deleteProduct(String prodNum) {
 			conn = DBManager.getConnection();
 			// Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 1 + (page - 1) * 10);
-			pstmt.setInt(2, page * 10);
+			pstmt.setString(1,  "%" +keyword+"%");
+			pstmt.setInt(2, 1+(page-1)*10);
+			pstmt.setInt(3, page * 10);
 
 			// SQL문 실행 및 결과처리 excuteQuery : 조회(select)
 			rs = pstmt.executeQuery();
@@ -316,19 +318,14 @@ public void deleteProduct(String prodNum) {
 				pVo.setProdName(rs.getString("prodName"));
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setReg_date(rs.getDate("reg_date"));
+				
 				list.add(pVo);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				// 사용한 리소스 해제
-				rs.close();
-				pstmt.close();
-				conn.close();
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-			}
+			DBManager.close(conn, pstmt, rs);
+
 		}
 		return list;
 	}
@@ -340,8 +337,10 @@ public void deleteProduct(String prodNum) {
 
 	public int getProductCount(String column, String keyword) {
 		int count = 0;
-		String sql = "SELECT COUNT(prodnum) count FROM (\r\n" + "    SELECT ROWNUM N, p.*\r\n"
-				+ "    from(select * from woodmallproduct order by prodnum desc) p\r\n" + ")";
+		String sql = "SELECT COUNT(prodnum) count FROM (\r\n"
+				+ "    SELECT ROWNUM N, p.*\r\n"
+				+ "    from(select * from woodmallproduct where "+column+" like ?  order by prodnum desc) p\r\n"
+				+ ")";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -353,7 +352,7 @@ public void deleteProduct(String prodNum) {
 			// SQL문 실행 및 결과처리 excuteQuery : 조회(select)
 			rs = pstmt.executeQuery();
 			// rs.next() : 다음 행(row) 확인, rs.getString("컬럼명")
-			while (rs.next()) {
+			if(rs.next()) {
 				count = rs.getInt("count");
 			}
 		} catch (Exception e) {

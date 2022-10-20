@@ -309,4 +309,25 @@ public int confirmID(String userid) {
 		return result;	
 		
 	}
+//멤버 삭제
+public void deleteMember(String userId) {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	System.out.println(userId);
+	
+	String sql = "delete from member where userid=?";
+	
+	try {
+		conn = DBManager.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		
+		pstmt.executeUpdate();
+	} catch(Exception e) {
+		e.printStackTrace();
+	} finally {
+		DBManager.close(conn, pstmt);
+	}
+}
+
 }

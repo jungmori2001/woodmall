@@ -33,6 +33,7 @@ public class OrderDetailServlet extends HttpServlet {
 		request.setAttribute("ordermanager", oDVo);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("order/orderDetail.jsp");
 		dispatcher.forward(request, response);
+		System.out.println(oDVo);
 	}
 
 	
