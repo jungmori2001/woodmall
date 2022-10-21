@@ -25,7 +25,7 @@
 		<tr>
 			<td>${woodmallnotice.noticeNum}</td>
 			<td>${woodmallnotice.name}</td>
-			<td><a href="noticePageDetail.do?noticeNum=${woodmallnotice.noticeNum}">${woodmallnotice.noticeTitle}</a></td>
+			<td><a class="notice_a" href="noticePageDetail.do?noticeNum=${woodmallnotice.noticeNum}">${woodmallnotice.noticeTitle}</a></td>
 			<td>${woodmallnotice.noticeContent}</td>
 			<td>${woodmallnotice.noticeHits}</td>
 		</tr>

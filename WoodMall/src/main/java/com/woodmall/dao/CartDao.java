@@ -162,7 +162,7 @@ public class CartDao {
 	
 	}
 	
-	public CartVo deleteProductFromCart(String userId, int prodNum) {
+	public CartVo deleteProductFromCart(String userId, String prodNum) {
 		String sql = "delete from cart where userid=? and prodNum=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -173,7 +173,7 @@ public class CartDao {
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			pstmt.setInt(2, prodNum);
+			pstmt.setString(2, prodNum);
 
 			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 			rs = pstmt.executeQuery();

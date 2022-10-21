@@ -107,9 +107,7 @@
 				
 				<input style="height: 30px" type="button" value="Add to Cart"
 					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}&userId=${loginUser.userid}'">
-					<c:if test="${result==1}">
 					
-					</c:if>
 				<input style="height: 30px" type="submit" value="구매">
 			</div>
 		</form>
