@@ -8,6 +8,23 @@
 <meta charset="UTF-8">
 <title>WoodMall : 장바구니</title>
 <link rel="stylesheet" type="text/css" href="css/clientCart.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#checkbox_all").click(function() {
+				if($("#checkbox_all").is(":checked")) $("input[name=chk]").prop("checked", true);
+				else $("input[name=chk]").prop("checked", false);
+			});
+			
+			$("input[name=chk]").click(function() {
+				var total = $("input[name=chk]").length;
+				var checked = $("input[name=chk]:checked").length;
+				
+				if(total != checked) $("#checkbox_all").prop("checked", false);
+				else $("#checkbox_all").prop("checked", true); 
+			});
+		});
+	</script>
 </head>
 <body>
 	<%@ include file="../baseLayout/header.jsp" %>
@@ -25,7 +42,7 @@
                 
                     <thead>
                         <tr>
-                            <td></td>
+                            <td><input type="checkbox" id="checkbox_all"></td>
                             <td colspan="2">상품정보</td>
                             <td>상품금액</td>
                             <td>수량</td>
@@ -35,7 +52,11 @@
                     <tbody>
                     <c:forEach var="product" items="${productList}">
                         <tr class="cart__list__detail">
-                            <td><input type="checkbox" name="prodNum" value="${product.prodNum}" checked>
+                        <td>
+                            <td>
+                            <input type="checkbox" name="chk" value="${product.prodNum}" checked>
+                            <input type="hidden" name="userId" value="${userId}">
+                            <input type="hidden" name="price" value="${product.price}">
                             <c:set var="price" value="${product.price}"/></td>
                             <td><img src="upload/${product.image}"></td>
                             <td><a href="index.jsp">WoodMall</a><span class="cart__list__smartstore"> 스마트스토어</span>
@@ -48,7 +69,7 @@
                             </td>
                             <td><div class="updown">
 
-                                <input style="text-align:center;" type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="1" readonly>
+                                <input style="text-align:center;" type="text" name="p_num1" size="2" maxlength="4" class="p_num" value="1" readonly>
             
                                 <span><i class="fas fa-arrow-alt-circle-up up"></i></span>
             
@@ -68,11 +89,12 @@
                         
                     </tfoot>
             </table>
-        </form>
             <div class="cart__mainbtns">
                 <button class="cart__bigorderbtn left" onclick="location.href='./index.jsp'">쇼핑 계속하기</button>
-                <button class="cart__bigorderbtn right">주문하기</button>
+                <input type="submit" value="주문하기" class="cart__bigorderbtn right">
             </div>
+        </form>
+            
         </section>
 	
 	<%@ include file="../baseLayout/footer.jsp" %>

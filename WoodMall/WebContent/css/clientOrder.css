@@ -1,25 +1,8 @@
 @charset "UTF-8";
-
-#header {
-    background-color:black;
-    text-align: center;
-    color:white;
-    font-size:xx-large;
-    font-weight:bold;
+.orderBody{
+    margin-left:300px;
+    margin-right:300px;
 }
-
-body {
-    margin-right:20%; 
-    margin-left:20%;
-}
-
-
-.mainName{
-    font-size:large; 
-    font-weight:bold
-}
-
-
 
 #pay {
     text-align:center;
@@ -30,14 +13,20 @@ body {
     border: 1px solid black;
     border-radius:10px 10px 10px 10px;
     margin-bottom:20px;
+    
+    
+}
+
+.delivery{
+    border-radius:10px 10px 10px 10px;
 }
 
 #productName {
     text-align:left; 
     font-weight:600;
-    margin-top:15px;
     margin-left:20px;
     margin-right:20px;
+    margin-bottom:5px;
 }
 
 #productOption {
@@ -50,7 +39,7 @@ body {
     display:flex;
 }
 
-hr{
+.totalHr{
     height:2px; 
     background-color: grey;
 }
@@ -72,7 +61,7 @@ hr{
 }
 
 
-.order{
+.order_btn{
     background-color:black;
     text-align: center;
     color:white;
@@ -80,3 +69,11 @@ hr{
     font-weight:bold;
     
 }
+
+.order_btn > a {
+    text-decoration-line: none;
+}
+
+
+
+

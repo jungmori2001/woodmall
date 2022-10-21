@@ -20,7 +20,7 @@ public class ClientCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userId = request.getParameter("userId");
-		
+		request.setAttribute("userId", userId);
 		CartDao cDao = CartDao.getInstance();
 		
 		// 장바구니에 넣은 데이터 가져와서 장바구니 화면에 뿌리기
@@ -36,7 +36,19 @@ public class ClientCartServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		request.setAttribute("userId", userId);
 		
+		CartDao cDao = CartDao.getInstance();
+		// 장바구니에 넣은 데이터 가져와서 장바구니 화면에 뿌리기
+		List<CartVo> productList = cDao.selectProductByUserId(userId);
+		request.setAttribute("productList", productList);
+			
+		int totalPrice = cDao.selectTotalPriceByUserIdBy(userId);
+		
+		request.setAttribute("totalPrice", totalPrice);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientCart.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

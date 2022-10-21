@@ -33,8 +33,7 @@ public class ClientProductDetailServlet extends HttpServlet {
 		pVo = pDao.selectProductByCode(prodNum);
 		
 		request.setAttribute("product", pVo);
-		HttpSession session = request.getSession();
-		session.getAttribute("loginUser");
+		
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
