@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./css/adminPage.css">
-<script src="script/memberCheck.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,7 +23,6 @@
 		<th style=width:20%>전화번호</th>
 		<th style=width:5%;>상세</th>
 		<th style=width:5%;>수정</th>
-		<th style=width:5%;>삭제</th>
 	</tr>
 	<c:forEach var = "memberList" items="${memberList}">
 		<tr>
@@ -32,9 +30,8 @@
 			<td>${memberList.userid}</td>
 			<input type="hidden" name="userId" id="userid" value="${memberList.userid}">
 			<td>${memberList.firstPhone} - ${memberList.midPhone} - ${memberList.lastPhone}</td>
-			<td>상세</td>
+			<td> <a href="memberDetail.do?userid=${memberList.userid}">상세</a></td>
 			<td>수정</td>		
-			<td id="checkDelete">삭제</td>
 		</tr>
 	</c:forEach>
 	

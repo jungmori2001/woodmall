@@ -9,14 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.woodmall.dao.ProductDao;
-import com.woodmall.dto.ProductVo;
+import com.woodmall.dao.MemberDao;
+import com.woodmall.dto.MemberVo;
 
-
-@WebServlet("/clientProductDetail.do")
-public class ClientProductDetailServlet extends HttpServlet {
+@WebServlet("/memberDetail.do")
+public class memberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
@@ -25,24 +23,20 @@ public class ClientProductDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String prodNum = request.getParameter("prodNum");
+		String urseId = request.getParameter("userid");
 		
-		ProductDao pDao = ProductDao.getInstance();
-		ProductVo pVo = new ProductVo();
+		MemberDao mDao = MemberDao.getInstance();
+		MemberVo mVo = new MemberVo();
 		
-		pVo = pDao.selectProductByCode(prodNum);
-		
-		request.setAttribute("product", pVo);
-		
-		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
+		mVo = mDao.getMember(urseId);
+		System.out.println(mVo);
+		request.setAttribute("member", mVo);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }

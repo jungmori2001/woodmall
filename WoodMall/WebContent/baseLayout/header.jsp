@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,20 +13,15 @@
     box-sizing: border-box;
 }
 
-menubar > ul, li {
-    list-style: none;
-}
-
 .header_link {
     text-decoration: none;
 }
 
-.login {
-    float: right;
-    margin-right: 20px;
+header > ul, li {
+	list-style:none;
 }
 
-.menu {
+.header_menu {
     font-family: fantasy;
     float: right;
     display: flex;
@@ -35,7 +30,7 @@ menubar > ul, li {
     margin: auto;
 }
 
-.menu > li {
+.header_menu>li {
     width: 40%;
     /*20*2=40%*/
     float: left;
@@ -44,28 +39,28 @@ menubar > ul, li {
     /*background-color: beige;*/
 }
 
-.menu a {
+.header_menu a {
     color: sienna;
 }
 
-.submenu>li {
+.header_submenu>li {
     line-height: 50px;
     background-color: azure;
 }
 
-.submenu {
+.header_submenu {
     height: 0;
     /*ul의 높이를 안보이게 처리*/
     overflow: hidden;
 
 }
 
-.menu>li:hover {
+.header_menu>li:hover {
     background-color: skyblue;
     transition-duration: 0.5s;
 }
 
-.menu>li:hover .submenu {
+.header_menu>li:hover .header_submenu {
     height: 100px;
     /*서브메뉴 li한개의 높이 50*2*/
     transition-duration: 0.5s;
@@ -77,25 +72,40 @@ menubar > ul, li {
         <div style="flex:10%">
             <img src="./image/logo.jpg" width="70%">
         </div>
-        <div style="flex:90%">
+            <div style="flex:90%">
             <div style="background-color: white; text-align: right;">
-                <a class="header_link" href="login.do">로그인</a>
+            
+            <c:set var="userid" scope="session" value="${loginUser}"/>
+            <c:if test="${empty userid}">
+            	<a class="header_link" href="login.do">로그인</a>
                 <a class="header_link" href="join.do">회원가입</a>
+            </c:if>
+            <c:if test="${userid!=null}">
+            <p>${loginUser.name}(${loginUser.userid})님</p>
+            <a class="header_link" href="logout.do">로그아웃</a>	 	
+            </c:if>
+            <c:set var="admin" value="${loginUser.userid}"/>
+            <c:if test="${admin=='admin'}">
+                  	<a href="adminIndexPage.jsp">관리자페이지로</a>
+            </c:if>
+           
+             
+ 
             </div>
-            <div class="menubar">
-                <ul class="menu">
+            <div class="header_menubar">
+                <ul class="header_menu">
                     <li>
                         <a class="header_link" href="#">소개</a>
                     </li>
                     <li>
                         <a class="header_link" href="#">가구</a>
-                        <ul class="submenu">
+                        <ul class="header_submenu">
                             <li><a class="header_link" href="./clientProductList.do?kind='책상'">책상</a></li>
                             <li><a class="header_link" href="./clientProductList.do?kind='의자'">의자</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">고객센터</a>
+                        <a class="header_link" href="#">고객센터</a>
                     </li>
                 </ul>
             </div>

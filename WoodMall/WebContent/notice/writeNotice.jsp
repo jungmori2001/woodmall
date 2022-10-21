@@ -15,16 +15,16 @@
 	<form method="post" name="frm">
 		<table border="1" class="list">
 			<tr>
-				<th>제목</th>
-				<td><input type="text" name="noticeTitle"></td>
-			</tr>
-			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="userId"></td>
+				<td><input type="text" name="userId" value="${loginUser.userid}"></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="name"></td>
+				<td><input type="text" name="name" value="${loginUser.name}"></td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" name="noticeTitle"></td>
 			</tr>
 			<tr>
 				<th>글 내용</th>

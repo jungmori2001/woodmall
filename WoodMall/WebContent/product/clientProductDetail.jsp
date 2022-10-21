@@ -60,7 +60,6 @@
 
 	<%@ include file="../baseLayout/header.jsp"%>
 	<article>
-	
 		<form action="../clientOrder.do" name="form" method="post">
 			<div class="article">
 				<div class="image" align="center">
@@ -103,18 +102,17 @@
 					<input type="hidden" name="prodNum" value="${product.prodNum}">
 				</div>
 			</div>
-			<% Object user = session.getAttribute("loginUser"); 
-                            	String loginUser = (String)user;
-                            %>
-            
 			<div align="center">
 				<c:set var="quantity" value="1"/>
+				
 				<input style="height: 30px" type="button" value="Add to Cart"
-					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}&userid=${loginUser.userid}'">
+					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}&userId=${loginUser.userid}'">
+					<c:if test="${result==1}">
+					
+					</c:if>
 				<input style="height: 30px" type="submit" value="구매">
 			</div>
 		</form>
-		
 	</article>
 
 	<div class="tab">
@@ -122,7 +120,7 @@
 		<button class="tablinks" onclick="openTap(event, 'review')">리뷰</button>
 		<button class="tablinks" onclick="openTap(event, 'qna')">QNA</button>
 	</div>
-	
+
 	<!-- Tab content -->
 	<div id="pro_detail" class="tabcontent">
 		<h3>제품상세</h3>
@@ -135,8 +133,8 @@
 	</div>
 
 	<div id="qna" class="tabcontent">
-		<h3>${product.prodName} QNA</h3>
-		<p>Tokyo is the capital of Japan.</p>
+		<h3>QNA</h3>
+		<p>${product.prodName} QNA</p>
 	</div>
 	<%@ include file="../baseLayout/footer.jsp"%>
 </body>

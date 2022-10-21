@@ -23,19 +23,18 @@ public class deleteMemberServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userid");
 		System.out.println(userId);
+		
 		MemberDao mDao = MemberDao.getInstance();
 		MemberVo mVo = new MemberVo();
 		
 		mVo = mDao.getMember(userId);
 		mDao.deleteMember(userId);
-		
 		System.out.println(mDao);
 		System.out.println(mVo);
 		request.setAttribute("member", mVo);
 		
 		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/deleteMember.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -45,10 +44,6 @@ public class deleteMemberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDao mDao = MemberDao.getInstance();
 		MemberVo mVo = new MemberVo();
-		
-		String userId = request.getParameter("userId");
-		System.out.println(userId);
-		
 		
 		
 		response.sendRedirect("memberList.do");

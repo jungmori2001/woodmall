@@ -3,7 +3,6 @@ package com.woodmall.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +27,12 @@ public class CartDao {
 		int result = -1;
 		
 		String sql_insert = "insert into cart values(?, ?, ?, ?, ?)";
-
+		
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql_insert);
 			
-//			pstmt.setInt(1, nVo.getNoticeNum());
+//			
 			pstmt.setString(1, cVo.getUserId());
 			pstmt.setInt(2, cVo.getProdNum());
 			pstmt.setString(3, cVo.getProdName());
@@ -44,7 +43,6 @@ public class CartDao {
 
 		}catch(Exception e) {
 			e.printStackTrace();
-			result=1;
 		}finally {
 			DBManager.close(conn, pstmt);
 
@@ -56,7 +54,7 @@ public class CartDao {
 	
 	// 장바구니 정보 출력
 	public List<CartVo> selectProductByUserId(String userId) {
-		String sql = "select * from cart order by userid=?";
+		String sql = "select c.*, p.image from woodmallproduct p ,cart c where p.prodnum=c.prodnum and userid=?";
 		List<CartVo> list = new ArrayList<CartVo>();
 		
 		Connection conn = null;
@@ -79,6 +77,7 @@ public class CartDao {
 				cVo.setProdName(rs.getString("prodName"));
 				cVo.setPrice(rs.getInt("price"));
 				cVo.setQuantity(rs.getInt("quantity"));
+				cVo.setImage(rs.getString("image"));
 				list.add(cVo);
 				
 			}
@@ -88,6 +87,78 @@ public class CartDao {
 			DBManager.close(conn, pstmt, rs);
 		}
 		return list;		
+	
+	}
+	
+	// 장바구니 정보 출력
+		public CartVo selectCheckProductFromCart(String prodNum, String userId) {
+			String sql = "select  c.*, p.image "
+					+ "from   woodmallproduct p, cart c "
+					+ "where  p.prodNum = c.prodNum "
+					+ "and c.prodNum=? "
+					+ "and c.userid=?";
+			
+			CartVo cVo = new CartVo();
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				conn=DBManager.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, prodNum);
+				pstmt.setString(2, userId);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					cVo = new CartVo();
+					cVo.setUserId(rs.getString("userId"));
+					cVo.setProdNum(rs.getInt("prodNum"));
+					cVo.setProdName(rs.getString("prodName"));
+					cVo.setPrice(rs.getInt("price"));
+					cVo.setQuantity(rs.getInt("quantity"));
+					cVo.setImage(rs.getString("image"));
+					
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				DBManager.close(conn, pstmt, rs);
+			}
+			return cVo;	
+		
+		}
+	
+	
+	
+	public int selectTotalPriceByUserIdBy(String userId) {
+		String sql = "select sum(price) sum from cart where userid=?";
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("sum");
+			}							
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return result;		
 	
 	}
 	
@@ -126,6 +197,36 @@ public class CartDao {
 		}
 		return cVo;
 	}
+	
+	public int selectTotalPriceCheckedProduct(String userId, String prodNum) {
+		String sql = "select price from cart where userid=? and prodnum=?";
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, prodNum);
+			
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("price");
+			}							
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return result;		
+	
+	}
+	
 	
 	
 	
