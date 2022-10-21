@@ -31,7 +31,7 @@ public class productDetailServlet extends HttpServlet {
 		pVo = pDao.selectProductByCode(prodnum);
 		
 		request.setAttribute("productList", pVo);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product/productDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 

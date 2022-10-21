@@ -58,6 +58,8 @@ public class ClientOrderServlet extends HttpServlet {
 		MemberDao mDao = MemberDao.getInstance();
 		mVo = mDao.getMember(userId);
 		
+		request.setAttribute("userInfo", mVo);
+		
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");
