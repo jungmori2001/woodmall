@@ -158,7 +158,7 @@ public MemberVo getMember(String userid) {
 			// 디비로부터 회원 정보 획득
 			mVo = new MemberVo();
 			String name = rs.getString("name");		// 컬럼명 name인 정보를 가져옴
-			mVo.setName(name); 						// DB에서 가져온 정보를 mVo객체에 저장				
+			mVo.setName(name); 						// DB에서 가져온 정보를 mVo객체에 저장	
 			mVo.setUserid(rs.getString("userid")); 
 			mVo.setPassword(rs.getString("password"));
 			mVo.setEmailId("emailId");
@@ -170,6 +170,9 @@ public MemberVo getMember(String userid) {
 			mVo.setMainAddress(rs.getString("mainAddress"));
 			mVo.setDetailAddress(rs.getString("detailAddress"));
 			mVo.setSubAddress(rs.getString("subAddress"));
+			mVo.setGrade(rs.getString("grade"));
+			mVo.setAdmin(rs.getInt("admin"));
+			mVo.setTotalPurchase(rs.getInt("totalPurchase"));
 	
 		} else {
 			result = -1;		// 디비에 userid 없음
@@ -194,8 +197,7 @@ public MemberVo getMember(String userid) {
 	// 반환값: 성공여부
 	public int updateMember(MemberVo mVo) {
 		int result = -1;		
-		String sql = "update Member set password=?,emailId=?,firstPhone=?, midPhone=?, lastPhone=?, where userid=?";
-		
+		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userid=?";
 		Connection conn = null;
 //		Statement stmt = null;
 		PreparedStatement pstmt = null;
@@ -208,9 +210,8 @@ public MemberVo getMember(String userid) {
 			pstmt = conn.prepareStatement(sql);		// 쿼리 입력
 			pstmt.setString(1, mVo.getPassword());
 			pstmt.setString(2, mVo.getEmailId());
-			pstmt.setString(3, mVo.getFirstPhone());
-			pstmt.setString(4, mVo.getMidPhone());
-			pstmt.setString(5, mVo.getLastPhone());
+			pstmt.setString(3, mVo.getMidPhone());
+			pstmt.setString(4, mVo.getLastPhone());
 			
 			// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
 //			rs = stmt.executeQuery(sql);
