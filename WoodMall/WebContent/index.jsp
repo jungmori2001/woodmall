@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -216,9 +217,14 @@ figcaption {
 <body>
 <div style="flex:90%">
 <div style="background-color: white; text-align: right;">
-<td>${loginUser.name}(${loginUser.userid})님</td> 
-<a href="login.do">로그인</a>
-<a href="join.do">회원가입</a>
+<c:if test="${loginUser eq null}">
+          <button type="button"  onclick="location.href='login.do'"> 로그인 </button>
+          <button type="button"  onclick="location.href='join.do'"> 회원가입</button>
+          </c:if>
+          <c:if test="${loginUser ne null}">
+          <button type="button" onclick="location.href='logout.do'">로그아웃</button>
+          <button type="button" onClick="location.href='updateMember.do'">MyPage</button>
+          </c:if>
 </div>
 </div>
     <!--메인-->

@@ -57,11 +57,22 @@ public class LoginServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userid");		// 입력양식으로 부터 가져온 아이디
 		String userPwd = request.getParameter("password");
+		String emilId = request.getParameter("emailId");
+		String emailAddress = request.getParameter("emailAddress");
+		String firstPhone = request.getParameter("firstPhone");
+		String midPhone = request.getParameter("midPhone");
+		String lastPhone = request.getParameter("lastPhone");
+		String postNum = request.getParameter("postNum");
+		String mainAddress = request.getParameter("mainAddress");
+		String subAddress = request.getParameter("subAddress");
+		String detailAddress = request.getParameter("detailAddress");
+		String detailAddress = request.getParameter("detailAddress");
+		
 //		System.out.println("userId: "+ userId + " userPwd: "+ userPwd);
 		// 디비 연동 후, 가져올 아이디/암호
 //		String id = "kenneth";
 		
-		int result = mDao.checkUser(userId, userPwd);		// DB 사용자 확인
+		int result = mDao.checkUser(userId, userPwd,emilId);		// DB 사용자 확인
 
 //		out.print("아이디: " + userId);
 //		out.print("<br>");
@@ -102,6 +113,6 @@ public class LoginServlet extends HttpServlet {
 		dispatcher.forward(request,response);
 	}
 
-
+}
 
 

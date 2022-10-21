@@ -28,14 +28,14 @@ function idOk(){
 // 로그인 페이지에서 입력된 양식에 정상 데이터가 포함되었는지 확인
 function checkLogin(){
 	//alert(document.frm.userId.value.length);
-	if(document.frm.userId.value.length === 0){
+	if(document.frm.userid.value.length === 0){
 		alert('아이디를 입력해주세요');
-		frm.userId.focus();
+		frm.userid.focus();
 		return false;
 	}
 	if(document.frm.password.value === ""){
 		alert('암호를 입력해주세요');
-		frm.userPwd.focus();
+		frm.userpassword.focus();
 		return false;
 	}
 	return true;
@@ -58,14 +58,14 @@ function checkJoin(){
 		frm.userid.focus();
 		return false;
 	}	
-	if(document.frm.password.value.length === 0){
+	if(document.frm.userPwd.value.length === 0){
 		alert('암호를 입력해주세요');
-		frm.password.focus();
+		frm.userPwd.focus();
 		return false;
 	}
-	if(document.frm.password.value !== document.frm.password_check.value){
+	if(document.frm.userPwd.value !== document.frm.userPwd_check.value){
 		alert('암호가 일치하지 않습니다.');
-		frm.password_check.focus();
+		frm.userPwd_check.focus();
 		return false;
 	}	
 	
