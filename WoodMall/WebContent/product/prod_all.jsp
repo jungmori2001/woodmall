@@ -1,19 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./css/adminPage.css">
 <title>Insert title here</title>
 </head>
 <body>
+
 <h2> 전체상품 리스트</h2>
-<a href="writeProduct.do">상품 등록</a>
+<a href="adminIndexPage.jsp" class="item-link" id="pageLink" >
+	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+	</svg>
+</a>
+<a href="writeProduct.do">
+	<svg xmlns="http://www.w3.org/2000/svg" width="30" hieght:"30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+	</svg>
+</a>
+<div class="search">
+		<form action="productList.do">
+			<select name="column">
+				<option ${(param.column=="prodNum")?"selected":""} value="prodNum">상품번호</option>
+				<option ${(param.column=="prodName")?"selected":""} value="prodName">상품명</option>
+				<option ${(param.column=="kind")?"selected":""} value="kind">분류</option>
+			</select>
+			<input type="text" name="keyword" value="${param.keyword}">
+			<input type="submit" value="검색">
+		</form>
+	</div>
 <div>
 <table border="1">
 	<tr>
-		<th>코드</th><th>분류</th><th>사진</th><th>이름</th><th>가격</th><th>등록일자</th><th>상세</th><th>수정</th><th>삭제</th>
+		<th style=width:5%;>코드</th>
+		<th style=width:10%;>분류</th>
+		<th style=width:5%;>사진</th>
+		<th style=width:15%;>이름</th>
+		<th style=width:10%;>가격</th>
+		<th style=width:10%;>등록일자</th>
+		<th style=width:5%;>상세</th>
+		<th style=width:5%;>수정</th>
+		<th style=width:5%;>삭제</th>
 	</tr>
 	
 	<c:forEach var="woodmallproduct" items="${productList}">
@@ -42,32 +74,36 @@
 <!-- 처음 6개 페이지 링크 표시 -->
 <!-- 페이지 -->
 <c:set var="page" value= "${(empty param.p)?1:param.p}"></c:set>
-<c:set var="startNum" value="${page - (page-1) % 5}"></c:set>
-<c:set var="lastNum" value="${Math.ceil(count/10)}"></c:set>
+<c:set var="startNum" value="${page-(page-1)%5}"></c:set>
+<c:set var="lastNum" value="${fn:substringBefore(Math.ceil(count/10), '.')}"></c:set>
 <!-- 	페이지 수 -->
-<!-- 페이지 시작 번호  startNum-->
-<!-- 	끝 번호 -->
-<br>
+<tr>
+	<div><span>${(empty param.p)?1:param.p}</span>/${lastNum} pages</div>
+</tr>
 <c:if test="${startNum-1>0}">
-	<a href="?p=${startNum-1}">이전</a>
+	<a href="?p=${startNum-1}&column=${param.column}&keyword=${param.keyword}">이전 </a>
 </c:if>
 <c:if test="${startNum-1<=0}">
-	<a href="?p=${startNum-1}">
-		<span onclick="alert('이전페이지가 없습니다.');"></span>
+		<span onclick="alert('이전페이지가 없습니다.');"> 이전 </span>
 	</a>
 </c:if>
 
 <c:forEach var="i" begin="0" end="4">
-	<a href=?p=${i+startNum}>${i+startNum}</a>
+	<c:if test="${(i+startNum) <= lastNum}">
+	<a href="?p=${i+startNum}>&column=${param.column}&keyword=${param.keyword}">
+	${i+startNum}</a>
+	</c:if>
 </c:forEach>
-<c:if test="${startNum+4} < lastNum">
-	<a href="?p=${startNum+5}">
+<c:forEach var="i" begin="0" end="4">
+	<a href="?p=${i+1}&column=${param.column}&keyword=${param.keyword}">${i+1}</a>
+</c:forEach> 
+<c:if test="${(startNum+4) < lastNum}">
+	<a href="?p=${startNum+5}&column=${param.column}&keyword=${param.keyword}">
 		다음
 	</a>
 </c:if>
-<c:if test="${startNum+4} >= lastNum">
-	<a href="?p=${startNum+5}">
-		<span onclick="alert('다음페이지가 없습니다.');"></span>
+<c:if test="${(startNum+4) >= lastNum}">
+		<span onclick="alert('다음페이지가 없습니다.');"> 다음</span>
 	</a>
 </c:if>
 

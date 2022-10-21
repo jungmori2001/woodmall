@@ -1,7 +1,6 @@
 package com.woodmall.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,34 +9,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.woodmall.dao.OrderDao;
-import com.woodmall.dto.OrderDetailVo;
+import com.woodmall.dao.MemberDao;
+import com.woodmall.dto.MemberVo;
 
 
-@WebServlet("/orderDetail.do")
-public class OrderDetailServlet extends HttpServlet {
+@WebServlet("/deleteMember.do")
+public class deleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
 		
-		String orderNum =request.getParameter("orderNum");
-		OrderDao oDao = OrderDao.getInstance();
-		OrderDetailVo oDVo = new OrderDetailVo();
-
-		oDVo = oDao.selectOrderByOrderNum(orderNum);
+		String userId = request.getParameter("userid");
+		System.out.println(userId);
 		
-		request.setAttribute("ordermanager", oDVo);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("order/orderDetail.jsp");
+		MemberDao mDao = MemberDao.getInstance();
+		MemberVo mVo = new MemberVo();
+		
+		mVo = mDao.getMember(userId);
+		mDao.deleteMember(userId);
+		System.out.println(mDao);
+		System.out.println(mVo);
+		request.setAttribute("member", mVo);
+		
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/deleteMember.jsp");
 		dispatcher.forward(request, response);
-		System.out.println(oDVo);
 	}
-
 	
+	
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MemberDao mDao = MemberDao.getInstance();
+		MemberVo mVo = new MemberVo();
+		
+		
+		response.sendRedirect("memberList.do");
 	}
 
 }

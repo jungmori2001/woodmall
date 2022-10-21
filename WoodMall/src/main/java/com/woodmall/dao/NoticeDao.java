@@ -22,10 +22,7 @@ public class NoticeDao {
 	
 	//전체 공지 조회
 	public List<NoticeVo> selectAllNotice(){
-		String sql ="select n.*\r\n"
-				+ "from woodmallnotice n, member m\r\n"
-				+ "where n.userid = m.userid\r\n"
-				+ "order by noticenum desc";
+		String sql ="select * from woodmallnotice order by noticenum desc";
 //				"select woodmallnotice.*, member.name from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc"; 
 //				"select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc";
 		

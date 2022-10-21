@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,10 +72,25 @@ header > ul, li {
         <div style="flex:10%">
             <img src="./image/logo.jpg" width="70%">
         </div>
-        <div style="flex:90%">
+            <div style="flex:90%">
             <div style="background-color: white; text-align: right;">
-                <a class="header_link" href="login.do">로그인</a>
+            
+            <c:set var="userid" scope="session" value="${loginUser}"/>
+            <c:if test="${empty userid}">
+            	<a class="header_link" href="login.do">로그인</a>
                 <a class="header_link" href="join.do">회원가입</a>
+            </c:if>
+            <c:if test="${userid!=null}">
+            <p>${loginUser.name}(${loginUser.userid})님</p>
+            <a class="header_link" href="logout.do">로그아웃</a>	 	
+            </c:if>
+            <c:set var="admin" value="${loginUser.userid}"/>
+            <c:if test="${admin=='admin'}">
+                  	<a href="adminIndexPage.jsp">관리자페이지로</a>
+            </c:if>
+           
+             
+ 
             </div>
             <div class="header_menubar">
                 <ul class="header_menu">

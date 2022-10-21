@@ -160,6 +160,7 @@ public List<MemberVo> selectAllMember(){
 			mVo.setFirstPhone(rs.getString("firstPhone"));
 			mVo.setMidPhone(rs.getString("midPhone"));
 			mVo.setLastPhone(rs.getString("lastPhone"));
+			mVo.setAdmin(rs.getInt("admin"));
 			list.add(mVo);
 		}
 	} catch(Exception e) {
@@ -177,14 +178,12 @@ public List<MemberVo> selectAllMember(){
 }
 // 회원 정보 가져오기 : select
 public MemberVo getMember(String userid) {
-	int result = -1;
+	String sql = "select * from Member where userid=?";
+	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	String sql = "select * from Member where userid=?";
 	MemberVo mVo = null;		
-
-
 	try {
 		conn = DBManager.getConnection();
 		
@@ -195,11 +194,11 @@ public MemberVo getMember(String userid) {
 //		 (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 		rs = pstmt.executeQuery();
 		// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
-		if(rs.next()){
+		while(rs.next()){
 			// 디비로부터 회원 정보 획득
 			mVo = new MemberVo();
-			String name = rs.getString("name");		// 컬럼명 name인 정보를 가져옴
-			mVo.setName(name); 						// DB에서 가져온 정보를 mVo객체에 저장				
+			
+			mVo.setName(rs.getString("name")); 						// DB에서 가져온 정보를 mVo객체에 저장				
 			mVo.setUserid(rs.getString("userid")); 
 			mVo.setPassword(rs.getString("password"));
 			mVo.setEmailId("emailId");
@@ -212,19 +211,11 @@ public MemberVo getMember(String userid) {
 			mVo.setDetailAddress(rs.getString("detailAddress"));
 			mVo.setSubAddress(rs.getString("subAddress"));
 	
-		} else {
-			result = -1;		// 디비에 userid 없음
 		}
 	} catch(Exception e) {
 		e.printStackTrace();
 	} finally {
-		try {
-			rs.close();
-			pstmt.close();
-			conn.close();
-	} catch(SQLException e) {
-		System.out.println(e.getMessage());
-		}
+		DBManager.close(conn, pstmt, rs);
 		
 	}
 	return mVo;
@@ -309,4 +300,24 @@ public int confirmID(String userid) {
 		return result;	
 		
 	}
+//멤버 삭제
+public void deleteMember(String userId) {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	
+	String sql = "delete from member where userid=?";
+	
+	try {
+		conn = DBManager.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		
+		pstmt.executeUpdate();
+	} catch(Exception e) {
+		e.printStackTrace();
+	} finally {
+		DBManager.close(conn, pstmt);
+	}
+}
+
 }

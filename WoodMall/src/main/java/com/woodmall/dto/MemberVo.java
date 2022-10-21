@@ -25,21 +25,21 @@ public class MemberVo {
 	private int admin;
 	private int totalPurchase;
 	
-	@Override
-	public String toString() {
-		return "MemberVo [name=" + name + ", userid=" + userid + ", password=" + password + ", emailId=" + emailId
-				+ ", emailAddress=" + emailAddress + ", firstPhone=" + firstPhone + ", midPhone=" + midPhone
-				+ ", lastPhone=" + lastPhone + ", postNum=" + postNum + ", mainAddress=" + mainAddress
-				+ ", detailAddress=" + detailAddress + ", subAddress=" + subAddress + ", grade=" + grade + ", admin="
-				+ admin + ", totalPurchase=" + totalPurchase + ", getName()=" + getName() + ", getUserid()="
-				+ getUserid() + ", getPassword()=" + getPassword() + ", getEmailAddress()=" + getEmailAddress()
-				+ ", getFirstPhone()=" + getFirstPhone() + ", getMidPhone()=" + getMidPhone() + ", getLastPhone()="
-				+ getLastPhone() + ", getPostNum()=" + getPostNum() + ", getMainAddress()=" + getMainAddress()
-				+ ", getDetailAddress()=" + getDetailAddress() + ", getSubAddress()=" + getSubAddress()
-				+ ", getEmailId()=" + getEmailId() + ", getGrade()=" + getGrade() + ", getAdmin()=" + getAdmin()
-				+ ", getTotalPurchase()=" + getTotalPurchase() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "MemberVo [name=" + name + ", userid=" + userid + ", password=" + password + ", emailId=" + emailId
+//				+ ", emailAddress=" + emailAddress + ", firstPhone=" + firstPhone + ", midPhone=" + midPhone
+//				+ ", lastPhone=" + lastPhone + ", postNum=" + postNum + ", mainAddress=" + mainAddress
+//				+ ", detailAddress=" + detailAddress + ", subAddress=" + subAddress + ", grade=" + grade + ", admin="
+//				+ admin + ", totalPurchase=" + totalPurchase + ", getName()=" + getName() + ", getUserid()="
+//				+ getUserid() + ", getPassword()=" + getPassword() + ", getEmailAddress()=" + getEmailAddress()
+//				+ ", getFirstPhone()=" + getFirstPhone() + ", getMidPhone()=" + getMidPhone() + ", getLastPhone()="
+//				+ getLastPhone() + ", getPostNum()=" + getPostNum() + ", getMainAddress()=" + getMainAddress()
+//				+ ", getDetailAddress()=" + getDetailAddress() + ", getSubAddress()=" + getSubAddress()
+//				+ ", getEmailId()=" + getEmailId() + ", getGrade()=" + getGrade() + ", getAdmin()=" + getAdmin()
+//				+ ", getTotalPurchase()=" + getTotalPurchase() + ", getClass()=" + getClass() + ", hashCode()="
+//				+ hashCode() + ", toString()=" + super.toString() + "]";
+//	}
 	
 	
 	
@@ -156,6 +156,15 @@ public class MemberVo {
 	}
 	public void setTotalPurchase(int totalPurchase) {
 		this.totalPurchase = totalPurchase;
+	}
+	
+	@Override
+	public String toString() {
+		return "MemberVo [name=" + name + ", userid=" + userid + ", password=" + password + ", emailId=" + emailId
+				+ ", emailAddress=" + emailAddress + ", firstPhone=" + firstPhone + ", midPhone=" + midPhone
+				+ ", lastPhone=" + lastPhone + ", postNum=" + postNum + ", mainAddress=" + mainAddress
+				+ ", detailAddress=" + detailAddress + ", subAddress=" + subAddress + ", grade=" + grade + ", admin="
+				+ admin + ", totalPurchase=" + totalPurchase + "]";
 	}
 
 

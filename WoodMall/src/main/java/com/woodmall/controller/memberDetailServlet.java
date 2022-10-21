@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.woodmall.dao.OrderDao;
-import com.woodmall.dto.OrderDetailVo;
+import com.woodmall.dao.MemberDao;
+import com.woodmall.dto.MemberVo;
 
-
-@WebServlet("/orderDetail.do")
-public class OrderDetailServlet extends HttpServlet {
+@WebServlet("/memberDetail.do")
+public class memberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
@@ -24,16 +23,16 @@ public class OrderDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String orderNum =request.getParameter("orderNum");
-		OrderDao oDao = OrderDao.getInstance();
-		OrderDetailVo oDVo = new OrderDetailVo();
-
-		oDVo = oDao.selectOrderByOrderNum(orderNum);
+		String urseId = request.getParameter("userid");
 		
-		request.setAttribute("ordermanager", oDVo);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("order/orderDetail.jsp");
+		MemberDao mDao = MemberDao.getInstance();
+		MemberVo mVo = new MemberVo();
+		
+		mVo = mDao.getMember(urseId);
+		System.out.println(mVo);
+		request.setAttribute("member", mVo);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberDetail.jsp");
 		dispatcher.forward(request, response);
-		System.out.println(oDVo);
 	}
 
 	

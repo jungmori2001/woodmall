@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
 import com.woodmall.dao.NoticeDao;
+import com.woodmall.dto.MemberVo;
 import com.woodmall.dto.NoticeVo;
 
 
@@ -19,6 +19,7 @@ public class writeNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./notice/writeNotice.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -30,10 +31,9 @@ public class writeNoticeServlet extends HttpServlet {
 		NoticeVo nVo = new NoticeVo();
 		NoticeDao nDao = NoticeDao.getInstance();
 		
-		
 		int result =-1;
-
-
+		
+		
 		try {
 //			String noticeNum2 = request.getParameter("noticeNum");
 //			int noticeNum = Integer.parseInt(noticeNum2);

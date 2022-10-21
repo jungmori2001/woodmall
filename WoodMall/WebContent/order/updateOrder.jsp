@@ -27,7 +27,7 @@
 		</tr>
 			
 		</table>
-		<input type="text" id="status-input" name="orderStatus" value="${ordermanager.orderStatus}">
+		<input type="hidden" id="status-input" name="orderStatus" value="${ordermanager.orderStatus}">
 			<input type="hidden" name="orderNum" value="${ordermanager.orderNum}">
 			<input type="button" value="목록" onClick="location.href='orderList.do'">
 			<input type="submit" value="수정">

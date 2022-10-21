@@ -217,9 +217,7 @@ figcaption {
 <%@ include file="./baseLayout/header.jsp" %>
 <div style="flex:90%">
 <div style="background-color: white; text-align: right;">
-<td>${loginUser.name}(${loginUser.userid})님</td> 
-<a href="login.do">로그인</a>
-<a href="join.do">회원가입</a>
+
 </div>
 </div>
     <!--메인-->
@@ -238,15 +236,6 @@ figcaption {
                     <br class="view-sm mb-s"><a href="#">more+</a>
                 </h3>
                 <ul class="wo-credit">
-                
-                
-                <form action="clientCart.do" method="post">
-
-                  <input type="text" name="userId" value="${loginUser.userid}">              
-                <input type="submit" value="장바구니">
-    
-                </form>
-                
                     <li>인테리어 제품을 판매하는 WoodMall 입니다</li>
                     <li><a href="#">More Table</a></li>
                     <li><span class="c-txt-s"><a href="#">More Chair</a></span></li>
