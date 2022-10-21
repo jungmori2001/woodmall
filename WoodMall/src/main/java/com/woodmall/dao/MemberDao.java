@@ -128,8 +128,6 @@ public int insertMember(MemberVo mVo) {
 		e.printStackTrace();			
 	} finally {
 		DBManager.close(conn, pstmt);
-		
-
 	}
 	return result;
 }
@@ -197,26 +195,30 @@ public MemberVo getMember(String userid) {
 	// 반환값: 성공여부
 	public int updateMember(MemberVo mVo) {
 		int result = -1;		
+//		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userid=?";
 		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userid=?";
 		Connection conn = null;
 //		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
+		
+		System.out.print(1);
+		
 		try {
 			conn = DBManager.getConnection();
-			
+			System.out.print(2);
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);		// 쿼리 입력
 			pstmt.setString(1, mVo.getPassword());
 			pstmt.setString(2, mVo.getEmailId());
 			pstmt.setString(3, mVo.getMidPhone());
 			pstmt.setString(4, mVo.getLastPhone());
-			
+			pstmt.setString(5, mVo.getUserid());
+			System.out.print(3);
 			// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
 //			rs = stmt.executeQuery(sql);
 			result = pstmt.executeUpdate();
-			
+			System.out.print(4);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -223,7 +223,7 @@ figcaption {
           </c:if>
           <c:if test="${loginUser ne null}">
           <button type="button" onclick="location.href='logout.do'">로그아웃</button>
-          <button type="button" onClick="location.href='updateMember.do'">MyPage</button>
+          <button type="button" onClick="location.href='memberMyPage.do'">마이페이지</button>
           </c:if>
 </div>
 </div>

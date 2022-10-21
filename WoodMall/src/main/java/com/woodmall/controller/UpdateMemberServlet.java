@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.woodmall.dao.MemberDao;
 import com.woodmall.dto.MemberVo;
@@ -19,6 +20,7 @@ public class UpdateMemberServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	
 		String userId = request.getParameter("userid");
 		System.out.println("userId: "+ userId);
 		
@@ -35,8 +37,10 @@ public class UpdateMemberServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 데이터베이스에 수정된 정보를 업데이트
+
+
 		
-//		String userid = request.getParameter("userid");
+		String userid = request.getParameter("userid");
 		String password = request.getParameter("password");
 		String emailId = request.getParameter("emailId");
 		String midPhone = request.getParameter("midPhone");
@@ -47,14 +51,17 @@ public class UpdateMemberServlet extends HttpServlet {
 		MemberDao mDao = MemberDao.getInstance();	// 데이터 베이스 연동
 		MemberVo mVo = new MemberVo();
 		
-		mVo.setPassword("password");
-		mVo.setEmailId("emailId");
-		mVo.setMidPhone("midPhone");
-		mVo.setLastPhone("lastPhone");
+		mVo.setUserid(userid);
+		mVo.setPassword(password);
+		mVo.setEmailId(emailId);
+		mVo.setMidPhone(midPhone);
+		mVo.setLastPhone(lastPhone);
+		mVo.setUserid(userid);
 		
-		
+//		System.out.println(mVo);
+	
 		mDao.updateMember(mVo);
-		
+//		System.out.println(mVo);
 		response.sendRedirect("login.do");
 		
 		
