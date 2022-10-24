@@ -70,7 +70,7 @@ header > ul, li {
 <body>
 <header style="display:flex">
         <div style="flex:10%">
-            <img src="./image/logo.jpg" width="70%">
+            <a href="index.jsp"><img src="./image/logo.jpg" width="70%"></a>
         </div>
             <div style="flex:90%">
             <div style="background-color: white; text-align: right;">
@@ -82,15 +82,14 @@ header > ul, li {
             </c:if>
             <c:if test="${userid!=null}">
             <p>${loginUser.name}(${loginUser.userid})님</p>
-            <a class="header_link" href="logout.do">로그아웃</a>	 	
-            </c:if>
+            <a class="header_link" href="logout.do">로그아웃</a>	
+             <a class="header_link" href="memberMypage.do">마이페이지</a>
+             <a class="header_link" href="clientCart.do?userId=${loginUser.userid}">장바구니</a>	 
+             </c:if>						
             <c:set var="admin" value="${loginUser.userid}"/>
             <c:if test="${admin=='admin'}">
                   	<a href="adminIndexPage.jsp">관리자페이지로</a>
             </c:if>
-           
-             
- 
             </div>
             <div class="header_menubar">
                 <ul class="header_menu">

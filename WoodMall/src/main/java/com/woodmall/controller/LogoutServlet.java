@@ -23,7 +23,7 @@ public class LogoutServlet extends HttpServlet {
 		// 페이지 이동 : 로그인
 //		response.sendRedirect("member/login.jsp");	// 리다이렉트 방식 		
 		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("member/login.jsp");
+				request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);		// 포워드 방식 페이지 이동		
 	}
 
