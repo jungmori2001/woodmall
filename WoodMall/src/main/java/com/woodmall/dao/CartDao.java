@@ -13,50 +13,42 @@ import com.woodmall.util.DBManager;
 public class CartDao {
 	private CartDao() {
 	}
-	
 	private static CartDao instance = new CartDao();
-	
 	public static CartDao getInstance() {
 		return instance;
 	}
-	
-	// 장바구니에 넣기
+	// 장바구니 DB에 상품 정보 넣기
 	public int insertProductToCart(CartVo cVo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
+		//SQL 문 작성
 		String sql_insert = "insert into cart values(?, ?, ?, ?, ?)";
 		
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql_insert);
-			
-//			
 			pstmt.setString(1, cVo.getUserId());
 			pstmt.setInt(2, cVo.getProdNum());
 			pstmt.setString(3, cVo.getProdName());
 			pstmt.setInt(4, cVo.getPrice());
 			pstmt.setInt(5, cVo.getQuantity());
-			
 			result = pstmt.executeUpdate();
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBManager.close(conn, pstmt);
-
 		}
 		return result;
 	}
 	
 	
 	
-	// 장바구니 정보 출력
+	// 장바구니DB에서 아이디와 상품코드로 해당 장바구니 정보 출력
 		public List<CartVo> selectProductFromCart(String userId, String prodNum) {
 			String sql = "select * from cart where prodnum=? and userid=?";
 			List<CartVo> list = new ArrayList<CartVo>();
-			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -66,10 +58,7 @@ public class CartDao {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, userId);
 				pstmt.setString(2, prodNum);
-				
-				
 				rs = pstmt.executeQuery();
-				
 				while(rs.next()) {
 					CartVo cVo = new CartVo();
 					cVo = new CartVo();
@@ -80,7 +69,6 @@ public class CartDao {
 					cVo.setQuantity(rs.getInt("quantity"));
 					cVo.setImage(rs.getString("image"));
 					list.add(cVo);
-					
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -88,7 +76,6 @@ public class CartDao {
 				DBManager.close(conn, pstmt, rs);
 			}
 			return list;		
-		
 		}
 	
 	

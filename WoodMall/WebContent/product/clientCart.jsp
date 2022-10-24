@@ -73,16 +73,16 @@
                             
                             <td align="center">무료</td>
                         </tr>
-							<c:set var="prodNum" value="${product.prodNum}"/>                        
                     </tbody>
-				
+                    </c:forEach>
                     <tfoot>
                         <tr align="right">
                             <td align="left" colspan="3">
-                            
-
-							<input type="button" value="선택상품 삭제" onclick="location.href='clientDeleteProductFromCart.do?prodNum=${product.prodNum}&userId=${userId}'" 
-								class="cart__list__optionbtn"></c:forEach>
+							
+							<input type="button" 
+									value="선택상품 삭제" 
+									onclick="location.href='clientDeleteProductFromCart.do?prodNum=${param.prodNum1}&userId=${userId}'" 
+									class="cart__list__optionbtn">
 								</td>
                             <td colspan="2">
                             	<strong style="font-size:20px;">총 금액</strong></td>

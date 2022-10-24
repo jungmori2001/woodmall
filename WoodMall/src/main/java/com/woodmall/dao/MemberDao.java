@@ -83,7 +83,7 @@ public int insertMember(MemberVo mVo) {
 	PreparedStatement pstmt = null;		// 동적 쿼리
 	
 //	String sql_insert = "insert into member values('"+name+"', '"+id+"', '"+pwd+"', '"+email+"', '"+phone+"', "+admin+")";
-	String sql_insert = "insert into Member(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	String sql_insert = "insert into Member values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 //	System.out.println(sql_insert);
 	
@@ -117,8 +117,6 @@ public int insertMember(MemberVo mVo) {
 		pstmt.setInt(15, mVo.getTotalPurchase());
 		
 		
-		
-		
 		// 정수형
 //		pstmt.setFloat(int idx, float x);			// 실수형
 //		pstmt.setDate(int idx, Date x);				// 날짜형
@@ -132,11 +130,9 @@ public int insertMember(MemberVo mVo) {
 		e.printStackTrace();			
 	} finally {
 		DBManager.close(conn, pstmt);
-		
-
 	}
 	return result;
-	}
+}
 
 
 //전체 회원 정보 가져오기
@@ -226,29 +222,30 @@ public MemberVo getMember(String userid) {
 	// 반환값: 성공여부
 	public int updateMember(MemberVo mVo) {
 		int result = -1;		
-		String sql = "update Member set password=?, EmailAddress=?, PostNum=?, MainAddress=?, PhoneNum=?,  where userid=?";
-		
+//		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userid=?";
+		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userid=?";
 		Connection conn = null;
 //		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
+		
+		System.out.print(1);
+		
 		try {
 			conn = DBManager.getConnection();
-			
+			System.out.print(2);
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);		// 쿼리 입력
 			pstmt.setString(1, mVo.getPassword());
-			pstmt.setString(2, mVo.getEmailAddress());
-			pstmt.setString(3, mVo.getPostNum());			pstmt.setString(4, mVo.getMainAddress());
-			pstmt.setString(4, mVo.getFirstPhone());
-			pstmt.setString(5, mVo.getMidPhone());
-			pstmt.setString(6, mVo.getLastPhone());
-			
+			pstmt.setString(2, mVo.getEmailId());
+			pstmt.setString(3, mVo.getMidPhone());
+			pstmt.setString(4, mVo.getLastPhone());
+			pstmt.setString(5, mVo.getUserid());
+			System.out.print(3);
 			// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
 //			rs = stmt.executeQuery(sql);
 			result = pstmt.executeUpdate();
-			
+			System.out.print(4);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
