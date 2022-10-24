@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/clientOrder.css">
 </head>
 <body>
-	<form action="#" form="frm" method="post">
+	<form action="orderList.do" form="frm" method="post">
 		<header class="orderBody">
 			<div align="center" id="header"><h1>주문 / 결제</h1></div>
 			<div>
@@ -64,7 +64,10 @@
 				<fieldset id="productSide">
 				
 					<legend id="productName"> 상품 정보 </legend>
+					<input type="hidden" name="userId" value="${userInfo.userid}">
 					<c:forEach var="product" items="${productList}">
+					<input type="hidden" name="prodNum" value="${product.prodNum}">
+					<input type="hidden" name="quantity" value="${product.quantity}">
 					<div style="display: flex">
 						<div style="flex: 50%" align="center">
 							<img src="upload/${product.image}" width="100px">
@@ -92,6 +95,7 @@
 					<hr class="totalHr">
 					<div class="payDetail">
 						<div class="payDetailLeft">주문 금액</div>
+						
 						<div class="payDetailRight"><fmt:formatNumber value="${totalPrice}"
 									pattern="#,###" /> 원</div>
 					</div>
@@ -128,10 +132,9 @@
 
 		<footer class="orderBody"> <br>
 
-		<div class="order_btn">
+		<div align="center" class="order_btn">
 			<input type="submit" 
-			value="주      문"
-			onclick="window.open('주소입력','','width=400px,height=600px')">
+			value="주      문">
 		</div>
 		</footer>
 	</form>

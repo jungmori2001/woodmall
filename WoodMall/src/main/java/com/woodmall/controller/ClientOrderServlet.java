@@ -30,14 +30,13 @@ public class ClientOrderServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CartDao cDao = CartDao.getInstance();
-		CartVo cVo = new CartVo();
+		
 		String userId = request.getParameter("userId");
 		String[] prodNums = request.getParameterValues("chk");
 		
-		System.out.println("userid :"+userId);
-		
 		if(prodNums != null) {
+		CartDao cDao = CartDao.getInstance();
+		CartVo cVo = new CartVo();
 		List<CartVo> list = new ArrayList<CartVo>();
 		for(String prodNum : prodNums) {
 			cVo = cDao.selectCheckProductFromCart(prodNum, userId);
@@ -62,14 +61,15 @@ public class ClientOrderServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		
 		} else {
+			CartDao cDao = CartDao.getInstance();
+			CartVo cVo = new CartVo();
 			ProductVo pVo = new ProductVo();
 			ProductDao pDao = ProductDao.getInstance();
 			String prodNum = request.getParameter("prodNum");
 			String quantity = request.getParameter("quantity");
 			List<CartVo> productList = new ArrayList<CartVo>();
 			
-			System.out.println(prodNum);
-			System.out.println(quantity);
+			
 			
 			pVo = pDao.selectProductByCode(prodNum); //리스트
 			
@@ -82,10 +82,10 @@ public class ClientOrderServlet extends HttpServlet {
 			
 			cDao.insertProductToCart(cVo);
 			
+			
+			
+			cVo = cDao.selectProductFromCart(userId, prodNum);
 			System.out.println(cVo);
-			
-			productList = cDao.selectProductFromCart(userId, prodNum);
-			
 			request.setAttribute("productList", productList);
 			
 			// getMember
@@ -93,9 +93,9 @@ public class ClientOrderServlet extends HttpServlet {
 			MemberDao mDao = MemberDao.getInstance();
 			mVo = mDao.getMember(userId);
 			
-			request.setAttribute("userInfo", mVo);
-			System.out.println("productList : "+productList);
-			System.out.println("userinfo : "+mVo);
+			
+			
+			
 			
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");

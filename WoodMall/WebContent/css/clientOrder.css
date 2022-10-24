@@ -63,18 +63,16 @@
 }
 
 
-.order_btn{
+.order_btn > input {
     background-color:black;
     text-align: center;
     color:white;
     font-size:xx-large;
     font-weight:bold;
-    
+	cursor:pointer;
 }
 
-.order_btn > a {
-    text-decoration-line: none;
-}
+
 
 
 

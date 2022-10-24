@@ -46,13 +46,13 @@ public class CartDao {
 	
 	
 	// 장바구니DB에서 아이디와 상품코드로 해당 장바구니 정보 출력
-		public List<CartVo> selectProductFromCart(String userId, String prodNum) {
+		public CartVo selectProductFromCart(String userId, String prodNum) {
 			String sql = "select * from cart where prodnum=? and userid=?";
 			List<CartVo> list = new ArrayList<CartVo>();
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			
+			CartVo cVo = new CartVo();
 			try {
 				conn=DBManager.getConnection();
 				pstmt = conn.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class CartDao {
 				pstmt.setString(2, prodNum);
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
-					CartVo cVo = new CartVo();
+					
 					cVo = new CartVo();
 					cVo.setUserId(rs.getString("userId"));
 					cVo.setProdNum(rs.getInt("prodNum"));
@@ -68,14 +68,14 @@ public class CartDao {
 					cVo.setPrice(rs.getInt("price"));
 					cVo.setQuantity(rs.getInt("quantity"));
 					cVo.setImage(rs.getString("image"));
-					list.add(cVo);
+					
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
 				DBManager.close(conn, pstmt, rs);
 			}
-			return list;		
+			return cVo;		
 		}
 	
 	

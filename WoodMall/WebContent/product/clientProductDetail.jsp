@@ -87,6 +87,7 @@
 						<tr>
 							<td>수량</td>
 							<td align="right">
+							<input type="hidden" name="userId" value="${loginUser.userid}"> 
 							<input type="hidden" name="sell_price" value="${product.price}"> 
 								<input class="input" type="text" name="quantity" value="1" size="3" onchange="change();"> 
 								<input type="button" value=" + "

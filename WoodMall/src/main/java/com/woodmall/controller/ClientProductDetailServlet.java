@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.woodmall.dao.ProductDao;
+import com.woodmall.dto.MemberVo;
 import com.woodmall.dto.ProductVo;
 
 
@@ -26,6 +27,11 @@ public class ClientProductDetailServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String prodNum = request.getParameter("prodNum");
+		
+		
+		HttpSession session = request.getSession();			
+		session.getAttribute("loginUser");
+		
 		
 		ProductDao pDao = ProductDao.getInstance();
 		ProductVo pVo = new ProductVo();
