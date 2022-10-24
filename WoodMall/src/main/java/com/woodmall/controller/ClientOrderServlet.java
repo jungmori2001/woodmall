@@ -35,6 +35,8 @@ public class ClientOrderServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String[] prodNums = request.getParameterValues("chk");
 		
+		System.out.println("userid :"+userId);
+		
 		if(prodNums != null) {
 		List<CartVo> list = new ArrayList<CartVo>();
 		for(String prodNum : prodNums) {
@@ -64,32 +66,42 @@ public class ClientOrderServlet extends HttpServlet {
 			ProductDao pDao = ProductDao.getInstance();
 			String prodNum = request.getParameter("prodNum");
 			String quantity = request.getParameter("quantity");
+			List<CartVo> productList = new ArrayList<CartVo>();
 			
+			System.out.println(prodNum);
+			System.out.println(quantity);
 			
-			pVo = pDao.selectProductByCode(prodNum);
+			pVo = pDao.selectProductByCode(prodNum); //리스트
 			
 			cVo.setProdNum(pVo.getProdNum());
 			cVo.setQuantity(Integer.parseInt(quantity));
 			cVo.setImage(pVo.getImage());
+			cVo.setUserId(userId);
+			cVo.setPrice(pVo.getPrice());
+			cVo.setProdName(pVo.getProdName());
+			
+			cDao.insertProductToCart(cVo);
+			
+			System.out.println(cVo);
+			
+			productList = cDao.selectProductFromCart(userId, prodNum);
+			
+			request.setAttribute("productList", productList);
+			
+			// getMember
+			MemberVo mVo = new MemberVo();
+			MemberDao mDao = MemberDao.getInstance();
+			mVo = mDao.getMember(userId);
+			
+			request.setAttribute("userInfo", mVo);
+			System.out.println("productList : "+productList);
+			System.out.println("userinfo : "+mVo);
 			
 			
-			request.setAttribute("productList", pVo);
-			request.setAttribute("quantity", quantity);
-			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");
+			dispatcher.forward(request, response);
 		}
-		// getMember
-		MemberVo mVo = new MemberVo();
-		MemberDao mDao = MemberDao.getInstance();
-		mVo = mDao.getMember(userId);
 		
-		request.setAttribute("userInfo", mVo);
-		
-
-		
-		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");
-		dispatcher.forward(request, response);
 	}
 
 }

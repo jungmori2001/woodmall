@@ -60,7 +60,7 @@
 
 	<%@ include file="../baseLayout/header.jsp"%>
 	<article>
-		<form action="../clientOrder.do" name="form" method="post">
+		<form action="clientOrder.do" name="form" method="post">
 			<div class="article">
 				<div class="image" align="center">
 					<c:choose>
@@ -104,7 +104,6 @@
 			</div>
 			<div align="center">
 				<c:set var="quantity" value="1"/>
-				
 				<input style="height: 30px" type="button" value="Add to Cart"
 					onclick="location.href='./clientProductCart.do?prodNum=${product.prodNum}&quantity=${quantity}&userId=${loginUser.userid}'">
 					

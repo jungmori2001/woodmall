@@ -18,7 +18,7 @@ import com.woodmall.dto.CartVo;
 public class ClientCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String userId = request.getParameter("userId");
 		request.setAttribute("userId", userId);
 		CartDao cDao = CartDao.getInstance();

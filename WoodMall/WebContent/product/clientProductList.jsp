@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +74,8 @@
 					</c:choose>
 
 					<div class="product-name">${product.prodName}</div>
-					<div class="product-price">${product.price}</div>
+					<div class="product-price"><fmt:formatNumber value="${product.price}"
+									pattern="#,###" /> 원</div>
 				</a>
 			</c:forEach>
 		</div>
