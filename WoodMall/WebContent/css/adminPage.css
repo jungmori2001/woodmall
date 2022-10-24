@@ -32,17 +32,13 @@ th {
 	background: moccasin;
 }
 
-img {
-	width: 300px;
-	height: 300px;
-}
 
-a {
+.notice_a {
 	text-decoration: none;	/* 링크 밑줄 없애기 */
 	color:black;			/* 글 색상 */
 }
 
-a:HOVER {
+.notice_a:HOVER {
 	text-decoration: underline;	/* 밑줄 */ 
 	color: crimson;			/* 글 색상 */
 	

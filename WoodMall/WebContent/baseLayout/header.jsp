@@ -105,7 +105,7 @@ header > ul, li {
                         </ul>
                     </li>
                     <li>
-                        <a class="header_link" href="#">고객센터</a>
+                        <a class="header_link" href="noticePage.do">고객센터</a>
                     </li>
                 </ul>
             </div>

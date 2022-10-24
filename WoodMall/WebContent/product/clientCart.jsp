@@ -49,8 +49,8 @@
                             <td>배송비</td>
                         </tr>
                     </thead>
-                    <tbody>
                     <c:forEach var="product" items="${productList}">
+                    <tbody>
                         <tr class="cart__list__detail">
                         <td>
                             <td>
@@ -73,19 +73,24 @@
                             
                             <td align="center">무료</td>
                         </tr>
-                        </c:forEach>
+							<c:set var="prodNum" value="${product.prodNum}"/>                        
                     </tbody>
+				
                     <tfoot>
                         <tr align="right">
                             <td align="left" colspan="3">
-								<button onclick="location.href='clientDeleteProductFromCart.do?${product.prodNum}&${userId}'" 
-								class="cart__list__optionbtn">선택상품 삭제</button></td>
+                            
+
+							<input type="button" value="선택상품 삭제" onclick="location.href='clientDeleteProductFromCart.do?prodNum=${product.prodNum}&userId=${userId}'" 
+								class="cart__list__optionbtn"></c:forEach>
+								</td>
                             <td colspan="2">
                             	<strong style="font-size:20px;">총 금액</strong></td>
                             <td colspan="2" style="font-size:17px">
                             <fmt:formatNumber value="${totalPrice}" pattern="#,###" />원</td>
                             </tr>
                     </tfoot>
+                    
             </table>
             <div class="cart__mainbtns">
                 <input type="button" value="쇼핑 계속하기" class="cart__bigorderbtn left" onclick="location.href='./index.jsp'">
