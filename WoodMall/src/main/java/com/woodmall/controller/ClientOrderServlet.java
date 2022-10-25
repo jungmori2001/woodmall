@@ -34,7 +34,7 @@ public class ClientOrderServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String[] prodNums = request.getParameterValues("chk");
 		
-		if(prodNums != null) {
+		if(prodNums != null) {						// 구매 상품 여러개일 경우
 		CartDao cDao = CartDao.getInstance();
 		CartVo cVo = new CartVo();
 		List<CartVo> list = new ArrayList<CartVo>();
@@ -60,7 +60,7 @@ public class ClientOrderServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");
 		dispatcher.forward(request, response);
 		
-		} else {
+		} else {									// 단일상품 구매일 경우
 			CartDao cDao = CartDao.getInstance();
 			CartVo cVo = new CartVo();
 			ProductVo pVo = new ProductVo();
@@ -68,35 +68,23 @@ public class ClientOrderServlet extends HttpServlet {
 			String prodNum = request.getParameter("prodNum");
 			String quantity = request.getParameter("quantity");
 			List<CartVo> productList = new ArrayList<CartVo>();
-			
-			
-			
+
 			pVo = pDao.selectProductByCode(prodNum); //리스트
-			
 			cVo.setProdNum(pVo.getProdNum());
 			cVo.setQuantity(Integer.parseInt(quantity));
 			cVo.setImage(pVo.getImage());
 			cVo.setUserId(userId);
 			cVo.setPrice(pVo.getPrice());
 			cVo.setProdName(pVo.getProdName());
-			
 			cDao.insertProductToCart(cVo);
-			
-			
-			
+
 			cVo = cDao.selectProductFromCart(userId, prodNum);
-			System.out.println(cVo);
 			request.setAttribute("productList", productList);
 			
 			// getMember
 			MemberVo mVo = new MemberVo();
 			MemberDao mDao = MemberDao.getInstance();
 			mVo = mDao.getMember(userId);
-			
-			
-			
-			
-			
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");
 			dispatcher.forward(request, response);

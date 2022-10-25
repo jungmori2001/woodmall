@@ -42,9 +42,7 @@ public class CartDao {
 		}
 		return result;
 	}
-	
-	
-	
+
 	// 장바구니DB에서 아이디와 상품코드로 해당 장바구니 정보 출력
 		public CartVo selectProductFromCart(String userId, String prodNum) {
 			String sql = "select * from cart where prodnum=? and userid=?";
@@ -77,15 +75,12 @@ public class CartDao {
 			}
 			return cVo;		
 		}
-	
-	
-	
-	
-	// 장바구니 정보 출력
+	// 사용자ID로 장바구니 정보 출력
 	public List<CartVo> selectProductByUserId(String userId) {
-		String sql = "select c.*, p.image from woodmallproduct p ,cart c where p.prodnum=c.prodnum and userid=?";
+		String sql = "select c.*, p.image "
+				+ "from woodmallproduct p ,cart c "
+				+ "where p.prodnum=c.prodnum and userid=?";
 		List<CartVo> list = new ArrayList<CartVo>();
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -94,10 +89,7 @@ public class CartDao {
 			conn=DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			
-			
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()) {
 				CartVo cVo = new CartVo();
 				cVo = new CartVo();
@@ -108,7 +100,6 @@ public class CartDao {
 				cVo.setQuantity(rs.getInt("quantity"));
 				cVo.setImage(rs.getString("image"));
 				list.add(cVo);
-				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -118,7 +109,6 @@ public class CartDao {
 		return list;		
 	
 	}
-	
 	// 장바구니 정보 출력
 		public CartVo selectCheckProductFromCart(String prodNum, String userId) {
 			String sql = "select  c.*, p.image "
@@ -137,12 +127,8 @@ public class CartDao {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, prodNum);
 				pstmt.setString(2, userId);
-				
-				
 				rs = pstmt.executeQuery();
-				
 				while(rs.next()) {
-					
 					cVo = new CartVo();
 					cVo.setUserId(rs.getString("userId"));
 					cVo.setProdNum(rs.getInt("prodNum"));
@@ -150,7 +136,6 @@ public class CartDao {
 					cVo.setPrice(rs.getInt("price"));
 					cVo.setQuantity(rs.getInt("quantity"));
 					cVo.setImage(rs.getString("image"));
-					
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -158,15 +143,12 @@ public class CartDao {
 				DBManager.close(conn, pstmt, rs);
 			}
 			return cVo;	
-		
 		}
-	
-	
-	
+		
+	// 장바구니 총 금액 출력	
 	public int selectTotalPriceByUserIdBy(String userId) {
 		String sql = "select sum(price) sum from cart where userid=?";
 		int result = 0;
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -174,23 +156,19 @@ public class CartDao {
 		try {
 			conn=DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			
-			
+			pstmt.setString(1, userId);		
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt("sum");
 			}							
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBManager.close(conn, pstmt, rs);
 		}
 		return result;		
-	
 	}
-	
+	// 장바구니 상품 삭제
 	public void deleteProductFromCart(String userId, String prodNum) {
 		String sql = "delete from cart where userid=? and prodNum=?";
 		Connection conn = null;
@@ -216,7 +194,7 @@ public class CartDao {
 		}
 	
 	}
-	
+	// 장바구니 내 체크된 상품 총 금액
 	public int selectTotalPriceCheckedProduct(String userId, String prodNum) {
 		String sql = "select price from cart where userid=? and prodnum=?";
 		int result = 0;

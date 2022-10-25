@@ -104,7 +104,7 @@ public class ProductDao {
 
 	// 카테고리별
 	public List<ProductVo> selectAllProductByKind(String kind) {
-		String sql = "select * from woodmallproduct where kind=" + kind;
+		String sql = "select * from woodmallproduct where kind=" + kind;	// SQL 문
 		List<ProductVo> list = new ArrayList<ProductVo>(); // list 컬렉션 개체 생성
 
 		Connection conn = null;
@@ -114,8 +114,6 @@ public class ProductDao {
 			conn = DBManager.getConnection();
 			// Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("statement 객체 생성");
-			// SQL문 실행 및 결과처리 excuteQuery : 조회(select)
 			rs = pstmt.executeQuery();
 			// rs.next() : 다음 행(row) 확인, rs.getString("컬럼명")
 			while (rs.next()) {
@@ -141,7 +139,6 @@ public class ProductDao {
 			}
 		}
 		return list;
-
 	}
 
 	// 단일 상품 조회
@@ -157,21 +154,19 @@ public class ProductDao {
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, prodnum);
-
-			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 			rs = pstmt.executeQuery();
-			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			 
 			while (rs.next()) {
 				// rs.getInt("컬럼명");
 				pVo = new ProductVo();
-				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				// 해당컬럼 정보를 DB 에서 가져와서 pVo 객체에 넣는다
+				pVo.setProdNum(rs.getInt("prodnum")); 
+				pVo.setProdName(rs.getString("prodname")); 
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setImage(rs.getString("image"));
 				pVo.setContent(rs.getString("content"));
 				pVo.setReg_date(rs.getDate("reg_date"));
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
