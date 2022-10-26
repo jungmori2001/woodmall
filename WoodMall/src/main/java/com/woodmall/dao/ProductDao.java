@@ -206,7 +206,7 @@ public class ProductDao {
 	}
 
 	// 상품 삭제
-public void deleteProduct(String prodNum) {
+	public void deleteProduct(String prodNum) {
 		
 		Connection conn = null;
 		// 동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리 필요
@@ -234,41 +234,6 @@ public void deleteProduct(String prodNum) {
 			DBManager.close(conn, pstmt);
 		}
 }
-//	public ProductVo deleteProduct(String prodNum) {
-//		String sql = "delete from woodmallproduct where prodNum=?";
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		ProductVo pVo = null;
-//		try {
-//			conn = DBManager.getConnection();
-//			// (3 단계) Statement 객체 생성
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, prodNum);
-//
-//			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
-//			rs = pstmt.executeQuery();
-//			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
-//			while (rs.next()) {
-//				// rs.getInt("컬럼명");
-//				pVo = new ProductVo();
-//				pVo.setProdNum(rs.getInt("prodNum"));// 컬럼명 code인 정보를 가져옴
-//				pVo.setProdName(rs.getString("prodName"));// DB에서 가져온 정보를 pVo객체에 저장
-//				pVo.setPrice(rs.getInt("price"));
-//				pVo.setImage(rs.getString("image"));
-//				pVo.setContent(rs.getString("content"));
-//				pVo.setReg_date(rs.getDate("reg_date"));
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("삭제실패");
-//		} finally {
-//			DBManager.close(conn, pstmt, rs);
-//			System.out.println("삭제완료");
-//		}
-//		return pVo;
-//	}
 
 	// 상품 검색
 	public List<ProductVo> getProductList() {

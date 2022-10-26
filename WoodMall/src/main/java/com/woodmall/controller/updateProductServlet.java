@@ -49,7 +49,7 @@ public class updateProductServlet extends HttpServlet {
 		String savePath = "upload";
 		ServletContext context = getServletContext();
 		String uploadFilePath = context.getRealPath(savePath);
-		System.out.println("저장파일 서버경로:" + uploadFilePath);
+		System.out.println("저장파일 서버경로:" + uploadFilePath);	//image 저장파일경로 지정
 		int uploadFileSizeLimit = 5 * 1024 * 1024;
 		String encType = "UTF-8";
 		
@@ -62,17 +62,17 @@ public class updateProductServlet extends HttpServlet {
 				new DefaultFileRenamePolicy());
 				
 			//입력 양식을 통해 정보를 휙득
-			System.out.println(pVo);
-			int prodnum = Integer.parseInt(multi.getParameter("prodnum"));
-			String prodname = multi.getParameter("prodname");
+			System.out.println(pVo);//디버깅
+			int prodNum = Integer.parseInt(multi.getParameter("prodNum"));
+			String prodName = multi.getParameter("prodName");
 			int price = Integer.parseInt(multi.getParameter("price"));
 			String content = multi.getParameter("content");
 			String image = multi.getFilesystemName("image");
 			Date reg_date = Date.valueOf(multi.getParameter("reg_date"));
 			
-			System.out.println(pVo);
-			pVo.setProdNum(prodnum);
-			pVo.setProdName(prodname);
+			System.out.println(pVo);//디버깅
+			pVo.setProdNum(prodNum);
+			pVo.setProdName(prodName);
 			pVo.setPrice(price);
 			pVo.setContent(content);
 			pVo.setImage(image);

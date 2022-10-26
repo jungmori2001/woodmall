@@ -15,15 +15,15 @@
 <table>
 	<tr>
 		<td>이름</td>
-		<td><input type="text" name="name" value="${loginUser.name}" readonly>*</td>
+		<td><input type="text" name="name" value="${member.name}" readonly>*</td>
 	</tr>
 	<tr>
 		<td>아이디</td>
-		<td><input type="text" name="userId" value="${loginUser.userId}" readonly>*</td>
+		<td><input type="text" name="userId" value="${member.userId}" readonly>*</td>
 	</tr>
 	<tr>
 		<td>암호</td>
-		<td><input type="password" name="password" >*</td>
+		<td><input type="password" name="password"}>*</td>
 	</tr>
 	<tr>
 		<td>암호 확인</td>

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>공지사항 등록</title>
 <link rel="stylesheet" type="text/css" href="css/product.css">
+<link rel="stylesheet" href="./css/adminPage.css">
 <script type="text/javascript" src="./script/product.js"></script>
 </head>
 <body>

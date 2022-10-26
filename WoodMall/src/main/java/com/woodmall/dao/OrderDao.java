@@ -25,13 +25,14 @@ public class OrderDao {
 	
 	//전체 주문 조회
 	public List<OrderVo> selectAllOrder(){
-		String sql = "select o.* , m.name\r\n"
-				+ "from ordermanager o, member m \r\n"
+		String sql = "select o.* , m.name\r\n"					//ordermanager 테이블에는 name 컬럼이 없기때문에
+				+ "from ordermanager o, member m \r\n"			//member 테이블에서 가져와서 출력
 				+ "where o.userId = m.userId\r\n"
 				+ "order by ordernum desc";
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		
 		Connection conn = null;
+		// Statement 객체 생성
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -39,8 +40,8 @@ public class OrderDao {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
+			// rs.next() 다음 행(row) 확인
+			while(rs.next()){							
 				OrderVo oVo = new OrderVo();
 				oVo.setOrderNum(rs.getInt("orderNum"));
 				oVo.setUserId(rs.getString("userId"));
@@ -152,7 +153,8 @@ public class OrderDao {
 	
 	//주문 상세 확인 (orderNum)
 	public OrderDetailVo selectOrderByOrderNum(String orderNum) {
-		String sql = "select o.*, p.prodname,m.name, m.emailid, m.emailaddress, m.firstphone, m.midphone, m.lastphone, m.postnum, m.mainaddress, m.detailaddress, m.subaddress\r\n"
+		String sql = "select o.*, p.prodname,m.name, m.emailid, m.emailaddress, m.firstphone, m.midphone,"
+				+ " m.lastphone, m.postnum, m.mainaddress, m.detailaddress, m.subaddress\r\n"
 				+ "from ordermanager o, woodmallproduct p, member m\r\n"
 				+ "where o.userId = m.userId\r\n"
 				+ "and o.prodnum = p.prodnum\r\n"

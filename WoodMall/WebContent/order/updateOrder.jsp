@@ -27,9 +27,12 @@
 		</tr>
 			
 		</table>
+		<!-- ∇ 자바스크립트로 변경된 값 저장  -->
 		<input type="hidden" id="status-input" name="orderStatus" value="${ordermanager.orderStatus}">
+		
 			<input type="hidden" name="orderNum" value="${ordermanager.orderNum}">
 			<input type="button" value="목록" onClick="location.href='orderList.do'">
+			<!--form 태그를 이용해 수정버튼을 누르면 updateOrder.do로 이동-->
 			<input type="submit" value="수정">
 			<input type="reset" value="취소">
 			<p id="demo"></p>

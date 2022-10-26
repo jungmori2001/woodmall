@@ -16,13 +16,13 @@
 <div>
 <table border="1">
 	<tr>
-		<td width="20%">
+		<td style="width:1%;">
 			<c:choose>
 				<c:when test="${empty woodmallproduct.image}">
 					<img src="image/noimage.jpg">
 				</c:when>
 				<c:otherwise>
-					<img src="upload/${woodmallproduct.image}">
+					<img src="upload/${woodmallproduct.image}" style=width:200px;>
 				</c:otherwise>
 			</c:choose>
 		</td>

@@ -33,10 +33,8 @@ public class writeNoticeServlet extends HttpServlet {
 		
 		int result =-1;
 		
-		
+		//내용 저장
 		try {
-//			String noticeNum2 = request.getParameter("noticeNum");
-//			int noticeNum = Integer.parseInt(noticeNum2);
 			String name = request.getParameter("name");
 			String userId = request.getParameter("userId");
 			String noticeTitle = request.getParameter("noticeTitle");
