@@ -46,7 +46,7 @@ public class CartDao {
 	// 장바구니DB에서 아이디와 상품코드로 해당 장바구니 정보 출력
 		public CartVo selectProductFromCart(String userId, String prodNum) {
 			String sql = "select * from cart where prodnum=? and userid=?";
-			List<CartVo> list = new ArrayList<CartVo>();
+			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -170,7 +170,7 @@ public class CartDao {
 	}
 	// 장바구니 상품 삭제
 	public void deleteProductFromCart(String userId, String prodNum) {
-		String sql = "delete from cart where userid=? and prodNum=?";
+		String sql = "delete from cart where userId=? and prodNum=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -196,7 +196,7 @@ public class CartDao {
 	}
 	// 장바구니 내 체크된 상품 총 금액
 	public int selectTotalPriceCheckedProduct(String userId, String prodNum) {
-		String sql = "select price from cart where userid=? and prodnum=?";
+		String sql = "select price from cart where userId=? and prodNum=?";
 		int result = 0;
 		
 		Connection conn = null;

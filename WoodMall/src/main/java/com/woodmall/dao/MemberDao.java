@@ -29,13 +29,13 @@ public class MemberDao {
 	// 로그인(사용자 인증) : select
 	// 입력값: 로그인 페이지에서 입력받은 사용자아이디와 암호
 	// 반환값: result (1:암호일치), (0:암호불일치), (-1:사용자아이디없음)
-	public int checkUser(String userid, String password) {
+	public int checkUser(String userId, String password) {
 		int result = -1;	
 		Connection conn = null;
-//		Statement stmt = null;
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;		
-		String sql = "select password from Member where userid=?";	
+		String sql = "select password from Member where userd=?";	
 		
 		try {
 			
@@ -43,8 +43,8 @@ public class MemberDao {
 			// (3 단계) Statement 객체 생성
 //			stmt = conn.createStatement();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userid);
-//			pstmt.setString(2, password);
+			pstmt.setString(1, userId);
+
 	
 			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 //			rs = stmt.executeQuery(sql);
@@ -60,7 +60,7 @@ public class MemberDao {
 					result = 0;		// 암호 불일치
 				}
 			} else {
-				result = -1;		// 디비에 userid 없음
+				result = -1;		// 디비에 userId 없음
 			}
 		} catch(Exception e) {
 				e.printStackTrace();
@@ -101,7 +101,7 @@ public int insertMember(MemberVo mVo) {
 //		pstmt.setInt(6, admin);
 		
 		pstmt.setString(1, mVo.getName());
-		pstmt.setString(2, mVo.getUserid());
+		pstmt.setString(2, mVo.getUserId());
 		pstmt.setString(3, mVo.getPassword());
 		pstmt.setString(4, mVo.getEmailId());
 		pstmt.setString(5, mVo.getEmailAddress());			// 문자형
@@ -152,7 +152,7 @@ public List<MemberVo> selectAllMember(){
 //			<th>회원 이름</th><th>아이디</th><th>전화번호</th><th>상세</th><th>수정</th><th>삭제</th>
 			MemberVo mVo = new MemberVo();
 			mVo.setName(rs.getString("name"));
-			mVo.setUserid(rs.getString("userid"));
+			mVo.setUserId(rs.getString("userId"));
 			mVo.setFirstPhone(rs.getString("firstPhone"));
 			mVo.setMidPhone(rs.getString("midPhone"));
 			mVo.setLastPhone(rs.getString("lastPhone"));
@@ -173,8 +173,8 @@ public List<MemberVo> selectAllMember(){
 	return list;
 }
 // 회원 정보 가져오기 : select
-public MemberVo getMember(String userid) {
-	String sql = "select * from Member where userid=?";
+public MemberVo getMember(String userId) {
+	String sql = "select * from Member where userId=?";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -185,7 +185,7 @@ public MemberVo getMember(String userid) {
 		
 //		// (3 단계) Statement 객체 생성
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, userid);
+		pstmt.setString(1, userId);
 		
 //		 (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 		rs = pstmt.executeQuery();
@@ -195,7 +195,7 @@ public MemberVo getMember(String userid) {
 			mVo = new MemberVo();
 			
 			mVo.setName(rs.getString("name")); 						// DB에서 가져온 정보를 mVo객체에 저장				
-			mVo.setUserid(rs.getString("userid")); 
+			mVo.setUserId(rs.getString("userId")); 
 			mVo.setPassword(rs.getString("password"));
 			mVo.setEmailId("emailId");
 			mVo.setEmailAddress(rs.getString("emailAddress"));
@@ -222,10 +222,10 @@ public MemberVo getMember(String userid) {
 	// 반환값: 성공여부
 	public int updateMember(MemberVo mVo) {
 		int result = -1;		
-//		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userid=?";
-		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userid=?";
+
+		String sql = "update Member set password=?, emailId=?, midPhone=?, lastPhone=? where userId=?";
 		Connection conn = null;
-//		Statement stmt = null;
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -240,10 +240,10 @@ public MemberVo getMember(String userid) {
 			pstmt.setString(2, mVo.getEmailId());
 			pstmt.setString(3, mVo.getMidPhone());
 			pstmt.setString(4, mVo.getLastPhone());
-			pstmt.setString(5, mVo.getUserid());
+			pstmt.setString(5, mVo.getUserId());
 			System.out.print(3);
 			// (4 단계) SQL문 실행 및 결과 처리 => executeUpdate : 수정(update)
-//			rs = stmt.executeQuery(sql);
+
 			result = pstmt.executeUpdate();
 			System.out.print(4);
 		} catch(Exception e) {
@@ -255,11 +255,11 @@ public MemberVo getMember(String userid) {
 	}
 
 	// 아이디를 확인 : select
-	// 입력값: 중복 체크하려는 userid
+	// 입력값: 중복 체크하려는 userId
 	// 반환값: 체크한 id가 DB에 존재 여부: 존재(1), 존재안함(-1)
-public int confirmID(String userid) {
+public int confirmID(String userId) {
 		int result = -1;
-		String sql = "select userid from Member where userid=?";
+		String sql = "select userId from Member where userId=?";
 		
 		Connection conn = null;
 //		Statement stmt =null;
@@ -277,16 +277,16 @@ public int confirmID(String userid) {
 			conn = DriverManager.getConnection(url, uid, pass);
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userid);
+			pstmt.setString(1, userId);
 			
 //			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 			rs = pstmt.executeQuery();
 			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
 			if(rs.next()){
 				// 디비로부터 회원 정보 획득
-				result = 1;			// 디비에 userid 있음
+				result = 1;			// 디비에 userId 있음
 			} else {
-				result = -1;		// 디비에 userid 없음
+				result = -1;		// 디비에 userId 없음
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -302,7 +302,7 @@ public void deleteMember(String userId) {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	
-	String sql = "delete from member where userid=?";
+	String sql = "delete from member where userId=?";
 	
 	try {
 		conn = DBManager.getConnection();

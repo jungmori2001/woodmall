@@ -44,7 +44,7 @@ public class ClientOrderOneBuyServlet extends HttpServlet {
 		oVo.setPrice(pVo.getPrice());
 		oVo.setOrderQuan(Integer.parseInt(quantity));
 		oDao.insertProductInOrder(oVo);
-		
+		System.out.println(oVo);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrderOneBuy.jsp");
 		dispatcher.forward(request, response);
 		

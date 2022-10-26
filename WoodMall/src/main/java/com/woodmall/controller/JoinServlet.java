@@ -31,7 +31,7 @@ public class JoinServlet extends HttpServlet {
 		// 회원 가입에서 작성한 데이터를 데이터 베이스에 삽입(insert)
 		
 		String name = request.getParameter("name");		// 입력양식으로부터 이름 획득
-		String userid = request.getParameter("userid");
+		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		String emailAddress = request.getParameter("emailAddress");
 		String firstPhone = request.getParameter("firstPhone");
@@ -44,7 +44,7 @@ public class JoinServlet extends HttpServlet {
 		
 		
 //		System.out.println("name: " + name);
-//		System.out.println("userid: " + userid);
+//		System.out.println("userId: " + userId);
 //		System.out.println("pwd: " + pwd);
 //		System.out.println("email: " + email);
 //		System.out.println("phone: " + phone);
@@ -55,7 +55,7 @@ public class JoinServlet extends HttpServlet {
 		
 		MemberVo mVo =  new MemberVo();
 		mVo.setName(name);				// MemberVo 클래스에 정보 저장 
-		mVo.setUserid(userid);
+		mVo.setUserId(userId);
 		mVo.setPassword(password);
 		mVo.setFirstPhone(firstPhone);
 		mVo.setMidPhone(midPhone);
@@ -69,7 +69,7 @@ public class JoinServlet extends HttpServlet {
 //		System.out.println(mVo.getName());
 //		System.out.println(mVo.getAdmin());
 		
-//		mDao.insertMember(name, userid, pwd, email, phone, admin);
+//		mDao.insertMember(name, userId, pwd, email, phone, admin);
 		int result = mDao.insertMember(mVo);
 		if (result == 1) {
 			System.out.println("회원가입 성공");

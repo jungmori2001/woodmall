@@ -43,7 +43,7 @@ public class OrderDao {
 			while(rs.next()){
 				OrderVo oVo = new OrderVo();
 				oVo.setOrderNum(rs.getInt("orderNum"));
-				oVo.setOrderQuan(rs.getInt("orderQuen"));
+				oVo.setOrderQuan(rs.getInt("orderQuan"));
 				oVo.setPaymentStatus(rs.getString("paymentStatus"));
 				oVo.setPrice(rs.getInt("price"));
 				oVo.setOrderDate(rs.getDate("orderDate"));
@@ -175,7 +175,7 @@ public class OrderDao {
 				oDVo.setOrderNum(rs.getInt("orderNum"));
 				oDVo.setProdName(rs.getString("prodName"));
 				oDVo.setUserId(rs.getString("userId"));
-				oDVo.setOrderQuen(rs.getInt("orderQuen"));
+				oDVo.setOrderQuan(rs.getInt("orderQuan"));
 				oDVo.setFirstPhone(rs.getString("firstPhone"));
 				oDVo.setMidPhone(rs.getString("midPhone"));
 				oDVo.setLastPhone(rs.getString("lastPhone"));
@@ -228,7 +228,7 @@ public class OrderDao {
 		Connection conn = null;
 		// 동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리 필요
 		PreparedStatement pstmt = null;		// 동적 쿼리
-		String sql_insert = "insert into ordermanager(orderNum, prodnum, userid, paymentstatus, price, orderquen)  values(ordermanager_seq.nextval,?,?,?,?,?)";
+		String sql_insert = "insert into ordermanager(orderNum, prodnum, userid, paymentstatus, price, orderQuan)  values(ordermanager_seq.nextval,?,?,?,?,?)";
 		
 		try {
 			conn = DBManager.getConnection();
