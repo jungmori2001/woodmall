@@ -23,7 +23,7 @@ public class memberDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String urseId = request.getParameter("userid");
+		String urseId = request.getParameter("userId");
 		
 		MemberDao mDao = MemberDao.getInstance();
 		MemberVo mVo = new MemberVo();

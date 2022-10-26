@@ -21,7 +21,7 @@ public class deleteMemberServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String userId = request.getParameter("userid");
+		String userId = request.getParameter("userId");
 		System.out.println(userId);
 		
 		MemberDao mDao = MemberDao.getInstance();

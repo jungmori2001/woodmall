@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/product.css">
+ <link rel="stylesheet" href="./css/adminPage.css">
 <title>상품 수정 페이지</title>
 </head>
 <body>
@@ -46,9 +47,9 @@
 	</tr>
 </table>
 <input type="hidden" name="prodnum" value="${woodmallproduct.prodNum}">
-<input type="submit" value="수정">
-<input type="reset" value="취소">
-<input type="button" value="목록" onClick="location.href='productList.do'">
+<input type="submit" value="수정" class="btn">
+<input type="reset" value="취소" class="btn">
+<input type="button" value="목록" onClick="location.href='productList.do'" class="btn">
 </form>
 </body>
 </html>

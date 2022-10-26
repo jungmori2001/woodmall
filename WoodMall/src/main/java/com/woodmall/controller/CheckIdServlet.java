@@ -17,13 +17,13 @@ public class CheckIdServlet extends HttpServlet {
 	
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userid = request.getParameter("userid");
-//		System.out.println("userid:"+ userid);
+		String userId = request.getParameter("userId");
+//		System.out.println("userId:"+ userId);
 		
 		// 입력한 아이디를 DB에서 조회하여 동일한 아이디가 없는지 확인
 //		MemberDao mDao = new MemberDao();
 		MemberDao mDao = MemberDao.getInstance();	// 데이터 베이스 연동
-		int result = mDao.confirmID(userid);
+		int result = mDao.confirmID(userId);
 		
 //		result => (-1):사용가능, (1):사용불가능
 		if(result==1) {
@@ -32,7 +32,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			request.setAttribute("message", "이 아이디는 사용 가능 합니다.");
 		}
 		
-		request.setAttribute("userid", userid);
+		request.setAttribute("userId", userId);
 		request.setAttribute("result", result);
 		
 		RequestDispatcher dispatcher = 

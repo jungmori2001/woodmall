@@ -10,14 +10,18 @@
 <style>
 	li, ul{
 	list-style: none;
+	display: inline-block;
+	}
+	.list{
+	display: inline-block;
+	margin-top:20%;
+	margin-left:7%;
 	}
 </style>
 </head>
 <body>
-<div>
-<ul>
-	<li><a href="index.jsp">
-		<div>
+
+<div class="list">
 <ul>
 	<li><a href="index.jsp">
 		<svg xmlns="http://www.w3.org/2000/svg"  width="75px" heigth="75px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -28,7 +32,7 @@
 	<h3>메인페이지</h3>
 </ul>
 </div>
-<div class= list>
+<div class="list">
 <ul>
 	<li><a href="memberList.do">
 		<svg xmlns="http://www.w3.org/2000/svg" width="100px" heigth="100px"fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -38,7 +42,7 @@
 	<h3>회원관리</h3>
 </ul>
 </div>
-<div>
+<div class="list">
 <ul>
 	<li><a href="orderList.do">
 	<svg xmlns="http://www.w3.org/2000/svg" width="100px" heigth="100px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -48,7 +52,7 @@
 	<h3>주문관리</h3>
 </ul>
 </div>
-<div>
+<div class="list">
 <ul>
 	<li><a href="productList.do">
 		<svg xmlns="http://www.w3.org/2000/svg"  width="100px" heigth="100px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -59,7 +63,7 @@
 	<h3>상품관리</h3>
 </ul>
 </div>
-<div>
+<div class="list">
 <ul>
 	<li><a href="noticeList.do">
 		<svg xmlns="http://www.w3.org/2000/svg" width="100px" heigth="100px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -69,7 +73,6 @@
 	<h3>게시판 관리</h3>
 </ul>
 </div>
-</ul>
-</div>
+
 </body>
 </html>

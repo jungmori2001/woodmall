@@ -24,10 +24,10 @@ public class ClientCartServlet extends HttpServlet {
 		CartDao cDao = CartDao.getInstance();
 		
 		// 장바구니에 넣은 데이터 가져와서 장바구니 화면에 뿌리기
-		List<CartVo> productList = cDao.selectProductByUserId(userId);
+		List<CartVo> productList = cDao.selectProductByuserId(userId);
 		request.setAttribute("productList", productList);
 			
-		int totalPrice = cDao.selectTotalPriceByUserIdBy(userId);
+		int totalPrice = cDao.selectTotalPriceByuserIdBy(userId);
 		
 		request.setAttribute("totalPrice", totalPrice);
 		
@@ -41,10 +41,10 @@ public class ClientCartServlet extends HttpServlet {
 		
 		CartDao cDao = CartDao.getInstance();
 		// 장바구니에 넣은 데이터 가져와서 장바구니 화면에 뿌리기
-		List<CartVo> productList = cDao.selectProductByUserId(userId);
+		List<CartVo> productList = cDao.selectProductByuserId(userId);
 		request.setAttribute("productList", productList);
 			
-		int totalPrice = cDao.selectTotalPriceByUserIdBy(userId);
+		int totalPrice = cDao.selectTotalPriceByuserIdBy(userId);
 		
 		request.setAttribute("totalPrice", totalPrice);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientCart.jsp");

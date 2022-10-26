@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <link rel="stylesheet" href="./css/adminPage.css">
 </head>
 <body>
 <table class="list" border="1">

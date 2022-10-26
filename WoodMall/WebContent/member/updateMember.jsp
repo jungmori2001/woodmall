@@ -19,7 +19,7 @@
 	</tr>
 	<tr>
 		<td>아이디</td>
-		<td><input type="text" name="userid" value="${loginUser.userid}" readonly>*</td>
+		<td><input type="text" name="userId" value="${loginUser.userId}" readonly>*</td>
 	</tr>
 	<tr>
 		<td>암호</td>

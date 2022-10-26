@@ -60,6 +60,7 @@ public class orderListServlet extends HttpServlet {
         }
 			list = oDao.selectAllOrderById(userId);
 			request.setAttribute("productList", list);
+			System.out.println(list);
         
       //리스트 페이지로 이동
       		RequestDispatcher dispatcher = request.getRequestDispatcher("order/payment.jsp");

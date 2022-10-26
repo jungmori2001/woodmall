@@ -48,3 +48,16 @@ th {
   color: gainsboro;
 }
 
+.btn{
+    border: 1px solid skyblue;
+    background-color: rgba(0,0,0,0);
+    color:skyblue;
+    padding:3px;
+    border-radius:5px;
+    cursor: pointer;
+}
+.btn:hover{
+    color:white;
+    background-color: skyblue;
+    transition-duration: 0.2s;
+}

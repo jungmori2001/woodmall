@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 		
 		MemberDao mDao = MemberDao.getInstance();	// 데이터 베이스 연동
 		
-		String userId = request.getParameter("userid");		// 입력양식으로 부터 가져온 아이디
+		String userId = request.getParameter("userId");		// 입력양식으로 부터 가져온 아이디
 		String userPwd = request.getParameter("password");
 //		System.out.println("userId: "+ userId + " userPwd: "+ userPwd);
 		// 디비 연동 후, 가져올 아이디/암호
@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 //			System.out.println(session.getAttribute("loginUser"));	// toString 확인
 //			System.out.println(session);		// session 객체 확인
 //			request.setAttribute("name", mVo.getName());
-//			request.setAttribute("userid", mVo.getUserid());
+//			request.setAttribute("userId", mVo.getuserId());
 		
 			
 		} else if(result == 0) {

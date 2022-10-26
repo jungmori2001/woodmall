@@ -77,9 +77,6 @@
 <c:set var="startNum" value="${page-(page-1)%5}"></c:set>
 <c:set var="lastNum" value="${fn:substringBefore(Math.ceil(count/10), '.')}"></c:set>
 <!-- 	페이지 수 -->
-<tr>
-	<div><span>${(empty param.p)?1:param.p}</span>/${lastNum} pages</div>
-</tr>
 <c:if test="${startNum-1>0}">
 	<a href="?p=${startNum-1}&column=${param.column}&keyword=${param.keyword}">이전 </a>
 </c:if>

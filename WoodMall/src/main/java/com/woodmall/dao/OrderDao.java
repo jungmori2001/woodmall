@@ -27,7 +27,7 @@ public class OrderDao {
 	public List<OrderVo> selectAllOrder(){
 		String sql = "select o.* , m.name\r\n"
 				+ "from ordermanager o, member m \r\n"
-				+ "where o.userid = m.userid\r\n"
+				+ "where o.userId = m.userId\r\n"
 				+ "order by ordernum desc";
 		List<OrderVo> list = new ArrayList<OrderVo>();
 		
@@ -43,6 +43,7 @@ public class OrderDao {
 			while(rs.next()){
 				OrderVo oVo = new OrderVo();
 				oVo.setOrderNum(rs.getInt("orderNum"));
+				oVo.setUserId(rs.getString("userId"));
 				oVo.setOrderQuan(rs.getInt("orderQuan"));
 				oVo.setPaymentStatus(rs.getString("paymentStatus"));
 				oVo.setPrice(rs.getInt("price"));
@@ -82,6 +83,7 @@ public class OrderDao {
 			while(rs.next()){
 				OrderVo oVo = new OrderVo();
 				oVo.setOrderNum(rs.getInt("orderNum"));
+				
 				oVo.setOrderQuan(rs.getInt("orderQuan"));
 				oVo.setPaymentStatus(rs.getString("paymentStatus"));
 				oVo.setPrice(rs.getInt("price"));
@@ -152,7 +154,7 @@ public class OrderDao {
 	public OrderDetailVo selectOrderByOrderNum(String orderNum) {
 		String sql = "select o.*, p.prodname,m.name, m.emailid, m.emailaddress, m.firstphone, m.midphone, m.lastphone, m.postnum, m.mainaddress, m.detailaddress, m.subaddress\r\n"
 				+ "from ordermanager o, woodmallproduct p, member m\r\n"
-				+ "where o.userid = m.userid\r\n"
+				+ "where o.userId = m.userId\r\n"
 				+ "and o.prodnum = p.prodnum\r\n"
 				+ "and o.ordernum=?"; 
 //				"select o.* from ordermanager o right join member m On o.name = m.name where ordernum=?";
@@ -228,7 +230,7 @@ public class OrderDao {
 		Connection conn = null;
 		// 동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리 필요
 		PreparedStatement pstmt = null;		// 동적 쿼리
-		String sql_insert = "insert into ordermanager(orderNum, prodnum, userid, paymentstatus, price, orderQuan)  values(ordermanager_seq.nextval,?,?,?,?,?)";
+		String sql_insert = "insert into ordermanager(orderNum, prodnum, userId, paymentstatus, price, orderQuan)  values(ordermanager_seq.nextval,?,?,?,?,?)";
 		
 		try {
 			conn = DBManager.getConnection();

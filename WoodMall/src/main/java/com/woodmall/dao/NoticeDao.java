@@ -67,7 +67,7 @@ public class NoticeDao {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
-		String sql_insert = "insert into woodmallnotice(noticeNum, userid, name, noticetitle, noticecontent) values(woodmallnotice_seq.nextval,?, ?, ?, ?)";
+		String sql_insert = "insert into woodmallnotice(noticeNum, userId, name, noticetitle, noticecontent) values(woodmallnotice_seq.nextval,?, ?, ?, ?)";
 		
 		try {
 			conn = DBManager.getConnection();

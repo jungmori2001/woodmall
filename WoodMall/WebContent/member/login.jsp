@@ -25,7 +25,7 @@
             </div>
             <div class="login_id">
                 <h4>아이디</h4>
-                <input type="text" name="userid" placeholder="아이디">
+                <input type="text" name="userId" placeholder="아이디">
             </div>
             <div class="login_pw">
                 <h4>비밀번호</h4>

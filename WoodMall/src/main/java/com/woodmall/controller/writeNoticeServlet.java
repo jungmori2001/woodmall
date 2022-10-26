@@ -38,13 +38,13 @@ public class writeNoticeServlet extends HttpServlet {
 //			String noticeNum2 = request.getParameter("noticeNum");
 //			int noticeNum = Integer.parseInt(noticeNum2);
 			String name = request.getParameter("name");
-			String userid = request.getParameter("userId");
+			String userId = request.getParameter("userId");
 			String noticeTitle = request.getParameter("noticeTitle");
 			String noticeContent = request.getParameter("noticeContent");
 			
 //			nVo.setNoticeNum(noticeNum);
 			nVo.setName(name);
-			nVo.setUserId(userid);
+			nVo.setUserId(userId);
 			nVo.setNoticeTitle(noticeTitle);
 			nVo.setNoticeContent(noticeContent);
 

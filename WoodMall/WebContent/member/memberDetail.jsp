@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-	<input type="hidden" name="userid" id="userid" value="${member.userid}">
+	<input type="hidden" name="userId" id="userId" value="${member.userId}">
 		<p id="checkDelete" style="cursor:pointer;">삭제</p>
 	</div>
 	</form>

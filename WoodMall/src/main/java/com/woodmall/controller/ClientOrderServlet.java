@@ -77,7 +77,7 @@ public class ClientOrderServlet extends HttpServlet {
 			//			cVo.setProdNum(pVo.getProdNum());
 //			cVo.setQuantity(Integer.parseInt(quantity));
 //			cVo.setImage(pVo.getImage());
-//			cVo.setUserId(userId);
+//			cVo.setuserId(userId);
 //			cVo.setPrice(pVo.getPrice());
 //			cVo.setProdName(pVo.getProdName());
 //			cDao.insertProductToCart(cVo);

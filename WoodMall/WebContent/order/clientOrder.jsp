@@ -64,7 +64,7 @@
 				<fieldset id="productSide">
 				
 					<legend id="productName"> 상품 정보 </legend>
-					<input type="hidden" name="userId" value="${userInfo.userid}">
+					<input type="hidden" name="userId" value="${userInfo.userId}">
 					<c:forEach var="product" items="${productList}">
 					<input type="hidden" name="prodNum" value="${product.prodNum}">
 					<input type="hidden" name="quantity" value="${product.quantity}">

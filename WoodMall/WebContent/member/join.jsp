@@ -29,7 +29,7 @@
          </div>  
     <div>
         <b class="name">아이디</b><br>
-        <input class="text" type="text" name="userid" placeholder="아이디" style="width:120px;height:30px">
+        <input class="text" type="text" name="userId" placeholder="아이디" style="width:120px;height:30px">
        	<input type="hidden" name="checkid">	
 		<input type="button" value="중복 체크" onclick="checkId()">
     </div>

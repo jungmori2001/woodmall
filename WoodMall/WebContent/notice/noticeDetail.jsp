@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <link rel="stylesheet" href="./css/adminPage.css">
 <title>Insert title here</title>
 </head>
 <body>

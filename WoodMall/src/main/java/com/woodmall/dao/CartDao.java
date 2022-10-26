@@ -45,7 +45,7 @@ public class CartDao {
 
 	// 장바구니DB에서 아이디와 상품코드로 해당 장바구니 정보 출력
 		public CartVo selectProductFromCart(String userId, String prodNum) {
-			String sql = "select * from cart where prodnum=? and userid=?";
+			String sql = "select * from cart where prodnum=? and userId=?";
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -76,10 +76,10 @@ public class CartDao {
 			return cVo;		
 		}
 	// 사용자ID로 장바구니 정보 출력
-	public List<CartVo> selectProductByUserId(String userId) {
+	public List<CartVo> selectProductByuserId(String userId) {
 		String sql = "select c.*, p.image "
 				+ "from woodmallproduct p ,cart c "
-				+ "where p.prodnum=c.prodnum and userid=?";
+				+ "where p.prodnum=c.prodnum and userId=?";
 		List<CartVo> list = new ArrayList<CartVo>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -115,7 +115,7 @@ public class CartDao {
 					+ "from   woodmallproduct p, cart c "
 					+ "where  p.prodNum = c.prodNum "
 					+ "and c.prodNum=? "
-					+ "and c.userid=?";
+					+ "and c.userId=?";
 			
 			CartVo cVo = new CartVo();
 			Connection conn = null;
@@ -146,8 +146,8 @@ public class CartDao {
 		}
 		
 	// 장바구니 총 금액 출력	
-	public int selectTotalPriceByUserIdBy(String userId) {
-		String sql = "select sum(price) sum from cart where userid=?";
+	public int selectTotalPriceByuserIdBy(String userId) {
+		String sql = "select sum(price) sum from cart where userId=?";
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

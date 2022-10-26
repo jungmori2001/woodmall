@@ -7,30 +7,30 @@
  */
  // id를 입력후 중복체크버튼을 눌렀을 때, 동작 함수
 function checkId(){
-	// 만약, html 문서(document)에 frm 태그의 userid 입력양식의 값이 비어있는 경우,
-	if(document.frm.userid.value===""){
+	// 만약, html 문서(document)에 frm 태그의 userId 입력양식의 값이 비어있는 경우,
+	if(document.frm.userId.value===""){
 		alert('아이디를 입력하여 주세요.');	// 경고창 띄우기
 		return;							// 함수 종료
 	}
-	var url = "checkId.do?userid=" + document.frm.userid.value; 
+	var url = "checkId.do?userId=" + document.frm.userId.value; 
 	window.open(url, "_blank_1", "menubar=no, resizable=no, width=450, height=200");
 }
 
 // idCheck.jsp에서 사용 버튼 클릭시, 동작 함수
 function idOk(){
 	// 중복체크 창에 입력된 아이디값을 회원가입창 아이디 입력양식에 표시
-	opener.frm.userid.value = document.frm.userid.value;
+	opener.frm.userId.value = document.frm.userId.value;
 	// 중복체크가 완료되었는지 확인하기 위한 목적의 변수에 아이디값 저장
-	opener.frm.checkid.value = document.frm.userid.value;
+	opener.frm.checkid.value = document.frm.userId.value;
 	self.close();		// 생성된 창 닫기
 }
 
 // 로그인 페이지에서 입력된 양식에 정상 데이터가 포함되었는지 확인
 function checkLogin(){
 	//alert(document.frm.userId.value.length);
-	if(document.frm.userid.value.length === 0){
+	if(document.frm.userId.value.length === 0){
 		alert('아이디를 입력해주세요');
-		frm.userid.focus();
+		frm.userId.focus();
 		return false;
 	}
 	if(document.frm.password.value === ""){
@@ -48,14 +48,14 @@ function checkJoin(){
 		frm.name.focus();
 		return false;
 	}
-	if(document.frm.userid.value.length === 0){
+	if(document.frm.userId.value.length === 0){
 		alert('아이디를 입력해주세요');
-		frm.userid.focus();
+		frm.userId.focus();
 		return false;
 	}
-	if(document.frm.userid.value.length < 4){
+	if(document.frm.userId.value.length < 4){
 		alert('아이디는 4자 이상 입력해야 합니다.');
-		frm.userid.focus();
+		frm.userId.focus();
 		return false;
 	}	
 	if(document.frm.userPwd.value.length === 0){
@@ -72,7 +72,7 @@ function checkJoin(){
 	//alert(document.frm.checkid.value.length);
 	if (document.frm.checkid.value.length === 0){
 		alert('중복 체크를 하지 않았습니다.');
-		frm.userid.focus();
+		frm.userId.focus();
 		return false;
 	}
 	return true;

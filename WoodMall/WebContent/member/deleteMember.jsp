@@ -10,7 +10,7 @@
 <body>
 
 	<div>
-		<input type="text" name="userid" id="userid" value="${member.userid}">
+		<input type="text" name="userId" id="userId" value="${member.userId}">
 	</div>
 	</form>
 </body>

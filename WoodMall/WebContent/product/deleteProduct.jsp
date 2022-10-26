@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>상품 삭제 페이지</title>
 <link rel="stylesheet" type="text/css" href="css/product.css">
+ <link rel="stylesheet" href="./css/adminPage.css">
 </head>
 <body>
 <h2>상품 삭제 페이지</h2>
@@ -44,8 +45,8 @@
 	</tr>
 </table>
 <input type="hidden" name="prodNum" value="${woodmallproduct.prodNum}">
-<input type="submit" value="삭제">
-<input type="button" value="목록" onClick="location.href='productList.do'">
+<input type="submit" value="삭제" class="btn">
+<input type="button" value="목록" onClick="location.href='productList.do'" class="btn">
 </form>
 </div>
 </body>

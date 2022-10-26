@@ -35,7 +35,7 @@ public class MemberDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;		
-		String sql = "select password from Member where userd=?";	
+		String sql = "select password from Member where userId=?";	
 		
 		try {
 			

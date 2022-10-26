@@ -22,7 +22,7 @@ public class myPageDeleteServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		// 쿼리 스트링으로 전달받은 code 를 획득
-		String userId = request.getParameter("userid");
+		String userId = request.getParameter("userId");
 		System.out.println(userId);
 		// 회원 삭제 링크 클릭시 삭제할 상품 정보를 표시
 		MemberDao mDao = MemberDao.getInstance();

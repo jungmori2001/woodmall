@@ -27,10 +27,10 @@
 	<c:forEach var = "memberList" items="${memberList}">
 		<tr>
 			<td>${memberList.name}</td>
-			<td>${memberList.userid}</td>
-			<input type="hidden" name="userId" id="userid" value="${memberList.userid}">
+			<td>${memberList.userId}</td>
+			<input type="hidden" name="userId" id="userId" value="${memberList.userId}">
 			<td>${memberList.firstPhone} - ${memberList.midPhone} - ${memberList.lastPhone}</td>
-			<td> <a href="memberDetail.do?userid=${memberList.userid}">상세</a></td>
+			<td> <a href="memberDetail.do?userId=${memberList.userId}">상세</a></td>
 			<td>수정</td>		
 		</tr>
 	</c:forEach>

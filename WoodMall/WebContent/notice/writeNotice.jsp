@@ -16,7 +16,7 @@
 		<table border="1" class="list">
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="userId" value="${loginUser.userid}"></td>
+				<td><input type="text" name="userId" value="${loginUser.userId}"></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
