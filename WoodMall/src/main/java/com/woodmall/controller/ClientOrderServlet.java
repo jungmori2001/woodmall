@@ -61,32 +61,39 @@ public class ClientOrderServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		
 		} else {									// 단일상품 구매일 경우
-			CartDao cDao = CartDao.getInstance();
-			CartVo cVo = new CartVo();
 			ProductVo pVo = new ProductVo();
 			ProductDao pDao = ProductDao.getInstance();
 			String prodNum = request.getParameter("prodNum");
 			String quantity = request.getParameter("quantity");
-			List<CartVo> productList = new ArrayList<CartVo>();
+			
 
 			pVo = pDao.selectProductByCode(prodNum); //리스트
-			cVo.setProdNum(pVo.getProdNum());
-			cVo.setQuantity(Integer.parseInt(quantity));
-			cVo.setImage(pVo.getImage());
-			cVo.setUserId(userId);
-			cVo.setPrice(pVo.getPrice());
-			cVo.setProdName(pVo.getProdName());
-			cDao.insertProductToCart(cVo);
 
-			cVo = cDao.selectProductFromCart(userId, prodNum);
-			request.setAttribute("productList", productList);
+			request.setAttribute("product", pVo);
+			request.setAttribute("quantity", quantity);
+			System.out.println("product : "+pVo);
+			System.out.println("quantity : "+quantity);
+			
+			//			cVo.setProdNum(pVo.getProdNum());
+//			cVo.setQuantity(Integer.parseInt(quantity));
+//			cVo.setImage(pVo.getImage());
+//			cVo.setUserId(userId);
+//			cVo.setPrice(pVo.getPrice());
+//			cVo.setProdName(pVo.getProdName());
+//			cDao.insertProductToCart(cVo);
+
+//			cVo = cDao.selectProductFromCart(userId, prodNum);
+//			request.setAttribute("productList", productList);
 			
 			// getMember
 			MemberVo mVo = new MemberVo();
 			MemberDao mDao = MemberDao.getInstance();
 			mVo = mDao.getMember(userId);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrder.jsp");
+			request.setAttribute("userInfo", mVo);
+			System.out.println("userInfo : "+mVo);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("order/clientOrderOneBuy.jsp");
 			dispatcher.forward(request, response);
 		}
 		
