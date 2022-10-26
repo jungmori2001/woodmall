@@ -3,14 +3,14 @@ package com.woodmall.dto;
 public class MemberVo {
 	
 	/*
-	 * name VARCHAR(10), userid VARCHAR(10), password VARCHAR(20), emailId
+	 * name VARCHAR(10), userId VARCHAR(10), password VARCHAR(20), emailId
 	 * VARCHAR(10), emailAddress VARCHAR(15), PhoneNum VARCHAR(5), postNum
 	 * VARCHAR(6), mainAddress VARCHAR(20), detailAddress VARCHAR(20), subAddress
 	 * VARCHAR(20), grade VARCHAR(20), admin NUMBER(1), totalPurchase NUMBER,
 	 */
 	
 	private String name;
-	private String userid;
+	private String userId;
 	private String password;
 	private String emailId;
 	private String emailAddress;
@@ -27,12 +27,12 @@ public class MemberVo {
 	
 //	@Override
 //	public String toString() {
-//		return "MemberVo [name=" + name + ", userid=" + userid + ", password=" + password + ", emailId=" + emailId
+//		return "MemberVo [name=" + name + ", userId=" + userId + ", password=" + password + ", emailId=" + emailId
 //				+ ", emailAddress=" + emailAddress + ", firstPhone=" + firstPhone + ", midPhone=" + midPhone
 //				+ ", lastPhone=" + lastPhone + ", postNum=" + postNum + ", mainAddress=" + mainAddress
 //				+ ", detailAddress=" + detailAddress + ", subAddress=" + subAddress + ", grade=" + grade + ", admin="
-//				+ admin + ", totalPurchase=" + totalPurchase + ", getName()=" + getName() + ", getUserid()="
-//				+ getUserid() + ", getPassword()=" + getPassword() + ", getEmailAddress()=" + getEmailAddress()
+//				+ admin + ", totalPurchase=" + totalPurchase + ", getName()=" + getName() + ", getUserId()="
+//				+ getUserId() + ", getPassword()=" + getPassword() + ", getEmailAddress()=" + getEmailAddress()
 //				+ ", getFirstPhone()=" + getFirstPhone() + ", getMidPhone()=" + getMidPhone() + ", getLastPhone()="
 //				+ getLastPhone() + ", getPostNum()=" + getPostNum() + ", getMainAddress()=" + getMainAddress()
 //				+ ", getDetailAddress()=" + getDetailAddress() + ", getSubAddress()=" + getSubAddress()
@@ -51,11 +51,11 @@ public class MemberVo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getPassword() {
 		return password;
@@ -160,7 +160,7 @@ public class MemberVo {
 	
 	@Override
 	public String toString() {
-		return "MemberVo [name=" + name + ", userid=" + userid + ", password=" + password + ", emailId=" + emailId
+		return "MemberVo [name=" + name + ", userId=" + userId + ", password=" + password + ", emailId=" + emailId
 				+ ", emailAddress=" + emailAddress + ", firstPhone=" + firstPhone + ", midPhone=" + midPhone
 				+ ", lastPhone=" + lastPhone + ", postNum=" + postNum + ", mainAddress=" + mainAddress
 				+ ", detailAddress=" + detailAddress + ", subAddress=" + subAddress + ", grade=" + grade + ", admin="

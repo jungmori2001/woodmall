@@ -22,9 +22,9 @@ public class NoticeDao {
 	
 	//전체 공지 조회
 	public List<NoticeVo> selectAllNotice(){
-		String sql ="select * from woodmallnotice order by noticenum desc";
-//				"select woodmallnotice.*, member.name from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc"; 
-//				"select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticenum desc";
+		String sql ="select * from woodmallnotice order by noticeNum desc";
+//				"select woodmallnotice.*, member.name from member left join woodmallnotice On woodmallnotice.name = member.name order by noticeNum desc"; 
+//				"select woodmallnotice.*, member.* from member left join woodmallnotice On woodmallnotice.name = member.name order by noticeNum desc";
 		
 		List<NoticeVo> list = new ArrayList<NoticeVo>();  //List 컬렉션 객체 생성
 		
@@ -67,7 +67,7 @@ public class NoticeDao {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
-		String sql_insert = "insert into woodmallnotice(noticenum, userid, name, noticetitle, noticecontent) values(woodmallnotice_seq.nextval,?, ?, ?, ?)";
+		String sql_insert = "insert into woodmallnotice(noticeNum, userid, name, noticetitle, noticecontent) values(woodmallnotice_seq.nextval,?, ?, ?, ?)";
 		
 		try {
 			conn = DBManager.getConnection();
@@ -90,7 +90,7 @@ public class NoticeDao {
 	}
 	//공지 하나 확인하기(noticeNum)
 	public NoticeVo selectNoticeByNoticeNum(String noticeNum) {
-		String sql = "select * from woodmallnotice where noticenum=?";
+		String sql = "select * from woodmallnotice where noticeNum=?";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;

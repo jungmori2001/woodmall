@@ -20,7 +20,7 @@ public class UpdateMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String userId = request.getParameter("userid");
+		String userId = request.getParameter("userId");
 		System.out.println("userId: "+ userId);
 		
 //		MemberDao mDao = new MemberDao();			// 데이터베이스 연동
@@ -39,7 +39,7 @@ public class UpdateMemberServlet extends HttpServlet {
 
 
 		
-		String userid = request.getParameter("userid");
+		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		String emailId = request.getParameter("emailId");
 		String midPhone = request.getParameter("midPhone");
@@ -50,12 +50,12 @@ public class UpdateMemberServlet extends HttpServlet {
 		MemberDao mDao = MemberDao.getInstance();	// 데이터 베이스 연동
 		MemberVo mVo = new MemberVo();
 		
-		mVo.setUserid(userid);
+		mVo.setUserId(userId);
 		mVo.setPassword(password);
 		mVo.setEmailId(emailId);
 		mVo.setMidPhone(midPhone);
 		mVo.setLastPhone(lastPhone);
-		mVo.setUserid(userid);
+		mVo.setUserId(userId);
 		
 //		System.out.println(mVo);
 	

@@ -27,7 +27,8 @@ public class ClientProductListServlet extends HttpServlet {
 		List<ProductVo> productList = pDao.selectAllProductByKind(kind);
 		request.setAttribute("productList", productList);
 
-		kind = kind.replaceAll("'", "");
+		// url 에 kind(상품종류)를 넣기 위해 문자열표시('')삭제
+		kind = kind.replaceAll("'", "");	
 		request.setAttribute("kind", kind);
 
 		// 리스트 페이지로 이동

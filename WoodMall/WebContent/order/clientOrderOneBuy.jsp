@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/clientOrder.css">
 </head>
 <body>
-	<form action="orderList.do" form="frm" method="post">
+	<form action="completeOrder.do" form="frm" method="post">
 		<header class="orderBody">
 			<div align="center" id="header"><h1>주문 / 결제</h1></div>
 			<div>
@@ -65,9 +65,8 @@
 				
 					<legend id="productName"> 상품 정보 </legend>
 					<input type="hidden" name="userId" value="${userInfo.userid}">
-					<c:forEach var="product" items="${productList}">
 					<input type="hidden" name="prodNum" value="${product.prodNum}">
-					<input type="hidden" name="quantity" value="${product.quantity}">
+					<input type="hidden" name="quantity" value="${quantity}">
 					<div style="display: flex">
 						<div style="flex: 50%" align="center">
 							<img src="upload/${product.image}" width="100px">
@@ -75,14 +74,14 @@
 
 						<div align="right" style="flex: 50%">
 							<div>상품명 : ${product.prodName}</div>
-							<div>수량 : ${product.quantity}개</div>
+							<div>수량 : ${quantity}개</div>
 							<div><fmt:formatNumber value="${product.price}"
 									pattern="#,###" /> 원</div>
 
 						</div>
 					</div>
 					<hr>
-					</c:forEach>
+					
 				</fieldset>
 
 			</div>
@@ -96,7 +95,7 @@
 					<div class="payDetail">
 						<div class="payDetailLeft">주문 금액</div>
 						
-						<div class="payDetailRight"><fmt:formatNumber value="${totalPrice}"
+						<div class="payDetailRight"><fmt:formatNumber value="${product.price}"
 									pattern="#,###" /> 원</div>
 					</div>
 					<div class="payDetail">
@@ -109,7 +108,7 @@
 						<div class="payDetailLeft">
 							<strong>총 결제 금액</strong>
 						</div>
-						<div class="payDetailRight"><fmt:formatNumber value="${totalPrice}"
+						<div class="payDetailRight"><fmt:formatNumber value="${product.price}"
 									pattern="#,###" /> 원</div>
 					</div>
 					</p>

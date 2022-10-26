@@ -62,7 +62,7 @@ public class ProductDao {
 
 //	 전체 상품 조회
 	public List<ProductVo> selectAllProduct() {
-		String sql = "select * from woodmallproduct order by prodnum desc";
+		String sql = "select * from woodmallproduct order by prodNum desc";
 		List<ProductVo> list = new ArrayList<ProductVo>(); // list 컬렉션 개체 생성
 
 		Connection conn = null;
@@ -104,7 +104,7 @@ public class ProductDao {
 
 	// 카테고리별
 	public List<ProductVo> selectAllProductByKind(String kind) {
-		String sql = "select * from woodmallproduct where kind=" + kind;
+		String sql = "select * from woodmallproduct where kind=" + kind;	// SQL 문
 		List<ProductVo> list = new ArrayList<ProductVo>(); // list 컬렉션 개체 생성
 
 		Connection conn = null;
@@ -114,8 +114,6 @@ public class ProductDao {
 			conn = DBManager.getConnection();
 			// Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("statement 객체 생성");
-			// SQL문 실행 및 결과처리 excuteQuery : 조회(select)
 			rs = pstmt.executeQuery();
 			// rs.next() : 다음 행(row) 확인, rs.getString("컬럼명")
 			while (rs.next()) {
@@ -141,12 +139,11 @@ public class ProductDao {
 			}
 		}
 		return list;
-
 	}
 
 	// 단일 상품 조회
-	public ProductVo selectProductByCode(String prodnum) {
-		String sql = "select * from woodmallproduct where prodnum=?";
+	public ProductVo selectProductByCode(String prodNum) {
+		String sql = "select * from woodmallproduct where prodNum=?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -156,22 +153,20 @@ public class ProductDao {
 			conn = DBManager.getConnection();
 			// (3 단계) Statement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, prodnum);
-
-			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
+			pstmt.setString(1, prodNum);
 			rs = pstmt.executeQuery();
-			// rs.next() : 다음 행(row)을 확인, rs.getString("컬럼명")
+			 
 			while (rs.next()) {
 				// rs.getInt("컬럼명");
 				pVo = new ProductVo();
-				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+				// 해당컬럼 정보를 DB 에서 가져와서 pVo 객체에 넣는다
+				pVo.setProdNum(rs.getInt("prodNum")); 
+				pVo.setProdName(rs.getString("prodName")); 
 				pVo.setPrice(rs.getInt("price"));
 				pVo.setImage(rs.getString("image"));
 				pVo.setContent(rs.getString("content"));
 				pVo.setReg_date(rs.getDate("reg_date"));
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -187,7 +182,7 @@ public class ProductDao {
 		// 동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리필요
 		PreparedStatement pstmt = null; // 동적 쿼리
 
-		String sql = "update woodmallproduct set prodname=?, price=?, image=?, content=?, reg_date=? where prodnum=?";
+		String sql = "update woodmallproduct set prodName=?, price=?, image=?, content=?, reg_date=? where prodNum=?";
 		System.out.println(pVo);
 		try {
 			conn = DBManager.getConnection();
@@ -217,7 +212,7 @@ public void deleteProduct(String prodNum) {
 		// 동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리 필요
 		PreparedStatement pstmt = null;		// 동적 쿼리
 		
-		String sql = "delete from woodmallproduct where prodnum=?";
+		String sql = "delete from woodmallproduct where prodNum=?";
 		
 		
 		try {
@@ -239,8 +234,8 @@ public void deleteProduct(String prodNum) {
 			DBManager.close(conn, pstmt);
 		}
 }
-//	public ProductVo deleteProduct(String prodnum) {
-//		String sql = "delete from woodmallproduct where prodnum=?";
+//	public ProductVo deleteProduct(String prodNum) {
+//		String sql = "delete from woodmallproduct where prodNum=?";
 //		Connection conn = null;
 //		PreparedStatement pstmt = null;
 //		ResultSet rs = null;
@@ -249,7 +244,7 @@ public void deleteProduct(String prodNum) {
 //			conn = DBManager.getConnection();
 //			// (3 단계) Statement 객체 생성
 //			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, prodnum);
+//			pstmt.setString(1, prodNum);
 //
 //			// (4 단계) SQL문 실행 및 결과 처리 => executeQuery : 조회(select)
 //			rs = pstmt.executeQuery();
@@ -257,8 +252,8 @@ public void deleteProduct(String prodNum) {
 //			while (rs.next()) {
 //				// rs.getInt("컬럼명");
 //				pVo = new ProductVo();
-//				pVo.setProdNum(rs.getInt("prodnum"));// 컬럼명 code인 정보를 가져옴
-//				pVo.setProdName(rs.getString("prodname"));// DB에서 가져온 정보를 pVo객체에 저장
+//				pVo.setProdNum(rs.getInt("prodNum"));// 컬럼명 code인 정보를 가져옴
+//				pVo.setProdName(rs.getString("prodName"));// DB에서 가져온 정보를 pVo객체에 저장
 //				pVo.setPrice(rs.getInt("price"));
 //				pVo.setImage(rs.getString("image"));
 //				pVo.setContent(rs.getString("content"));
@@ -286,7 +281,7 @@ public void deleteProduct(String prodNum) {
 
 	public List<ProductVo> getProductList(String column, String keyword, int page) {
 		String sql = "SELECT * FROM ( SELECT ROWNUM N, p.*\r\n"
-				+ "from(select * from woodmallproduct where "+column+" like ? order by prodnum desc) p) \r\n"
+				+ "from(select * from woodmallproduct where "+column+" like ? order by prodNum desc) p) \r\n"
 				+ "WHERE N BETWEEN ? AND ?";
 
 //		첫번째 ? -> 1, 11, 21, 31, 41, -> 1 + (page-1)*10
@@ -337,9 +332,9 @@ public void deleteProduct(String prodNum) {
 
 	public int getProductCount(String column, String keyword) {
 		int count = 0;
-		String sql = "SELECT COUNT(prodnum) count FROM (\r\n"
+		String sql = "SELECT COUNT(prodNum) count FROM (\r\n"
 				+ "    SELECT ROWNUM N, p.*\r\n"
-				+ "    from(select * from woodmallproduct where "+column+" like ?  order by prodnum desc) p\r\n"
+				+ "    from(select * from woodmallproduct where "+column+" like ?  order by prodNum desc) p\r\n"
 				+ ")";
 
 		Connection conn = null;

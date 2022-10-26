@@ -1,12 +1,12 @@
 package com.woodmall.dto;
 
 public class CartVo {
-	private	String userId;
-	private int prodNum;
-	private String prodName;
-	private int price;
-	private int quantity;
-	private String image;
+	private	String userId;		// 유저아이디
+	private int prodNum;		// 상품코드
+	private String prodName;	// 상품명
+	private int price;			// 가격
+	private int quantity;		// 수량
+	private String image;		// 상품 이미지
 
 
 	

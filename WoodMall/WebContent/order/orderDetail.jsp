@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<th>수량</th>
-			<td>${ordermanager.orderQuen}</td>
+			<td>${ordermanager.orderQuan}</td>
 		</tr>
 		<tr>
 			<th>배송지 정보</th>

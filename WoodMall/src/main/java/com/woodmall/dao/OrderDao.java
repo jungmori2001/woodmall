@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.woodmall.dto.MemberVo;
 import com.woodmall.dto.OrderDetailVo;
 import com.woodmall.dto.OrderVo;
 import com.woodmall.dto.ProductVo;
@@ -42,8 +43,7 @@ public class OrderDao {
 			while(rs.next()){
 				OrderVo oVo = new OrderVo();
 				oVo.setOrderNum(rs.getInt("orderNum"));
-				oVo.setName(rs.getString("name"));
-				oVo.setOrderQuen(rs.getInt("orderQuen"));
+				oVo.setOrderQuan(rs.getInt("orderQuan"));
 				oVo.setPaymentStatus(rs.getString("paymentStatus"));
 				oVo.setPrice(rs.getInt("price"));
 				oVo.setOrderDate(rs.getDate("orderDate"));
@@ -65,6 +65,50 @@ public class OrderDao {
 		}
 		return list;
 	}
+	
+	public List<OrderVo> selectAllOrderById(String userId){
+		String sql = "select * from ordermanager where userId=?";
+		List<OrderVo> list = new ArrayList<OrderVo>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				OrderVo oVo = new OrderVo();
+				oVo.setOrderNum(rs.getInt("orderNum"));
+				oVo.setOrderQuan(rs.getInt("orderQuan"));
+				oVo.setPaymentStatus(rs.getString("paymentStatus"));
+				oVo.setPrice(rs.getInt("price"));
+				oVo.setOrderDate(rs.getDate("orderDate"));
+				oVo.setOrderContent(rs.getString("orderContent"));
+				oVo.setOrderStatus(rs.getString("orderStatus"));
+				
+				list.add(oVo);
+				
+			}
+			System.out.println(list);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return list;
+	}
+	
+	
+	
 	//ordermanager만 부분 조회
 	public OrderVo changeStatusByOrderNum(String orderNum) {
 		String sql ="select * from ordermanager  where ordernum=?";
@@ -85,7 +129,7 @@ public class OrderDao {
 				oVo.setOrderNum(rs.getInt("orderNum"));
 				oVo.setProdNum(rs.getInt("prodNum"));
 				oVo.setUserId(rs.getString("userId"));
-				oVo.setOrderQuen(rs.getInt("orderQuen"));
+				oVo.setOrderQuan(rs.getInt("orderQuan"));
 				oVo.setPaymentStatus(rs.getString("paymentStatus"));
 				oVo.setPrice(rs.getInt("price"));
 				oVo.setOrderDate(rs.getDate("orderDate"));
@@ -100,6 +144,10 @@ public class OrderDao {
 		}
 		return oVo;
 	}
+	
+	
+	
+	
 	//주문 상세 확인 (orderNum)
 	public OrderDetailVo selectOrderByOrderNum(String orderNum) {
 		String sql = "select o.*, p.prodname,m.name, m.emailid, m.emailaddress, m.firstphone, m.midphone, m.lastphone, m.postnum, m.mainaddress, m.detailaddress, m.subaddress\r\n"
@@ -113,8 +161,8 @@ public class OrderDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		OrderDetailVo oDVo = null;
-		ProductVo pVo = null;
-//		memberVo mVo = null;
+		
+
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -127,7 +175,7 @@ public class OrderDao {
 				oDVo.setOrderNum(rs.getInt("orderNum"));
 				oDVo.setProdName(rs.getString("prodName"));
 				oDVo.setUserId(rs.getString("userId"));
-				oDVo.setOrderQuen(rs.getInt("orderQuen"));
+				oDVo.setOrderQuan(rs.getInt("orderQuan"));
 				oDVo.setFirstPhone(rs.getString("firstPhone"));
 				oDVo.setMidPhone(rs.getString("midPhone"));
 				oDVo.setLastPhone(rs.getString("lastPhone"));
@@ -175,7 +223,33 @@ public class OrderDao {
 	}
 
 
+	public int insertProductInOrder(OrderVo oVo) {
+		int result = -1;
+		Connection conn = null;
+		// 동일한 쿼리문을 특정 값만 바꿔서 여러번 실행해야 할때, 매개변수가 많아서 쿼리문 정리 필요
+		PreparedStatement pstmt = null;		// 동적 쿼리
+		String sql_insert = "insert into ordermanager(orderNum, prodnum, userid, paymentstatus, price, orderQuan)  values(ordermanager_seq.nextval,?,?,?,?,?)";
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			// (3 단계) Statement 객체 생성
+//		
+			pstmt = conn.prepareStatement(sql_insert);
+			pstmt.setInt(1, oVo.getProdNum());
+			pstmt.setString(2, oVo.getUserId());
+			pstmt.setString(3, oVo.getPaymentStatus());
+			pstmt.setInt(4, oVo.getPrice());
+			pstmt.setInt(5, oVo.getOrderQuan());
 
+			result = pstmt.executeUpdate();				// 쿼리 수행
+		} catch(Exception e) {
+			e.printStackTrace();			
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		return result;
+	}
 
 
 

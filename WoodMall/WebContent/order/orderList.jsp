@@ -33,7 +33,7 @@
 			<tr>
 				<td>${ordermanager.orderNum}</td>
 				<td>${ordermanager.name}</td>
-				<td>${ordermanager.orderQuen}</td>
+				<td>${ordermanager.orderQuan}</td>
 				<td>${ordermanager.paymentStatus}</td>
 				<td>${ordermanager.price}</td>
 				<td>${ordermanager.orderDate}</td>

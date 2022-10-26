@@ -30,7 +30,8 @@
     <div>
         <b class="name">아이디</b><br>
         <input class="text" type="text" name="userid" placeholder="아이디" style="width:120px;height:30px">
-       <button type="button" onclick="checkId()">중복체크</button><br><br>
+       	<input type="hidden" name="checkid">	
+		<input type="button" value="중복 체크" onclick="checkId()">
     </div>
     <div>
         <b class="name">비밀번호</b><br>
