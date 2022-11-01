@@ -30,7 +30,7 @@ public class UpdateMemberServlet extends HttpServlet {
 //		request.setAttribute("name", mVo.getName());
 		request.setAttribute("mVo", mVo);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("member/updateMember.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberMyPage.jsp");
 		dispatcher.forward(request, response);
 	}
 

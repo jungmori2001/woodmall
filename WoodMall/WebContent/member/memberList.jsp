@@ -31,7 +31,7 @@
 			<input type="hidden" name="userId" id="userId" value="${memberList.userId}">
 			<td>${memberList.firstPhone} - ${memberList.midPhone} - ${memberList.lastPhone}</td>
 			<td> <a href="memberDetail.do?userId=${memberList.userId}">상세</a></td>
-			<td>수정</td>		
+			<td><a href="adminUpdateMember.do?userId=${memberList.userId}">수정</a></td>		
 		</tr>
 	</c:forEach>
 	

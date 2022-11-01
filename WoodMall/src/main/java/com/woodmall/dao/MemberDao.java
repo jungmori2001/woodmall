@@ -317,4 +317,46 @@ public void deleteMember(String userId) {
 	}
 }
 
+//어드민 멤버 한명
+public MemberVo selectMemeberByUserId(String userId) {
+	String sql= "select * from member where userId=?";
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs=null;
+	MemberVo mVo = null;
+	try {
+		conn=DBManager.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		
+		rs=pstmt.executeQuery();
+		
+		while(rs.next()) {
+			mVo = new MemberVo();
+			mVo.setName(rs.getString("name"));
+			mVo.setUserId(rs.getString("userId"));
+			mVo.setPassword(rs.getString("password"));
+			mVo.setEmailId(rs.getString("emailId"));
+			mVo.setEmailAddress(rs.getString("emailAddress"));
+			mVo.setFirstPhone(rs.getString("firstPhone"));
+			mVo.setMidPhone(rs.getString("midPhone"));
+			mVo.setLastPhone(rs.getString("lastPhone"));
+			mVo.setPostNum(rs.getString("postNum"));
+			mVo.setMainAddress(rs.getString("mainAddress"));
+			mVo.setDetailAddress(rs.getString("detailAddress"));
+			mVo.setSubAddress(rs.getString("subAddress"));
+			mVo.setGrade(rs.getString("grade"));
+			mVo.setAdmin(rs.getInt("admin"));
+			mVo.setTotalPurchase(rs.getInt("totalPurchase"));
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return mVo;
+	
+		}
+
 }

@@ -23,21 +23,21 @@
 	</tr>
 	<tr>
 		<td>암호</td>
-		<td><input type="password" name="password"}>*</td>
+		<td><input type="text" name="password" value="${member.password}">*</td>
 	</tr>
 	<tr>
 		<td>암호 확인</td>
-		<td><input type="password" name="password" >*</td>
+		<td><input type="password" name="password">*</td>
 	</tr>
 	<tr>
 		<td>이메일아이디</td>
-		<td><input type="text" name="emailId"></td>
+		<td><input type="text" name="emailId" value="${member.emailId}"></td>
 	</tr>
 	<tr>
 		<td>전화번호</td>
-		<td><input type="text" name="firstPhone"></td>
-		<td><input type="text" name="midPhone"  ></td>
-		<td><input type="text" name="lastPhone" ></td>
+		<td><input type="text" name="firstPhone" value="${member.firstPhone}"></td>
+		<td><input type="text" name="midPhone"  value="${member.midPhone}"></td>
+		<td><input type="text" name="lastPhone" value="${member.lastPhone}"></td>
 	</tr>
 	
 	<tr>

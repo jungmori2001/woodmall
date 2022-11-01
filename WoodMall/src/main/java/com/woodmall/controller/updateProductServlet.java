@@ -63,7 +63,7 @@ public class updateProductServlet extends HttpServlet {
 				
 			//입력 양식을 통해 정보를 휙득
 			System.out.println(pVo);//디버깅
-			int prodNum = Integer.parseInt(multi.getParameter("prodNum"));
+			int prodNum = Integer.parseInt(multi.getParameter("prodnum"));
 			String prodName = multi.getParameter("prodName");
 			int price = Integer.parseInt(multi.getParameter("price"));
 			String content = multi.getParameter("content");
