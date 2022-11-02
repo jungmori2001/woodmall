@@ -19,15 +19,16 @@ public class ClientCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String userId = request.getParameter("userId");
-		request.setAttribute("userId", userId);
-		CartDao cDao = CartDao.getInstance();
+		String userId = request.getParameter("userId");	// 아이디 저장
+		request.setAttribute("userId", userId);		
+		CartDao cDao = CartDao.getInstance();	// 장바구니 DAO 객체 생성
 		
 		// 장바구니에 넣은 데이터 가져와서 장바구니 화면에 뿌리기
-		List<CartVo> productList = cDao.selectProductByuserId(userId);
+		List<CartVo> productList = cDao.selectProductByUserId(userId);
 		request.setAttribute("productList", productList);
-			
-		int totalPrice = cDao.selectTotalPriceByuserIdBy(userId);
+		
+		// 장바구니에 있는 상품 가격의 총액 출력
+		int totalPrice = cDao.selectTotalPriceByUserIdBy(userId);
 		
 		request.setAttribute("totalPrice", totalPrice);
 		
@@ -41,10 +42,10 @@ public class ClientCartServlet extends HttpServlet {
 		
 		CartDao cDao = CartDao.getInstance();
 		// 장바구니에 넣은 데이터 가져와서 장바구니 화면에 뿌리기
-		List<CartVo> productList = cDao.selectProductByuserId(userId);
+		List<CartVo> productList = cDao.selectProductByUserId(userId);
 		request.setAttribute("productList", productList);
 			
-		int totalPrice = cDao.selectTotalPriceByuserIdBy(userId);
+		int totalPrice = cDao.selectTotalPriceByUserIdBy(userId);
 		
 		request.setAttribute("totalPrice", totalPrice);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientCart.jsp");
