@@ -22,20 +22,16 @@ public class ClientProductDetailServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		String prodNum = request.getParameter("prodNum");
+		String prodNum = request.getParameter("prodNum");  // 고유 번호 값을 가져옴
 		
-		HttpSession session = request.getSession();			
+		HttpSession session = request.getSession();			// 세션 값을 가져옴
 		session.getAttribute("loginUser");
 		
-		ProductDao pDao = ProductDao.getInstance();
+		ProductDao pDao = ProductDao.getInstance();		// 상품 Dao, Vo 객체 생성
 		ProductVo pVo = new ProductVo();
-		
-		// 상품 코드 값으로 해당 상품 정보를 가져옴
-		pVo = pDao.selectProductByCode(prodNum);
-		// 가져온 상품 정보를 인자값에 할당
-		request.setAttribute("product", pVo);
+
+		pVo = pDao.selectProductByCode(prodNum);			// 상품 코드 값으로 해당 상품 정보를 가져옴
+		request.setAttribute("product", pVo);				// 가져온 상품 정보를 인자값에 할당
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("product/clientProductDetail.jsp");
 		dispatcher.forward(request, response);

@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woodmall.dao.CartDao;
 import com.woodmall.dao.MemberDao;
+import com.woodmall.dao.OrderDao;
 import com.woodmall.dao.ProductDao;
 import com.woodmall.dto.CartVo;
 import com.woodmall.dto.MemberVo;
+import com.woodmall.dto.OrderVo;
 import com.woodmall.dto.ProductVo;
 
 
@@ -33,14 +35,29 @@ public class ClientOrderServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String[] prodNums = request.getParameterValues("chk");
-		
+		String pay = request.getParameter("pay");
+		String quantity = request.getParameter("quantity");
+
 		if(prodNums != null) {						// 구매 상품 여러개일 경우
 		CartDao cDao = CartDao.getInstance();
 		CartVo cVo = new CartVo();
+		OrderDao oDao = OrderDao.getInstance();
+		ProductDao pDao = ProductDao.getInstance();
+		ProductVo pVo = new ProductVo();
+		// 사용자 ID와 상품 번호로 장바구니 DB 에서 선택된 상품의 정보를 가져와서 주문DB에 넣음과 동시에 
+		// List 객체에 담아 주문 페이지로 넘겨줌
 		List<CartVo> list = new ArrayList<CartVo>();
-		for(String prodNum : prodNums) {
+		OrderVo oVo = new OrderVo();
+		for(String prodNum : prodNums) {		
 			cVo = cDao.selectCheckProductFromCart(prodNum, userId);
+			pVo = pDao.selectProductByCode(prodNum);
 			list.add(cVo);
+			oVo.setUserId(userId);
+			oVo.setProdNum(Integer.parseInt(prodNum));
+			oVo.setPaymentStatus(pay);
+			oVo.setPrice(pVo.getPrice());
+			oVo.setOrderQuan(Integer.parseInt(quantity));
+			oDao.insertProductInOrder(oVo);
 		}
 		request.setAttribute("productList", list);
 	
@@ -64,26 +81,13 @@ public class ClientOrderServlet extends HttpServlet {
 			ProductVo pVo = new ProductVo();
 			ProductDao pDao = ProductDao.getInstance();
 			String prodNum = request.getParameter("prodNum");
-			String quantity = request.getParameter("quantity");
-			
 
-			pVo = pDao.selectProductByCode(prodNum); //리스트
+			pVo = pDao.selectProductByCode(prodNum); // 상품 번호로 해당 상품 정보 조회
 
 			request.setAttribute("product", pVo);
 			request.setAttribute("quantity", quantity);
 			System.out.println("product : "+pVo);
 			System.out.println("quantity : "+quantity);
-			
-			//			cVo.setProdNum(pVo.getProdNum());
-//			cVo.setQuantity(Integer.parseInt(quantity));
-//			cVo.setImage(pVo.getImage());
-//			cVo.setuserId(userId);
-//			cVo.setPrice(pVo.getPrice());
-//			cVo.setProdName(pVo.getProdName());
-//			cDao.insertProductToCart(cVo);
-
-//			cVo = cDao.selectProductFromCart(userId, prodNum);
-//			request.setAttribute("productList", productList);
 			
 			// getMember
 			MemberVo mVo = new MemberVo();

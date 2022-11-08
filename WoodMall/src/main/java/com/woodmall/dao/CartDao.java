@@ -45,8 +45,7 @@ public class CartDao {
 
 	// 장바구니DB에서 아이디와 상품코드로 해당 장바구니 정보 출력
 		public CartVo selectProductFromCart(String userId, String prodNum) {
-			String sql = "select * from cart where prodnum=? and userId=?";
-			
+			String sql = "select * from cart where prodnum=? and userid=?";
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -76,10 +75,10 @@ public class CartDao {
 			return cVo;		
 		}
 	// 사용자ID로 장바구니 정보 출력
-	public List<CartVo> selectProductByuserId(String userId) {
+	public List<CartVo> selectProductByUserId(String userId) {
 		String sql = "select c.*, p.image "
 				+ "from woodmallproduct p ,cart c "
-				+ "where p.prodnum=c.prodnum and userId=?";
+				+ "where p.prodnum=c.prodnum and userid=?";
 		List<CartVo> list = new ArrayList<CartVo>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -115,7 +114,7 @@ public class CartDao {
 					+ "from   woodmallproduct p, cart c "
 					+ "where  p.prodNum = c.prodNum "
 					+ "and c.prodNum=? "
-					+ "and c.userId=?";
+					+ "and c.userid=?";
 			
 			CartVo cVo = new CartVo();
 			Connection conn = null;
@@ -146,8 +145,8 @@ public class CartDao {
 		}
 		
 	// 장바구니 총 금액 출력	
-	public int selectTotalPriceByuserIdBy(String userId) {
-		String sql = "select sum(price) sum from cart where userId=?";
+	public int selectTotalPriceByUserIdBy(String userId) {
+		String sql = "select sum(price) sum from cart where userid=?";
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -170,7 +169,7 @@ public class CartDao {
 	}
 	// 장바구니 상품 삭제
 	public void deleteProductFromCart(String userId, String prodNum) {
-		String sql = "delete from cart where userId=? and prodNum=?";
+		String sql = "delete from cart where userid=? and prodNum=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -196,7 +195,7 @@ public class CartDao {
 	}
 	// 장바구니 내 체크된 상품 총 금액
 	public int selectTotalPriceCheckedProduct(String userId, String prodNum) {
-		String sql = "select price from cart where userId=? and prodNum=?";
+		String sql = "select price from cart where userid=? and prodnum=?";
 		int result = 0;
 		
 		Connection conn = null;

@@ -3,20 +3,20 @@ package com.woodmall.dto;
 import java.sql.Date;
 
 public class OrderVo {
-	private int orderNum;
-	private int prodNum;
+	private int orderNum;	//시퀀스
+	private int prodNum;	
 	private String userId;
 //	private String name;
-	private int orderQuan;
-	private String paymentStatus;
+	private int orderQuan;	// 1 고정
+	private String paymentStatus;	// 결제정보
 	private int price;
-	private Date orderDate;
-	private String orderContent;
-	private String orderStatus;
+	private Date orderDate;	// default sysDate 
+	private String orderContent;	// 주문사항 현재 null
+	private String orderStatus;		// 주문상태 
 
 	@Override
 	public String toString() {
-		return "OrderVo [ordernum=" + orderNum + ", prodnum=" + prodNum +", userid="+userId+"," + ", orderQuan=" + orderQuan + ", paymentstatus=" + paymentStatus
+		return "OrderVo [ordernum=" + orderNum + ", prodnum=" + prodNum +", userid="+userId+"," + ", orderquen=" + orderQuan + ", paymentstatus=" + paymentStatus
 				+ ", price=" + price + ",orderdate=" + orderDate +", ordercontent=" + orderContent +", orderstatus=" + orderStatus + "]";
 		}
 	

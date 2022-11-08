@@ -7,7 +7,7 @@ public class OrderDetailVo {
 	private int orderNum;
 	private String name;
 	private String userId;
-	private int orderQuan;
+	private int orderQuen;
 	private String paymentStatus;
 	private int price;
 	private Date orderDate;
@@ -27,7 +27,7 @@ public class OrderDetailVo {
 	
 	@Override
 	public String toString() {
-		return "OrderDetailVo [prodname =" + prodName +", ordernum=" + orderNum+", name =" + name +",userid="+ userId +", orderQuen=" + orderQuan + " paymentstatus="+ paymentStatus
+		return "OrderDetailVo [prodname =" + prodName +", ordernum=" + orderNum+", name =" + name +",userid="+ userId +", orderquen=" + orderQuen + " paymentstatus="+ paymentStatus
 				+ ", price=" + price + ", orderdate=" + orderDate+", + ordercontent="+orderContent+", orderstatus=" + orderStatus 
 				+", emailid="+emailId+", emailaddress="+emailAddress+",firstphone="+firstPhone+",midphone="+midPhone+",lastphone="+lastPhone
 				+", postnum="+postNum+", mainaddress="+mainAddress+", detailaddress="+detailAddress+",subaddress="+subAddress+"]";
@@ -179,12 +179,12 @@ public class OrderDetailVo {
 		this.name = name;
 	}
 
-	public int getOrderQuan() {
-		return orderQuan;
+	public int getOrderQuen() {
+		return orderQuen;
 	}
 
-	public void setOrderQuan(int orderQuan) {
-		this.orderQuan = orderQuan;
+	public void setOrderQuen(int orderQuen) {
+		this.orderQuen = orderQuen;
 	}
 
 	public String getPaymentStatus() {

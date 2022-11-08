@@ -10,6 +10,7 @@
 </head>
 <body>
 <table>
+
 	<tr>
 		<td>이름</td>
 		<td><input type="text" name="name" value="${loginUser.name}" readonly>*</td>
